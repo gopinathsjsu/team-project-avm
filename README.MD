@@ -3,7 +3,6 @@ Team AVM - Health Club Membership Management System
 <br />
 Team Members:
 <br />
-<br />
 Adesh Langde
 <br />
 Vineeth Hamilpur
@@ -70,6 +69,7 @@ Design decisions:
 3. Choosing the database
 <br />
 4. Choosing the cloud platform
+<br />
 <br />
 
 Extreme Programming (XP) Core Values:
