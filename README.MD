@@ -62,10 +62,15 @@ UML Diagrams:
 <br />
 <br />
 Design decisions:
+<br />
 1. Choosing the frontend framework
+<br />
 2. Choosing the backend framework
+<br />
 3. Choosing the database
+<br />
 4. Choosing the cloud platform
+<br />
 
 Extreme Programming (XP) Core Values:
 
