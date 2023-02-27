@@ -3,6 +3,7 @@ Team AVM - Health Club Membership Management System
 <br />
 Team Members:
 <br />
+<br />
 Adesh Langde
 <br />
 Vineeth Hamilpur
@@ -59,7 +60,7 @@ UML Diagrams:
 <br />
 5. Component diagram
 <br />
-
+<br />
 Design decisions:
 1. Choosing the frontend framework
 2. Choosing the backend framework
