@@ -44,6 +44,7 @@ https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP
 
 <br />
 <br />
+
 **Project Journals:**
 <br />
 <br />
@@ -60,6 +61,7 @@ https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP
 5. Component diagram
 <br />
 <br />
+
 **Design decisions:**
 <br />
 1. Choosing the frontend framework
