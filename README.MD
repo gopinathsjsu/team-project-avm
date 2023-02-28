@@ -1,7 +1,7 @@
-Team AVM - Health Club Membership Management System
+**Team AVM - Health Club Membership Management System**
 <br />
 <br />
-Team Members:
+**Team Members:**
 <br />
 Adesh Langde
 <br />
@@ -10,7 +10,7 @@ Vineeth Hamilpur
 Meera Tresa Sebastian
 <br />
 <br />
-Tech Stack:
+**Tech Stack:**
 <br />
 Backend: Java with Spring Boot
 <br />
@@ -24,30 +24,30 @@ Testing: Postman
 <br />
 <br />
 
-Component Ownership / Task Allocation:
+**Component Ownership / Task Allocation:**
 
 <br />
 <br />
 
-Scrum Meetings Schedule:
+**Scrum Meetings Schedule:**
 <br />
 Every Friday
 <br />
 <br />
 
-Project Board:
+**Project Board:**
 <br />
 <br />
-Sprint Sheet:
+**Sprint Sheet:**
 <br />
 https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP2NA/edit#gid=0
 
 <br />
 <br />
-Project Journals:
+**Project Journals:**
 <br />
 <br />
-UML Diagrams:
+**UML Diagrams:**
 <br />
 1. Use case Diagram
 <br />
@@ -60,7 +60,7 @@ UML Diagrams:
 5. Component diagram
 <br />
 <br />
-Design decisions:
+**Design decisions:**
 <br />
 1. Choosing the frontend framework
 <br />
@@ -72,5 +72,5 @@ Design decisions:
 <br />
 <br />
 
-Extreme Programming (XP) Core Values:
+**Extreme Programming (XP) Core Values:**
 
