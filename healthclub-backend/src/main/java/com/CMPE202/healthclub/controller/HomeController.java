@@ -8,8 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     public HomeController() {
     }
-    @GetMapping({"/home"})
+    @GetMapping({"/"})
     public String home() {
-        return "Welcome to Health Club";
+        return "<h1>Welcome to Health Club</h1>";
+    }
+    @GetMapping({"/admin"})
+    public String admin() {
+        return "<h1>Welcome Admin</h1>";
+    }
+    @GetMapping({"/user"})
+    public String user() {
+        return "<h1>Welcome User</h1>";
     }
 }

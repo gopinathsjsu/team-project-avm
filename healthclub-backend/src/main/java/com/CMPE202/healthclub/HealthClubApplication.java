@@ -6,9 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication()
 public class HealthClubApplication {
-	public HealthClubApplication() {
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(HealthClubApplication.class, args);
 	}
