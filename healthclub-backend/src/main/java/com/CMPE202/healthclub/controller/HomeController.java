@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     public HomeController() {
     }
-    @GetMapping({"/"})
+    @GetMapping({"/home"})
     public String home() {
         return "<h1>Welcome to Health Club</h1>";
     }
