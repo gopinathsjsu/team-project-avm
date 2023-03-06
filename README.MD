@@ -75,4 +75,6 @@ https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP
 <br />
 
 **Extreme Programming (XP) Core Values:**
-
+Communication
+Courage
+Respect
