@@ -14,9 +14,9 @@ Meera Tresa Sebastian
 <br />
 Backend: Java with Spring Boot
 <br />
-Frontend:
+Frontend: REACT
 <br />
-Database:
+Database: MYSQL
 <br />
 Cloud:
 <br />
