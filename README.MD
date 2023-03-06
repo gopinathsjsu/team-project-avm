@@ -75,4 +75,18 @@ https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP
 <br />
 
 **Extreme Programming (XP) Core Values:**
+<br/>
+<br/>
+Communication
+<br/>
+Courage
+<br/>
+Respect
+<br/>
 
+Miscellaneous Documentation and Links
+<br/>
+<br/>
+Use Case Document: https://docs.google.com/document/d/1elBsyKjouo2y6qebof2T6KTjaqZViJoHcbuWU6KkSrg/edit
+<br/>
+DB Design Document: https://docs.google.com/document/d/1RVoZ4PhjYBk-wO_gTpIca4wBZe4h66cWvU7SVgAVgNs/edit
