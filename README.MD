@@ -19,6 +19,12 @@
 
 Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/69).
 
+<h3>Project Journals</h3>
+
+- Adesh Landge - 
+- Vineeth Hamilpur - 
+- Meera Tresa Sebastian - 
+
 <h3>UML Diagrams:</h3>
 
 1. Use case Diagram
