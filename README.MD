@@ -3,7 +3,7 @@
 <br />
 **Team Members:**
 <br />
-Adesh Langde
+Adesh Landge
 <br />
 Vineeth Hamilpur
 <br />
