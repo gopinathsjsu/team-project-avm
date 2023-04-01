@@ -275,27 +275,19 @@ function AdminDashboard() {
         setCity(event.target.value);
         API.fetchGyms(event.target.value)
             .then(response => {
-                setLocationList(response.data);
-                console.log(response.data);
+                setLocationList(response.data);                
             })
             .catch(error => {
                 console.log(error);
-            })
-        console.log(city)
+            })        
     };
 
-    const handleLocationChange = (event) => {
-        console.log(event.target.value)
+    const handleLocationChange = (event) => {        
         setLocation(event.target.value);
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('startDate==>', startDateValue.format('YYYY-MM-DD'))
-        console.log('endDare==>', endDateValue.format('YYYY-MM-DD'))
-        console.log('city==>', city)
-        console.log('location==>', location)
-
+        event.preventDefault();        
         if (city && location && startDateValue && endDateValue && startDateValue <= endDateValue) {
             getAnalytics()
         }
@@ -441,8 +433,7 @@ function AdminDashboard() {
             })
 
         API.getTimeSpentByDate(location, startDate, endDate)
-            .then(response => {
-                console.log('getTimeSpentByDate response=>', response.data);
+            .then(response => {                
                 const resp = response.data;
                 const timeSpentBasedOnDate = {};
 
@@ -472,8 +463,7 @@ function AdminDashboard() {
             })
 
         API.getFreeTrailMembers()
-            .then(response => {
-                console.log('Free Trail==>', response.data)
+            .then(response => {                
                 setFreeTrailMembersCount(response.data.length)
             })
             .catch(error => {

@@ -46,7 +46,8 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 Every Friday
 
 <h3>Sprint Sheet:</h3>
-https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP2NA/edit#gid=0
+  
+[Sprint Sheet](https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP2NA/edit#gid=0).
 
 <h3>Extreme Programming (XP) Core Values:</h3>
 

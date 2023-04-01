@@ -27,19 +27,12 @@ function MemberWorkoutTracker() {
     const [timeInMinutes, setTimeInMinutes] = React.useState(0);
     const [userRole, setUserRole] = React.useState('');
 
-    useEffect(() => {
-        // const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
-        // API.fetchUserDetails(memberData.email).then(response => {            
-        //     setUserId(response.data.id)
-        // }).catch(error => {
-        //     console.log(error);
-        // })
+    useEffect(() => {       
         const memberData = JSON.parse(window.sessionStorage.getItem("USER_DATA"));
         setUserRole(memberData.role)
         setUserId(memberData.id)
         API.getGymActivities()
-            .then(response => {
-                console.log(response.data)
+            .then(response => {                
                 setWorkouts(response.data);
             })
             .catch(error => {
@@ -61,8 +54,7 @@ function MemberWorkoutTracker() {
         event.preventDefault();
         const data = { userId, activity, timeInMinutes }
         API.logMemberActivity(data)
-            .then(response => {
-                console.log('response aftr log==>', response)
+            .then(response => {                
                 setOpen(true)
                 setActivity('')
                 setTimeInMinutes(0)
