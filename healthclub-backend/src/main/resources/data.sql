@@ -1,0 +1,2 @@
+INSERT INTO `healthclub`.`gym` (`address`, `city`, `coordinate`, `country`, `name`, `state`) VALUES ('120 E Capitol Ave', 'Milpitas', ST_GeomFromText('POINT(40.71727401 -74.00898606)'), 'USA', 'Orange Theory', 'California');
+INSERT INTO `healthclub`.`gym` (`address`, `city`, `coordinate`, `country`, `name`, `state`) VALUES ( '100 E Julian St', 'San Jose', ST_GeomFromText('POINT(45.71727401 -73.00898606)'), 'USA', 'Orange Theory', 'California');
