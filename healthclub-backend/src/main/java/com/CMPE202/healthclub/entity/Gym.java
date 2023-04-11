@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.geo.Point;
 
+import java.util.List;
+
 @Entity
 @Data
 @Builder
@@ -15,7 +17,6 @@ import org.springframework.data.geo.Point;
 public class Gym {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "gym_id")
     private Long id;
     private String name;
     private String city;
@@ -24,4 +25,6 @@ public class Gym {
     private String address;
     @Column(columnDefinition = "POINT")
     private Point coordinate;
+    @OneToMany(mappedBy = "gym")
+    private List<UserGymVisit> userGymVisitList;
 }

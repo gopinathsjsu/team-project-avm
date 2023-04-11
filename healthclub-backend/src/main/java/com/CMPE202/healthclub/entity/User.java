@@ -29,7 +29,8 @@ public class User implements UserDetails {
     private ROLE role;
     private String homeGym;
 
-
+    @OneToMany(mappedBy = "user")
+    private List<UserGymVisit> userGymVisitList;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
