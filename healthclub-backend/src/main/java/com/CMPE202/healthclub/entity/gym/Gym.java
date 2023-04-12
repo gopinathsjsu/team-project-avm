@@ -27,9 +27,12 @@ public class Gym {
     private String country;
     @Column(unique = true)
     private String address;
+    /*
     @Convert(converter = SQLServerGeographyAttributeConverter.class)
     @Column(columnDefinition = "POINT")
     private Point coordinate;
+    */
+
     @OneToMany(mappedBy = "gym")
     private List<UserGymVisit> userGymVisitList;
     @OneToMany(mappedBy = "gym")
