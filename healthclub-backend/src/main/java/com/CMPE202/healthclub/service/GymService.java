@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class GymService {
     private final GymRepository gymRepository;
-    public List<Gym> getAllGyms(){
-        return gymRepository.findAll();
+    public List<Gym> getAllGymsInTheCity(String city){
+        return gymRepository.findByCity(city);
     }
 }
