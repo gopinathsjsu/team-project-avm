@@ -1,6 +1,6 @@
 package com.CMPE202.healthclub.security.service;
 
-import com.CMPE202.healthclub.entity.User;
+import com.CMPE202.healthclub.entity.user.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;

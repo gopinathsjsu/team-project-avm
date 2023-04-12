@@ -1,6 +1,6 @@
 package com.CMPE202.healthclub.service;
 
-import com.CMPE202.healthclub.entity.User;
+import com.CMPE202.healthclub.entity.user.User;
 import com.CMPE202.healthclub.model.AuthenticationRequest;
 import com.CMPE202.healthclub.model.AuthenticationResponse;
 import com.CMPE202.healthclub.model.UserModel;

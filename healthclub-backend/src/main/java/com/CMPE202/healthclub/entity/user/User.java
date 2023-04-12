@@ -1,5 +1,6 @@
-package com.CMPE202.healthclub.entity;
+package com.CMPE202.healthclub.entity.user;
 
+import com.CMPE202.healthclub.entity.user.enums.ROLE;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ public class User implements UserDetails {
     private Long id;
     private String firstName;
     private String lastName;
+
     private String email;
     @Column(length = 60)
     private String password;
