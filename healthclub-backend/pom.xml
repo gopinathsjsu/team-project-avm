@@ -41,6 +41,15 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-spatial</artifactId>
+			<version>6.1.7.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+		</dependency>
 
 		<!-- end of db related dependencies -->
 		<dependency>

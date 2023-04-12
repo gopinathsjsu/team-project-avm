@@ -21,9 +21,10 @@ public class RestControllerExceptionHandler {
         return errorMap;
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(IllegalArgumentException.class)
-    public String handelIllegalException(IllegalArgumentException ex) {
+    @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+    @ExceptionHandler(Exception.class)
+    public String handelIllegalException(Exception ex) {
         return ex.getMessage();
+
     }
 }

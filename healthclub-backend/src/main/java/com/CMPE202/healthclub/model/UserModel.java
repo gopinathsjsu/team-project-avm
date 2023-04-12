@@ -1,6 +1,6 @@
 package com.CMPE202.healthclub.model;
 
-import com.CMPE202.healthclub.entity.ROLE;
+import com.CMPE202.healthclub.entity.user.enums.ROLE;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

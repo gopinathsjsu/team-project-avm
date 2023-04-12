@@ -1,5 +1,7 @@
-package com.CMPE202.healthclub.entity;
+package com.CMPE202.healthclub.entity.user;
 
+import com.CMPE202.healthclub.entity.gym.Gym;
+import com.CMPE202.healthclub.entity.user.embeddableids.UserGymVisitId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

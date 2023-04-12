@@ -1,4 +1,4 @@
-package com.CMPE202.healthclub.entity;
+package com.CMPE202.healthclub.entity.user.embeddableids;
 
 import jakarta.persistence.Embeddable;
 
