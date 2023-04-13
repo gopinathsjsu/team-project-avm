@@ -1,6 +1,8 @@
 package com.CMPE202.healthclub.service;
 
 import com.CMPE202.healthclub.entity.gym.Gym;
+import com.CMPE202.healthclub.entity.gym.GymSchedule;
+import com.CMPE202.healthclub.repository.GymClassScheduleRepository;
 import com.CMPE202.healthclub.repository.GymRepository;
 import lombok.AllArgsConstructor;
 
@@ -12,7 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class GymService {
     private final GymRepository gymRepository;
+    private final GymClassScheduleRepository gymClassScheduleRepository;
     public List<Gym> getAllGymsInTheCity(String city){
         return gymRepository.findByCity(city);
+    }
+    public List<GymSchedule> getClassSchedule(Long id){
+        Gym gym = gymRepository.findById(id).get();
+        return gymClassScheduleRepository.findAllByGym(gym);
     }
 }
