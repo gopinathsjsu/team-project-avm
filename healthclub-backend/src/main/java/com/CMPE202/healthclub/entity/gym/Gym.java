@@ -2,6 +2,7 @@ package com.CMPE202.healthclub.entity.gym;
 
 import com.CMPE202.healthclub.entity.user.UserGymVisit;
 import com.CMPE202.healthclub.model.AttributeConverter.SQLServerGeographyAttributeConverter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,11 +28,15 @@ public class Gym {
     private String country;
     @Column(unique = true)
     private String address;
+    /*
     @Convert(converter = SQLServerGeographyAttributeConverter.class)
     @Column(columnDefinition = "POINT")
     private Point coordinate;
+    */
+    @JsonIgnore
     @OneToMany(mappedBy = "gym")
     private List<UserGymVisit> userGymVisitList;
+    @JsonIgnore
     @OneToMany(mappedBy = "gym")
     private List<GymSchedule> gymScheduleList;
 }

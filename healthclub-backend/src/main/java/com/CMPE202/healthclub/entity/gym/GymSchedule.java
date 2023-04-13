@@ -1,6 +1,7 @@
 package com.CMPE202.healthclub.entity.gym;
 
 import com.CMPE202.healthclub.entity.user.UserSchedule;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,7 @@ public class GymSchedule {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private int maxOccupancy;
+    @JsonIgnore
     @OneToMany(mappedBy = "gymSchedule")
     private List<UserSchedule> signUpList;
 }
