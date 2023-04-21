@@ -23,9 +23,9 @@ export default function Workout() {
         });
     }, []);
 
-    let cor = useRef(null);
+    let cor1 = useRef(null);
     useEffect(() => {
-        gsap.to(cor, {
+        gsap.to(cor1, {
             delay: 0.4,
             duration: 1,
             x: '0',
@@ -33,7 +33,7 @@ export default function Workout() {
             opacity: 1,
             ease: 'ease-in',
             scrollTrigger: {
-                trigger: cor,
+                trigger: cor1,
                 start: 'top 90%',
                 end: 'bottom 60%',
                 toggleActions: 'restart complete',
@@ -41,9 +41,29 @@ export default function Workout() {
             },
         });
     }, []);
-    let corri = useRef(null);
+
+    let cor2 = useRef(null);
     useEffect(() => {
-        gsap.to(corri, {
+        gsap.to(cor2, {
+            delay: 0.4,
+            duration: 1,
+            x: '0',
+            y: '0',
+            opacity: 1,
+            ease: 'ease-in',
+            scrollTrigger: {
+                trigger: cor2,
+                start: 'top 90%',
+                end: 'bottom 60%',
+                toggleActions: 'restart complete',
+                //options: play, pause, resume, reset, restart, complete, reverse,none
+            },
+        });
+    }, []);
+
+    let corri1 = useRef(null);
+    useEffect(() => {
+        gsap.to(corri1, {
             delay: 0.4,
             duration: 1,
             x: '0',
@@ -52,7 +72,27 @@ export default function Workout() {
             stagger: 0.4,
             ease: 'ease-in',
             scrollTrigger: {
-                trigger: corri,
+                trigger: corri1,
+                start: 'top 90%',
+                end: 'bottom 60%',
+                toggleActions: 'restart complete ',
+                //options: play, pause, resume, reset, restart, complete, reverse,none
+            },
+        });
+    }, []);
+
+    let corri2 = useRef(null);
+    useEffect(() => {
+        gsap.to(corri2, {
+            delay: 0.4,
+            duration: 1,
+            x: '0',
+            y: '0',
+            opacity: 1,
+            stagger: 0.4,
+            ease: 'ease-in',
+            scrollTrigger: {
+                trigger: corri2,
                 start: 'top 90%',
                 end: 'bottom 60%',
                 toggleActions: 'restart complete ',
@@ -85,13 +125,13 @@ export default function Workout() {
                         src="https://sm.askmen.com/t/askmen_in/photo/default/askmen-coolestgym-th_fmq6.h720.jpg"
                         alt="membership"
                         ref={(el) => {
-                            cor = el;
+                            cor1 = el;
                         }}
                     />
                     <div
                         className="joinus--headline"
                         ref={(el) => {
-                            corri = el;
+                            corri1 = el;
                         }}
                     >
                         <h3>How to Join?</h3>
@@ -114,7 +154,7 @@ export default function Workout() {
                     <div
                         className="joinus--headline"
                         ref={(el) => {
-                            corri = el;
+                            corri2 = el;
                         }}
                     >
                         <h3>Treadmill</h3>
@@ -131,7 +171,7 @@ export default function Workout() {
                         src="https://sm.askmen.com/t/askmen_in/photo/default/askmen-coolestgym-th_fmq6.h720.jpg"
                         alt="membership"
                         ref={(el) => {
-                            cor = el;
+                            cor2 = el;
                         }}
                     />
                 </div>
