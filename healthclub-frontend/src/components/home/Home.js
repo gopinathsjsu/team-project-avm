@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-// import Overlay from "react-overlay-component";
-// import { Router, Link, Switch, Route, Routes } from 'react-router-dom'
 import HeroSection from './HeroSection.js';
-import './Home.css';
-import vid from '../resources/trainingVideo.mp4';
+import '../../styles/Home.css';
+
+import vid from '../../assets/videos/trainingVideo.mp4';
 
 class Home extends Component {
     render() {
@@ -12,7 +11,9 @@ class Home extends Component {
                 <div className="video-container">
                     <video autoPlay loop muted src={vid} id='myVideo'>
                     </video>
-                    <div className="text-overlay"> <HeroSection /> </div>
+                    <div className="text-overlay">
+                        <HeroSection />
+                    </div>
                 </div>
 
             </div>
