@@ -40,10 +40,10 @@ public class AdminService {
         if(userRole == null || ( userRole != ROLE.MEMBER && userRole != ROLE.FREE_TRIAL_MEMBER )){
             throw new InvalidOperationException("The user is not a member of the HealthClub nor a Free trial member");
         }
-        Gym gym = gymRepository.getReferenceById(gymId);
+        Optional<Gym> gym = gymRepository.findById(gymId);
         UserGymVisit newCheckIn = new UserGymVisit();
         newCheckIn.setUser(user);
-        newCheckIn.setGym(gym);
+        newCheckIn.setGym(gym.get());
         newCheckIn.setCheckinDateTime(LocalDateTime.now());
         List<UserGymVisit> userGymVisitList = user.getUserGymVisitList();
         userGymVisitList.add(newCheckIn);

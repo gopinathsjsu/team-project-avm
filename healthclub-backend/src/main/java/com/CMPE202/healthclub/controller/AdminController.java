@@ -17,7 +17,7 @@ import java.util.Optional;
 @RolesAllowed("STAFF")
 public class AdminController {
     private final AdminService adminService;
-    @GetMapping({"/member/"})
+    @GetMapping({"/member"})
     public User getUserDetailsFromEmail(@RequestParam String email) throws RecordNotFoundException {
         return adminService.getUserByEmail(email);
     }
