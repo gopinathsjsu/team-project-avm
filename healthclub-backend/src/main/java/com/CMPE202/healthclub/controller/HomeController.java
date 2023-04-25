@@ -1,6 +1,7 @@
 package com.CMPE202.healthclub.controller;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +18,12 @@ public class HomeController {
         return "<h1>Welcome to Health Club</h1>";
     }
     @GetMapping({"/admin"})
+    @RolesAllowed("STAFF")
     public String admin() {
         return "<h1>Welcome Admin</h1>";
     }
     @GetMapping({"/user"})
+    @RolesAllowed("MEMBER")
     public String user() {
         return "<h1>Welcome User</h1>";
     }

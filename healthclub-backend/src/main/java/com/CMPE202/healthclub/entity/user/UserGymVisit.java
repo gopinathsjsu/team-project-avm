@@ -1,12 +1,8 @@
 package com.CMPE202.healthclub.entity.user;
 
 import com.CMPE202.healthclub.entity.gym.Gym;
-import com.CMPE202.healthclub.entity.user.embeddableids.UserGymVisitId;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 import java.time.LocalDateTime;
@@ -16,16 +12,19 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "UserGymVisit")
 public class UserGymVisit {
-    @EmbeddedId
-    private UserGymVisitId id;
-    @MapsId("gymId")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userGymVisitId;
+
     @ManyToOne
     @JoinColumn(name = "gymId", referencedColumnName = "id")
     private Gym gym;
 
-    @MapsId("userId")
+
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
