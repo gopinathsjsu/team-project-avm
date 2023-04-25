@@ -1,6 +1,7 @@
 package com.CMPE202.healthclub.entity.user;
 
 import com.CMPE202.healthclub.entity.user.enums.ROLE;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +24,6 @@ public class User implements UserDetails {
     private Long id;
     private String firstName;
     private String lastName;
-
     private String email;
     @Column(length = 60)
     private String password;
@@ -31,8 +31,12 @@ public class User implements UserDetails {
     private ROLE role;
     private String homeGym;
 
-    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserGymVisit> userGymVisitList;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<UserActivityTracker> userActivityTrackerList;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
