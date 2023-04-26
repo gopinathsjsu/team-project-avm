@@ -25,12 +25,12 @@ public class AdminController {
     public UserDetailsResponse getUserDetailsFromEmail(@RequestParam String email) throws RecordNotFoundException {
         return adminService.getUserDetailsFromEmail(email);
     }
-    @GetMapping({"/member/checkIn"})
+    @PostMapping({"/member/checkIn"})
     public Boolean checkInUserToGym(@RequestParam(required = true) Long gymId,
                                     @RequestParam(required = true) String email) throws RecordNotFoundException, InvalidOperationException {
         return adminService.checkInUsers(gymId, email);
     }
-    @GetMapping({"/member/checkOut"})
+    @PostMapping({"/member/checkOut"})
     public Boolean checkOutUserToGym(@RequestParam(required = true) Long gymId,
                                     @RequestParam(required = true) String email) throws RecordNotFoundException, InvalidOperationException {
         return adminService.checkOutUsers(gymId, email);
