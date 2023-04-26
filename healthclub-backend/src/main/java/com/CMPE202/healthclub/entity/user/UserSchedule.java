@@ -4,13 +4,11 @@ import com.CMPE202.healthclub.entity.gym.GymSchedule;
 import com.CMPE202.healthclub.entity.user.embeddableids.UserGymScheduleId;
 import com.CMPE202.healthclub.entity.user.enums.REG_STATUS;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
