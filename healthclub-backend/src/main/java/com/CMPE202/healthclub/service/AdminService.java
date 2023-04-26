@@ -3,15 +3,16 @@ package com.CMPE202.healthclub.service;
 import com.CMPE202.healthclub.entity.gym.Gym;
 import com.CMPE202.healthclub.entity.user.User;
 import com.CMPE202.healthclub.entity.user.UserGymVisit;
-import com.CMPE202.healthclub.entity.user.UserSchedule;
 import com.CMPE202.healthclub.entity.user.enums.ROLE;
+import com.CMPE202.healthclub.exceptions.BadServerException;
 import com.CMPE202.healthclub.exceptions.InvalidOperationException;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import com.CMPE202.healthclub.model.UserDetailsResponse;
 import com.CMPE202.healthclub.repository.GymRepository;
+import com.CMPE202.healthclub.repository.UserGymVisitRepository;
 import com.CMPE202.healthclub.repository.UserRepository;
-import jakarta.servlet.http.PushBuilder;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,8 @@ public class AdminService {
     private final UserRepository userRepository;
     @Autowired
     private final GymRepository gymRepository;
+    @Autowired
+    private final UserGymVisitRepository userGymVisitRepository;
     public UserDetailsResponse getUserDetailsFromEmail(String email) throws RecordNotFoundException {
         User user = getUserByEmail(email);
         return UserDetailsResponse.builder().id(user.getId()).firstName(user.getFirstName())
@@ -49,7 +52,7 @@ public class AdminService {
         }
         return gym.get();
     }
-    public Boolean checkInUsers(Long gymId, String email) throws RecordNotFoundException, InvalidOperationException {
+    public UserGymVisit checkInUsers(Long gymId, String email) throws RecordNotFoundException, InvalidOperationException, BadServerException {
         //Check if users are enrolled members
         User user = getUserByEmail(email);
         //Check the role of users
@@ -58,6 +61,11 @@ public class AdminService {
             throw new InvalidOperationException("The user is not a member of the HealthClub nor a Free trial member");
         }
         Gym gym = getGymById(gymId);
+        Optional<UserGymVisit> currentCheckIn = userGymVisitRepository.findUserGymVisitByUserAndGymAndCheckoutDateTime(user,gym,
+                null);
+        if(!currentCheckIn.isEmpty()){
+            throw new InvalidOperationException("The user is already checked In to the gym at "+currentCheckIn.get().getCheckinDateTime());
+        }
         UserGymVisit newCheckIn = new UserGymVisit();
         newCheckIn.setUser(user);
         newCheckIn.setGym(gym);
@@ -67,7 +75,12 @@ public class AdminService {
         //Should do some validation as to if the user is currently checked into any gym
         userGymVisitList.add(newCheckIn);
         userRepository.save(user);
-        return true;
+        currentCheckIn = userGymVisitRepository.findUserGymVisitByUserAndGymAndCheckoutDateTime(user,gym,
+                null);
+        if(currentCheckIn.isEmpty()){
+            throw new BadServerException("The checkIn was unsuccessful");
+        }
+        return currentCheckIn.get();
     }
 
     public List<UserDetailsResponse> getAllCurrentCheckedInUsers(Long gymId){
@@ -84,25 +97,13 @@ public class AdminService {
         return result;
     }
 
-    public Boolean checkOutUsers(Long gymId, String email) throws RecordNotFoundException, InvalidOperationException {
-
-        //Check if users are enrolled members
-        User user = getUserByEmail(email);
-        //Check the role of users
-        ROLE userRole = user.getRole();
-        if(userRole == null || ( userRole != ROLE.MEMBER && userRole != ROLE.FREE_TRIAL_MEMBER )){
-            throw new InvalidOperationException("The user is not a member of the HealthClub nor a Free trial member");
+    public UserGymVisit checkOutUsers(Long userGymVisitId) throws InvalidOperationException {
+        Optional<UserGymVisit> userGymVisit = userGymVisitRepository.findById(userGymVisitId);
+        if(userGymVisit.isEmpty()){
+            throw new InvalidOperationException("Cannot find this check In record");
         }
-        Gym gym = getGymById(gymId);
-        List<UserGymVisit> userGymVisitList = user.getUserGymVisitList();
-        //Get the latest check in made by the user and then update the check out
-        if(!userGymVisitList.isEmpty()){
-            userGymVisitList.sort((o1, o2) -> o2.getCheckinDateTime().compareTo(o1.getCheckinDateTime()));
-            userGymVisitList.get(0).setCheckoutDateTime(LocalDateTime.now());
-            userRepository.save(user);
-        } else throw new InvalidOperationException("User has not checked into the gym");
-
-        return true;
+        userGymVisit.get().setCheckoutDateTime(LocalDateTime.now());
+        return userGymVisitRepository.save(userGymVisit.get());
     }
 
 }
