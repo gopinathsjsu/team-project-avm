@@ -10,6 +10,7 @@ import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import com.CMPE202.healthclub.model.UserDetailsResponse;
 import com.CMPE202.healthclub.repository.GymRepository;
 import com.CMPE202.healthclub.repository.UserRepository;
+import jakarta.servlet.http.PushBuilder;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class AdminService {
     private final UserRepository userRepository;
     @Autowired
     private final GymRepository gymRepository;
+    public UserDetailsResponse getUserDetailsFromEmail(String email) throws RecordNotFoundException {
+        User user = getUserByEmail(email);
+        return UserDetailsResponse.builder().id(user.getId()).firstName(user.getFirstName())
+                .lastName(user.getLastName()).role(user.getRole()).email(user.getEmail())
+                .homeGym(user.getHomeGym()).build();
+    }
     public User getUserByEmail(String email) throws RecordNotFoundException {
         Optional<User> optionalUser = userRepository.findUserByEmail(email);
         if(optionalUser.isEmpty()){

@@ -22,8 +22,8 @@ import java.util.Optional;
 public class AdminController {
     private final AdminService adminService;
     @GetMapping({"/member"})
-    public User getUserDetailsFromEmail(@RequestParam String email) throws RecordNotFoundException {
-        return adminService.getUserByEmail(email);
+    public UserDetailsResponse getUserDetailsFromEmail(@RequestParam String email) throws RecordNotFoundException {
+        return adminService.getUserDetailsFromEmail(email);
     }
     @GetMapping({"/member/checkIn"})
     public Boolean checkInUserToGym(@RequestParam(required = true) Long gymId,
