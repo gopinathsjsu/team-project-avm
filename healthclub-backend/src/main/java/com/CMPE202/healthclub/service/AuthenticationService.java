@@ -1,6 +1,7 @@
 package com.CMPE202.healthclub.service;
 
 import com.CMPE202.healthclub.entity.user.User;
+import com.CMPE202.healthclub.exceptions.InvalidOperationException;
 import com.CMPE202.healthclub.model.AuthenticationRequest;
 import com.CMPE202.healthclub.model.AuthenticationResponse;
 import com.CMPE202.healthclub.model.UserModel;
@@ -41,7 +42,7 @@ public class AuthenticationService {
         String jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(jwtToken);
     }
-    public AuthenticationResponse authenticate(AuthenticationRequest authRequest) {
+    public AuthenticationResponse authenticate(AuthenticationRequest authRequest) throws InvalidOperationException {
         try{
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -58,6 +59,9 @@ public class AuthenticationService {
         var user = userRepository.
                 findUserByEmail(authRequest.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Email not found"));
+        if(user.getRole() != authRequest.getRole()){
+            throw new InvalidOperationException("The user doesn't have the role specified");
+        }
 
         String jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(jwtToken);
