@@ -56,6 +56,8 @@ public class AdminService {
         newCheckIn.setGym(gym);
         newCheckIn.setCheckinDateTime(LocalDateTime.now());
         List<UserGymVisit> userGymVisitList = user.getUserGymVisitList();
+        //TO DO
+        //Should do some validation as to if the user is currently checked into any gym
         userGymVisitList.add(newCheckIn);
         userRepository.save(user);
         return true;
@@ -73,6 +75,27 @@ public class AdminService {
             }
         }
         return result;
+    }
+
+    public Boolean checkOutUsers(Long gymId, String email) throws RecordNotFoundException, InvalidOperationException {
+
+        //Check if users are enrolled members
+        User user = getUserByEmail(email);
+        //Check the role of users
+        ROLE userRole = user.getRole();
+        if(userRole == null || ( userRole != ROLE.MEMBER && userRole != ROLE.FREE_TRIAL_MEMBER )){
+            throw new InvalidOperationException("The user is not a member of the HealthClub nor a Free trial member");
+        }
+        Gym gym = getGymById(gymId);
+        List<UserGymVisit> userGymVisitList = user.getUserGymVisitList();
+        //Get the latest check in made by the user and then update the check out
+        if(!userGymVisitList.isEmpty()){
+            userGymVisitList.sort((o1, o2) -> o2.getCheckinDateTime().compareTo(o1.getCheckinDateTime()));
+            userGymVisitList.get(0).setCheckoutDateTime(LocalDateTime.now());
+            userRepository.save(user);
+        } else throw new InvalidOperationException("User has not checked into the gym");
+
+        return true;
     }
 
 }

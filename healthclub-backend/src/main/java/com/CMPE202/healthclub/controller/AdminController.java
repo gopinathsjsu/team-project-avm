@@ -30,6 +30,11 @@ public class AdminController {
                                     @RequestParam(required = true) String email) throws RecordNotFoundException, InvalidOperationException {
         return adminService.checkInUsers(gymId, email);
     }
+    @GetMapping({"/member/checkOut"})
+    public Boolean checkOutUserToGym(@RequestParam(required = true) Long gymId,
+                                    @RequestParam(required = true) String email) throws RecordNotFoundException, InvalidOperationException {
+        return adminService.checkOutUsers(gymId, email);
+    }
     @GetMapping({"/member/currentCheckedInList"})
     public List<UserDetailsResponse> getAllCurrentCheckedInUsers(@RequestParam(required = true) Long gymId){
         return adminService.getAllCurrentCheckedInUsers(gymId);
