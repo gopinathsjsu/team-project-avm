@@ -1,5 +1,6 @@
 package com.CMPE202.healthclub.controller;
 
+import com.CMPE202.healthclub.exceptions.InvalidOperationException;
 import com.CMPE202.healthclub.model.AuthenticationRequest;
 import com.CMPE202.healthclub.model.AuthenticationResponse;
 import com.CMPE202.healthclub.model.UserModel;
@@ -22,7 +23,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticateUser(@RequestBody @Valid AuthenticationRequest authRequest) {
+    public ResponseEntity<AuthenticationResponse> authenticateUser(@RequestBody @Valid AuthenticationRequest authRequest) throws InvalidOperationException {
         AuthenticationResponse authenticationResponse = authService.authenticate(authRequest);
         return ResponseEntity.ok(authenticationResponse);
     }

@@ -4,16 +4,14 @@ import com.CMPE202.healthclub.entity.user.UserGymVisit;
 import com.CMPE202.healthclub.model.AttributeConverter.SQLServerGeographyAttributeConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.geo.Point;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

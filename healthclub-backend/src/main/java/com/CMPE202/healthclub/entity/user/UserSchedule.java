@@ -3,29 +3,33 @@ package com.CMPE202.healthclub.entity.user;
 import com.CMPE202.healthclub.entity.gym.GymSchedule;
 import com.CMPE202.healthclub.entity.user.embeddableids.UserGymScheduleId;
 import com.CMPE202.healthclub.entity.user.enums.REG_STATUS;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "UserSchedule")
 public class UserSchedule {
     @EmbeddedId
+    @JsonUnwrapped
+    @Column(nullable = false, unique = true)
     private UserGymScheduleId id;
     @MapsId("scheduleId")
     @ManyToOne
     @JoinColumn(name = "scheduleId", referencedColumnName = "scheduleId")
+
     private GymSchedule gymSchedule;
 
     @MapsId("userId")
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
+    @JsonIncludeProperties({"id","firstName","lastName","email","homeGym","role"})
     private User user;
 
     private REG_STATUS registrationStatus;

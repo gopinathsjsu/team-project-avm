@@ -6,6 +6,7 @@ import com.CMPE202.healthclub.repository.GymClassScheduleRepository;
 import com.CMPE202.healthclub.repository.GymRepository;
 import lombok.AllArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,9 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class GymService {
+    @Autowired
     private final GymRepository gymRepository;
+    @Autowired
     private final GymClassScheduleRepository gymClassScheduleRepository;
     public List<Gym> getAllGymsInTheCity(String city){
         return gymRepository.findByCity(city);

@@ -1,33 +1,35 @@
 package com.CMPE202.healthclub.entity.user;
 
 import com.CMPE202.healthclub.entity.gym.Gym;
-import com.CMPE202.healthclub.entity.user.embeddableids.UserGymVisitId;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "UserGymVisit")
 public class UserGymVisit {
-    @EmbeddedId
-    private UserGymVisitId id;
-    @MapsId("gymId")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userGymVisitId;
+
     @ManyToOne
     @JoinColumn(name = "gymId", referencedColumnName = "id")
+
     private Gym gym;
 
-    @MapsId("userId")
+
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
+    @JsonIncludeProperties({"id","firstName","lastName","email"})
     private User user;
     private LocalDateTime checkinDateTime;
     private LocalDateTime checkoutDateTime;

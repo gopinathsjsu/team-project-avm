@@ -1,6 +1,9 @@
 package com.CMPE202.healthclub.advice;
 
+import com.CMPE202.healthclub.exceptions.CustomException;
+import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,6 +22,10 @@ public class RestControllerExceptionHandler {
             errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
         });
         return errorMap;
+    }
+    @ExceptionHandler(CustomException.class)
+    protected ResponseEntity<Object> handleCustomExceptions(CustomException ex) {
+        return new ResponseEntity<>(ex.getMessage(),ex.getStatus());
     }
 
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)

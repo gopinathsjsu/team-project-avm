@@ -1,15 +1,15 @@
 package com.CMPE202.healthclub.entity.user;
 
+import com.CMPE202.healthclub.entity.user.enums.ACTIVITY;
+import com.CMPE202.healthclub.entity.user.enums.ROLE;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,4 +22,6 @@ public class UserActivityTracker {
     private User user;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    @Enumerated(EnumType.STRING)
+    private ACTIVITY activity;
 }
