@@ -96,7 +96,7 @@ export default function CheckInCheckOut() {
                         >
                             <Container maxWidth="xs">
                                 <Typography align='center' gutterBottom variant="overline" >
-                                    Member Registration
+                                Checkin Members
                                 </Typography>
                                 <form onSubmit={handleSubmit}>
                                     <Grid container spacing={3}>
