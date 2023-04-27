@@ -36,7 +36,7 @@ public class AdminService {
         User user = getUserByEmail(email);
         return UserDetailsResponse.builder().id(user.getId()).firstName(user.getFirstName())
                 .lastName(user.getLastName()).role(user.getRole()).email(user.getEmail())
-                .homeGym(user.getHomeGym()).build();
+                .homeGym(user.getHomeGymId()).build();
     }
     public User getUserByEmail(String email) throws RecordNotFoundException {
         Optional<User> optionalUser = userRepository.findUserByEmail(email);
@@ -91,7 +91,7 @@ public class AdminService {
             for(User user: users.get()){
                 result.add(UserDetailsResponse.builder().id(user.getId()).firstName(user.getFirstName())
                         .lastName(user.getLastName()).role(user.getRole()).email(user.getEmail())
-                        .homeGym(user.getHomeGym()).build());
+                        .homeGym(user.getHomeGymId()).build());
             }
         }
         return result;

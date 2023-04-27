@@ -1,10 +1,12 @@
 package com.CMPE202.healthclub.service;
 
+import com.CMPE202.healthclub.entity.gym.Gym;
 import com.CMPE202.healthclub.entity.user.User;
 import com.CMPE202.healthclub.exceptions.InvalidOperationException;
 import com.CMPE202.healthclub.model.AuthenticationRequest;
 import com.CMPE202.healthclub.model.AuthenticationResponse;
 import com.CMPE202.healthclub.model.UserModel;
+import com.CMPE202.healthclub.repository.GymRepository;
 import com.CMPE202.healthclub.repository.UserRepository;
 import com.CMPE202.healthclub.security.service.JWTService;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AuthenticationService {
     private final UserRepository userRepository;
+    private final GymRepository gymRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -31,12 +34,16 @@ public class AuthenticationService {
         if(optionalUser.isPresent()) {
             throw new IllegalArgumentException("Email already registered");
         }
+        //Get user's homeGym
+        Long homeGymId = userModel.getHomeGym();
+
         User user = User.builder()
                 .email(userModel.getEmail())
                 .firstName(userModel.getFirstName())
                 .lastName(userModel.getLastName())
                 .role(userModel.getRole())
                 .password(passwordEncoder.encode(userModel.getPassword()))
+                .homeGymId(homeGymId)
                 .build();
         userRepository.save(user);
         String jwtToken = jwtService.generateToken(user);

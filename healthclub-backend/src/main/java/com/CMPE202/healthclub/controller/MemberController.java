@@ -1,6 +1,8 @@
 package com.CMPE202.healthclub.controller;
 
 import com.CMPE202.healthclub.entity.user.User;
+import com.CMPE202.healthclub.entity.user.UserSchedule;
+import com.CMPE202.healthclub.exceptions.BadServerException;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import com.CMPE202.healthclub.model.UserDetailsResponse;
 import com.CMPE202.healthclub.service.MemberService;
@@ -22,5 +24,11 @@ public class MemberController {
     @GetMapping({"/user"})
     public UserDetailsResponse getUserDetailsFromEmail(@RequestParam(required = true) String email) throws RecordNotFoundException {
         return memberService.getUserDetailsFromEmail(email);
+    }
+    @PostMapping({"/user/{userId}/book/{scheduleId}"})
+    public UserSchedule bookGymClassForUser (
+            @PathVariable(required = true)Long userId,
+            @PathVariable(required = true)Long scheduleId)throws RecordNotFoundException, BadServerException {
+            return memberService.bookGymClassForUser(userId,scheduleId);
     }
 }

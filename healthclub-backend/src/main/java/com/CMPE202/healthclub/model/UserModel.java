@@ -26,4 +26,5 @@ public class UserModel {
     private String password;
     @NotNull
     private ROLE role;
+    private Long homeGym;
 }
