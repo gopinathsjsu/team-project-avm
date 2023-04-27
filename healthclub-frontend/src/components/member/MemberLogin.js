@@ -45,10 +45,11 @@ function MemberLogin(props) {
                 const decoded = decodeToken(response.data.token);
                 console.log("decoded token", decoded);
                 console.log("decoded token sub=>", decoded.sub); //given user email! - change to return user from BE
+                sessionStorage.setItem("MEMBER", decoded.sub);
                 //Auth.userLogin(decoded.sub);
                 setIsError(false);
                 props.onHide(); // hide only when user is loggedin successfully
-                navigate('/'); // navigate to member page
+                navigate('/memberpage'); // navigate to member page
             })
             .catch(error => {
                 console.log(error);

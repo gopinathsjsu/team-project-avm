@@ -10,7 +10,7 @@ import { Typography } from '@mui/material';
 import { Avatar, Card, CardContent, CardHeader, IconButton, CardActions, } from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
-
+import { useNavigate } from 'react-router-dom';
 
 import * as API from '../../actions/API.js';
 
@@ -19,6 +19,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 export default function Membership() {
+    const navigate = useNavigate();
     let text = useRef(null);
 
     useEffect(() => {
@@ -58,15 +59,16 @@ export default function Membership() {
             })
     };
 
-    const onGetScheduleClick = (gymLocation) => {
-        console.log(gymLocation)
-        API.fetchGymSchedule(gymLocation)
-            .then(response => {              
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+    const onGetScheduleClick = (gymId) => {
+        navigate(`/schedule/${gymId}`);
+        console.log(gymId)
+        // API.fetchGymSchedule(gymId)
+        //     .then(response => {              
+        //         console.log(response.data);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     })
     };
 
 

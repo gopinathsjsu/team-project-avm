@@ -21,12 +21,12 @@ function App() {
         <Route path="/workout" element={<Workouts />} />
         <Route path="/memberships" exact element={<Membership />} />
         <Route path="/locations" exact element={<Locations />} />
-        <Route path="/schedule" exact element={<Schedule />} />
+        <Route path="/schedule/:gymId" exact element={<Schedule />} />
 
         <Route path="/adminpage" element={<AdminDashboard />} />
         <Route path="/memberpage" element={<MemberHome />} />
         <Route path="/enrollmember" element={<MemberForm />} />
-        <Route path="/logmember" element={<CheckInCheckOut />} />
+        <Route path="/adminpage/logmember" element={<CheckInCheckOut />} />
         
         {/* <Route path='/login' element={<Login />} />
         <Route path="/adminpage" element={<PrivateRoute><AdminPage /></PrivateRoute>} />
