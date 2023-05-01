@@ -29,10 +29,11 @@ function MemberLogin(props) {
 
 
     const handleMemberLogin = (event) => {
+        const role = "MEMBER";
         event.preventDefault();
         console.log('username=>' + email)
         console.log('password=>' + password)
-        const data = { email, password };
+        const data = { email, password, role };
         console.log(data);
         if (!(email && password)) {
             setIsError(true)
