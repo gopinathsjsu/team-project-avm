@@ -83,18 +83,24 @@ public class AdminService {
         return currentCheckIn.get();
     }
 
-    public List<UserDetailsResponse> getAllCurrentCheckedInUsers(Long gymId){
+    public List<UserGymVisit> getAllCurrentCheckedInUsers(Long gymId) throws RecordNotFoundException{
+        //Find the gym
+        Gym gym = getGymById(gymId);
         //Find all the users who are currently checkedIn to the Gym, but not checkedOut
         ArrayList<UserDetailsResponse> result = new ArrayList<>();
-        Optional<List<User>> users = userRepository.findCurrentCheckedInUsers(gymId);
+        //Optional<List<User>> users = userRepository.findCurrentCheckedInUsers(gymId);
+        Optional<List<UserGymVisit>> userGymVisitList = userGymVisitRepository.findByGymAndCheckoutDateTime(gym,null);
+        /*
         if(!users.isEmpty()){
+
             for(User user: users.get()){
                 result.add(UserDetailsResponse.builder().id(user.getId()).firstName(user.getFirstName())
                         .lastName(user.getLastName()).role(user.getRole()).email(user.getEmail())
                         .homeGym(user.getHomeGymId()).build());
             }
         }
-        return result;
+        */
+        return userGymVisitList.get();
     }
 
     public UserGymVisit checkOutUsers(Long userGymVisitId) throws InvalidOperationException {

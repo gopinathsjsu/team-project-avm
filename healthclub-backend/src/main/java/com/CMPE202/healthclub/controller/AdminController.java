@@ -37,7 +37,7 @@ public class AdminController {
         return adminService.checkOutUsers(userGymVisitId);
     }
     @GetMapping({"/member/currentCheckedInList"})
-    public List<UserDetailsResponse> getAllCurrentCheckedInUsers(@RequestParam(required = true) Long gymId){
+    public List<UserGymVisit> getAllCurrentCheckedInUsers(@RequestParam(required = true) Long gymId) throws RecordNotFoundException{
         return adminService.getAllCurrentCheckedInUsers(gymId);
     }
 }
