@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/member")
 @RequiredArgsConstructor
@@ -30,5 +32,9 @@ public class MemberController {
             @PathVariable(required = true)Long userId,
             @PathVariable(required = true)Long scheduleId)throws RecordNotFoundException, BadServerException {
             return memberService.bookGymClassForUser(userId,scheduleId);
+    }
+    @GetMapping({"/user/{userId}/schedule"})
+    public List<UserSchedule> getUserClassSchedule(@PathVariable(required = true) Long userId) throws RecordNotFoundException {
+        return memberService.getUpcomingGymClassesForUser(userId);
     }
 }

@@ -19,7 +19,7 @@ public class GymService {
     @Autowired
     private final GymClassScheduleRepository gymClassScheduleRepository;
     public List<Gym> getAllGymsInTheCity(String city){
-        return gymRepository.findByCity(city);
+        return gymRepository.findAllByCity(city);
     }
     public List<GymSchedule> getClassSchedule(Long id){
         Gym gym = gymRepository.findById(id).get();
