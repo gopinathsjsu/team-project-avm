@@ -18,22 +18,16 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import { OverviewTotalCustomers } from './OverviewTotalCustomers.js';
 import AdminDashboardCSS from './AdminDashboard.css'
-import Customers from './customers'
+import Customers from './Members'
 
-const drawerWidth = 240;
-
-
-const openDashboard = () => {
-
-}
-const openMembers = () => {
-
-}
+import AdminAuth from '../../context/AdminAuth.js'
+import AdminNavbar from './AdminNavbar.js'
 
 //Get all the dashboard values from backend
-export default function AdminDashboard() {
+function AdminDashboard() {
     return (
         <>
+            <AdminNavbar />
             <div className='divClass'>
                 <Box
                     sx={{
@@ -50,7 +44,7 @@ export default function AdminDashboard() {
                 >
 
                     <Container maxWidth="xl">
-                        
+
                         <Grid
                             container
                             spacing={3}
@@ -132,9 +126,12 @@ export default function AdminDashboard() {
                             </Grid>
                         </Grid>
                     </Container>
-                    <Customers />
+                    {/* <Customers /> */}
                 </Box>
             </div>
         </>
     );
 }
+
+
+export default AdminAuth(AdminDashboard);

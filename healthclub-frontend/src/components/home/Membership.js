@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 //import { Button } from './Button.js';
 import './Membership.css';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import NavbarHome from './NavbarHome.js';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Membership() {
@@ -64,6 +65,7 @@ export default function Membership() {
 
     return (
         <>
+            <NavbarHome />
             <div className="membership">
                 <div className="membership--container">
                     <h1>View Our Plans</h1>

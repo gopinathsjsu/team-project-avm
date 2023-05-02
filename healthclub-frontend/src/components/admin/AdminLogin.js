@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-
+import { decodeToken } from "react-jwt";
 import * as API from '../../actions/API.js';
 
 
@@ -29,10 +29,10 @@ function AdminLogin(props) {
 
 
     const handleAdminLogin = (event) => {
-        const role = "STAFF";
         event.preventDefault();
         console.log('username=>' + email)
         console.log('password=>' + password)
+        const role = 'STAFF';
         const data = { email, password, role };
         console.log(data);
         if (!(email && password)) {
@@ -41,10 +41,16 @@ function AdminLogin(props) {
         }
         API.login(data)
             .then(response => {
-                console.log(response);
-                console.log(response.data);
+                const decoded = decodeToken(response.data.token);
+                console.log("decoded token", decoded);
+                console.log("decoded token sub=>", decoded.sub); //given user email! - change to return user from BE
+                const userDetails = { token: response.data.token, role: decoded.role, user: decoded.sub.split("@")[0] };
+                console.log("userDetails ", userDetails);
+                window.sessionStorage.setItem("USER_DETAILS", JSON.stringify(userDetails));
                 props.onHide(); // hide only when admin is loggedin successfully
-                navigate('/adminpage'); // navigate to admin page
+                if (window.sessionStorage.getItem("USER_DETAILS")) {
+                    navigate('/adminpage'); // navigate to admin page
+                }
             })
             .catch(error => {
                 console.log(error);

@@ -4,6 +4,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 
 import * as API from '../../actions/API.js';
+import NavbarHome from './NavbarHome.js';
 import './Schedule.css'
 
 export default function Schedule() {
@@ -17,6 +18,7 @@ export default function Schedule() {
         API.fetchGymSchedule(gymId)
             .then(response => {                
                 const modifiedSchedules = response.data.map(schedule => {
+                    console.log(schedule)
                     setCity(schedule.gym.city);
                     setLocation(schedule.gym.address);
                     const dateObject = new Date(schedule.startTime);
@@ -49,7 +51,7 @@ export default function Schedule() {
 
     return (
         <>
-
+            <NavbarHome/>
             <div style={{ marginLeft: '100px', marginTop: '100px', width: 'fit-content' }} role="presentation">
                 <Breadcrumbs aria-label="breadcrumb">
                     <Link underline="hover" color="inherit">

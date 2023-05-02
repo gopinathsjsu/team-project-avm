@@ -1,4 +1,14 @@
-.divClass{
+/* .divClass{
     margin-top: 100px;
     margin-left: 20px;
-}
+} */
+
+
+
+.divClass {
+    /* background-image: url('../../assets/images/GymBG.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 20px; */
+    margin-top: 100px;
+  }

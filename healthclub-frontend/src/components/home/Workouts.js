@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './Membership.css';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import NavbarHome from './NavbarHome.js';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Workout() {
@@ -103,6 +104,7 @@ export default function Workout() {
 
     return (
         <>
+            <NavbarHome />
             <div className="membership">
                 <div className="membership--container">
                     <h1>Workouts</h1>

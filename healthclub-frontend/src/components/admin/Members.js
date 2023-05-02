@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
 //import Head from 'next/head';
 import { subDays, subHours } from 'date-fns';
 import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
@@ -7,11 +7,14 @@ import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
 //import { useSelection } from 'src/hooks/use-selection';
 //import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
-import { CustomersTable } from './customers-table';
+import { MembersTable } from './MembersTable';
 //import { CustomersSearch } from 'src/sections/customer/customers-search';
 import { applyPagination } from './apply-pagination';
+import PropTypes from 'prop-types';
+import * as API from '../../actions/API.js';
 
 const now = new Date();
+
 
 const data = [
   {
@@ -194,12 +197,28 @@ const useCustomerIds = (customers) => {
   );
 };
 
-const Page = () => {
+const Members = (props) => {
+
+
+  const gymId = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const customers = useCustomers(page, rowsPerPage);
   const customersIds = useCustomerIds(customers);
   //const customersSelection = useSelection(customersIds);
+
+  useEffect(() => {
+    console.log(gymId)
+    //make an API call!               
+    API.getCheckedInUsers(gymId)
+      .then(response => {
+        console.log(response);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }, [])
 
   const handlePageChange = useCallback(
     (event, value) => {
@@ -217,7 +236,7 @@ const Page = () => {
 
   return (
     <>
-     
+
       <Box
         component="main"
         sx={{
@@ -234,7 +253,7 @@ const Page = () => {
             >
               <Stack spacing={1}>
                 <Typography variant="h4">
-                  Members
+                  Checked-In Members
                 </Typography>
                 <Stack
                   alignItems="center"
@@ -276,15 +295,15 @@ const Page = () => {
                 </Button>
               </div> */}
             </Stack>
-            <CustomersTable
+            <MembersTable
               count={data.length}
               items={customers}
-            //   onDeselectAll={customersSelection.handleDeselectAll}
-            //   onDeselectOne={customersSelection.handleDeselectOne}
+              //   onDeselectAll={customersSelection.handleDeselectAll}
+              //   onDeselectOne={customersSelection.handleDeselectOne}
               onPageChange={handlePageChange}
               onRowsPerPageChange={handleRowsPerPageChange}
-            //   onSelectAll={customersSelection.handleSelectAll}
-            //   onSelectOne={customersSelection.handleSelectOne}
+              //   onSelectAll={customersSelection.handleSelectAll}
+              //   onSelectOne={customersSelection.handleSelectOne}
               page={page}
               rowsPerPage={rowsPerPage}
             //   selected={customersSelection.selected}
@@ -298,4 +317,8 @@ const Page = () => {
 
 
 
-export default Page;
+export default Members;
+
+Members.propTypes = {
+  gymId: PropTypes.string, //number
+};

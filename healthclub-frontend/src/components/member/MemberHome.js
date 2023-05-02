@@ -1,142 +1,143 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import AppBar from '@mui/material/AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import { Box, Container, Unstable_Grid2 as Grid } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MemberNavbar from './MemberNavbar.js'
 
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleIcon from '@mui/icons-material/People';
-
-const drawerWidth = 240;
-
-
-const openDashboard = () => {
-    
-}
-const openMembers = () => {
-    
-}
-
+const filters = [
+    { value: 'Week', label: "Week" },
+    { value: 'Month', label: "Month" },
+    { value: '90 days', label: "90 days" }
+];
 
 export default function MemberHome() {
+
+
+    const [filterValue, setFilterValue] = React.useState('');
+
+    const handleFilterChange = (event) => {
+        setFilterValue(event.target.value);
+        //make API call before and modify the response array based on filter or make API call everytime the filter changes.
+    };
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-                <Toolbar>
-                    <Typography variant="h6" noWrap component="div">
-                        Fitfinity
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                variant="permanent"
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
-                }}
-            >
-                <Toolbar />
-                <Box sx={{ overflow: 'auto' }}>
-                    <List>
-                        <ListItem key="Dashboard" disablePadding>
-                            <ListItemButton onClick={openDashboard}>
-                                <ListItemIcon>
-                                    <DashboardIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Dashboard" />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem key="Members" disablePadding>
-                            <ListItemButton onClick={openMembers}>
-                                <ListItemIcon>
-                                    <PeopleIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Members" />
-                            </ListItemButton>
-                        </ListItem>
-                    </List>
-                    {/* <Divider /> */}
+        <>
+            <MemberNavbar />
+            <div style={{ marginTop: '80px', marginLeft: '20px' }}>
+                <FormControl required style={{ width: '180px' }}>
+                    <InputLabel id="demo-simple-select-label">Filter</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={filterValue}
+                        label="Filter"
+                        onChange={handleFilterChange}
+                    >
+                        {filters.map((filter) => (
+                            <MenuItem key={filter.value} value={filter.value}>{filter.label}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            </div>
+            <div className='divClass'>
+                <Box
+                    sx={{
+                        // display: 'flex',
+                        // '& > :not(style)': {
+                        //     m: 1,
+                        //     width: 'fit-content',
+                        //     height: 'fit-content',
+
+                        // },
+                        flexGrow: 1,
+                        py: 8
+                    }}
+                >
+
+
+                    <Container maxWidth="xl">
+
+                        <Grid
+                            container
+                            spacing={3}
+                        >
+                            <Grid
+                                xs={12}
+                                sm={6}
+                                lg={3}
+                            >
+                                <Paper elevation={3}>
+
+                                </Paper>
+                            </Grid>
+                            <Grid
+                                xs={12}
+                                sm={6}
+                                lg={3}
+                            >
+                                <Paper elevation={3}>
+
+                                    {/* <OverviewTotalCustomers
+                                        difference={16}
+                                        positive={true}
+                                        sx={{ height: '100%' }}
+                                        value="10"
+                                        overviewType="Total Classes"
+                                    /> */}
+                                </Paper>
+                            </Grid>
+                            <Grid
+                                xs={12}
+                                sm={6}
+                                lg={3}
+                            >
+                                <Paper elevation={3}>
+                                    {/* <OverviewTotalCustomers
+                                        difference={16}
+                                        positive={true}
+                                        sx={{ height: '100%' }}
+                                        value="5"
+                                        overviewType="Total Locations"
+                                    /> */}
+                                </Paper>
+                            </Grid>
+                            <Grid
+                                xs={12}
+                                sm={6}
+                                lg={3}
+                            >
+                                <Paper elevation={3}>
+                                    {/* <OverviewTotalCustomers
+                                        difference={16}
+                                        positive={true}
+                                        sx={{ height: '100%' }}
+                                        value="10"
+                                        overviewType="Total Classes"
+                                    /> */}
+                                </Paper>
+                            </Grid>
+                            <Grid
+                                xs={12}
+                                sm={6}
+                                lg={3}
+                            >
+                                <Paper elevation={3}>
+                                    {/* <OverviewTotalCustomers
+                                        difference={16}
+                                        positive={true}
+                                        sx={{ height: '100%' }}
+                                        value="10"
+                                        overviewType="Total Classes"
+                                    /> */}
+                                </Paper>
+                            </Grid>
+                        </Grid>
+                    </Container>
+
                 </Box>
-            </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                <Toolbar />
-                <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-                    enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-                    imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-                    Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-                    Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-                    nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-                    leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-                    feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-                    consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-                    sapien faucibus et molestie ac.
-                </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-                    eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-                    neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-                    tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-                    sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-                    tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-                    gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                    et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-                    tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                    eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                    posuere sollicitudin aliquam ultrices sagittis orci a.
-                </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-                    eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-                    neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-                    tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-                    sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-                    tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-                    gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                    et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-                    tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                    eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                    posuere sollicitudin aliquam ultrices sagittis orci a.
-                </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-                    eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-                    neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-                    tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-                    sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-                    tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-                    gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                    et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-                    tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                    eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                    posuere sollicitudin aliquam ultrices sagittis orci a.
-                </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-                    eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-                    neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-                    tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-                    sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-                    tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-                    gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                    et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-                    tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                    eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                    posuere sollicitudin aliquam ultrices sagittis orci a.
-                </Typography>
-            </Box>
-        </Box>
+            </div>
+        </>
     );
 }

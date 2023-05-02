@@ -11,6 +11,7 @@ import { Avatar, Card, CardContent, CardHeader, IconButton, CardActions, } from 
 import SearchIcon from "@mui/icons-material/Search";
 import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
 import { useNavigate } from 'react-router-dom';
+import NavbarHome from './NavbarHome.js';
 
 import * as API from '../../actions/API.js';
 
@@ -75,6 +76,7 @@ export default function Membership() {
 
     return (
         <>
+            <NavbarHome />
             <div className="membership">
                 <div className="membership--container">
                     <h1>Locations</h1>
@@ -91,7 +93,7 @@ export default function Membership() {
                 </div>
             </div>
 
-            <div style={{marginLeft:'20px'}}>
+            <div style={{ marginLeft: '20px' }}>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <TextField
@@ -108,31 +110,31 @@ export default function Membership() {
                         </IconButton>
 
                         {/* <Grid container spacing={2}> */}
-                            {gymData.map((location) => (
-                                // <Grid item xs={3}>
-                                    <Card key={location.id}>
-                                        <CardHeader
-                                            avatar={
-                                                <Avatar aria-label="location">
-                                                    <LocationOnSharpIcon color='primary' />
-                                                </Avatar>
-                                            }
-                                            title={location.name}
-                                            subheader={location.address}
-                                        />
-                                        <CardContent>
-                                            <Typography variant="body2" color="textSecondary" component="p">
-                                                {location.city} {location.state} {location.country}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <Button  onClick={() =>onGetScheduleClick(location.id)} size="small" color="primary">
-                                               View Schedule
-                                            </Button>
-                                        </CardActions>
-                                    </Card>
-                                // </Grid>
-                            ))}
+                        {gymData.map((location) => (
+                            // <Grid item xs={3}>
+                            <Card key={location.id}>
+                                <CardHeader
+                                    avatar={
+                                        <Avatar aria-label="location">
+                                            <LocationOnSharpIcon color='primary' />
+                                        </Avatar>
+                                    }
+                                    title={location.name}
+                                    subheader={location.address}
+                                />
+                                <CardContent>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        {location.city} {location.state} {location.country}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button onClick={() => onGetScheduleClick(location.id)} size="small" color="primary">
+                                        View Schedule
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                            // </Grid>
+                        ))}
                         {/* </Grid> */}
                     </Grid>
                     <Grid item xs={6}>

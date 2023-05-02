@@ -10,8 +10,12 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Email from '@mui/icons-material/Email';
 import Lock from '@mui/icons-material/Lock';
 import InputAdornment from '@mui/material/InputAdornment';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 import './MemberForm.css'
+import AdminNavbar from './AdminNavbar.js'
+import * as API from '../../actions/API.js';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -22,7 +26,9 @@ export default function MemberForm() {
     const [memberLastName, setMemberLastName] = useState('');
     const [memberEmail, setMemberEmail] = useState('');
     const [memberPassword, setMemberPassword] = useState('');
+    const [freeTrail, setFreeTrail] = useState(false);
     const [open, setOpen] = useState(false);
+    const [errorReg, setErrorReg] = useState(false);
 
     const handleMemberFirstNameChange = (event) => {
         setMemberFirstName(event.target.value);
@@ -40,10 +46,43 @@ export default function MemberForm() {
         setMemberPassword(event.target.value);
     };
 
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(freeTrail)
+        //     "firstName": "cvbn",
+        // "lastName": "mdfh",
+        // "email": "abc@gmail.com",
+        // "password": "123",
+        // "role": "MEMBER",
+        // "homeGym":"1"
+        let memberRole = 'MEMBER';
+        if (freeTrail) {
+            memberRole = 'NON-MEMBER'
+        }
+        const data = {
+            "firstName": memberFirstName,
+            "lastName": memberLastName,
+            "email": memberEmail,
+            "password": memberPassword,
+            "role": memberRole,
+            // "homeGym": 1
+        };
         //make an API call!
-        setOpen(true) // toast message if success!
+        API.register(data)
+            .then(response => {
+                console.log(response);
+                console.log(response.data);
+                setErrorReg(false);
+                setOpen(true)
+            })
+            .catch(error => {
+                console.log(error);
+                setErrorReg(true);
+                setOpen(true)
+            })
+        // toast message if success!
         //need to send role as member
         // You can use the memberName and memberEmail to send a request to your server to enroll a new member
     };
@@ -55,6 +94,7 @@ export default function MemberForm() {
 
     return (
         <>
+            <AdminNavbar />
             <div className='memberForm'>
                 <Box
                     sx={{
@@ -144,6 +184,10 @@ export default function MemberForm() {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
+                                    <FormControlLabel control={<Switch checked={freeTrail} onChange={() => setFreeTrail(!freeTrail)} />}
+                                        label="Enroll Member for Free Trail" />
+                                </Grid>
+                                <Grid item xs={12}>
                                     <Button variant="contained" color="primary" type="submit">
                                         Enroll Member
                                     </Button>
@@ -155,13 +199,24 @@ export default function MemberForm() {
             </div>
 
             <Stack spacing={2} sx={{ width: '100%' }}>
-                <Snackbar open={open} autoHideDuration={6000}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                        Member is registered successfully!
-                    </Alert>
-                </Snackbar>
+                {errorReg === false ? (
+                    <Snackbar open={open} autoHideDuration={6000}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                        onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                            Member was registered successfully!
+                        </Alert>
+
+                    </Snackbar>
+                ) :
+                    <Snackbar open={open} autoHideDuration={6000}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                        onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                            Sorry, there was an issue while registering the user. Try again later!
+                        </Alert>
+                    </Snackbar>
+                }
             </Stack>
         </>
     );

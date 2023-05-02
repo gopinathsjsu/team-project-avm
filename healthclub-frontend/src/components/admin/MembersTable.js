@@ -22,7 +22,7 @@ import PersonIcon from '@mui/icons-material/Person';
 // import { Scrollbar } from 'src/components/scrollbar';
 // import { getInitials } from 'src/utils/get-initials';
 
-export const CustomersTable = (props) => {
+export const MembersTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -87,7 +87,7 @@ export const CustomersTable = (props) => {
                 Exit Time
               </TableCell>
               <TableCell>
-                Mark Exit
+                {/* Mark Exit */}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -158,7 +158,7 @@ export const CustomersTable = (props) => {
                       variant="contained"
                       disabled={customer.exit?true:false}
                     >
-                      Exit Time
+                      Check-out
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -181,7 +181,7 @@ export const CustomersTable = (props) => {
   );
 };
 
-CustomersTable.propTypes = {
+MembersTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,
