@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,7 +78,7 @@ public class MemberService {
     //Return the list of upcoming classed for the user
     public List<UserSchedule> getUpcomingGymClassesForUser(Long userId) throws RecordNotFoundException{
         User user = findUserById(userId);
-        List<UserSchedule> allGymClasses =  userScheduleRepository.findUpComingClassesByUser(user);
+        List<UserSchedule> allGymClasses =  userScheduleRepository.findUpComingClassesByUser(user, LocalDateTime.now());
         return allGymClasses;
     }
 

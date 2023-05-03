@@ -8,6 +8,9 @@ import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import com.CMPE202.healthclub.model.UserDetailsResponse;
 import com.CMPE202.healthclub.service.AdminService;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -23,21 +26,21 @@ import java.util.Optional;
 @Validated
 public class AdminController {
     private final AdminService adminService;
-    @GetMapping({"/member"})
-    public UserDetailsResponse getUserDetailsFromEmail(@RequestParam String email) throws RecordNotFoundException {
+    @GetMapping({"/member/{email}"})
+    public UserDetailsResponse getUserDetailsFromEmail(@PathVariable(required = true)  @Email String email) throws RecordNotFoundException {
         return adminService.getUserDetailsFromEmail(email);
     }
-    @PostMapping({"/member/checkIn"})
-    public UserGymVisit checkInUserToGym(@RequestParam(required = true) Long gymId,
-                                         @RequestParam(required = true) String email) throws RecordNotFoundException, InvalidOperationException, BadServerException {
+    @PostMapping({"/member/{email}/checkIn/{gymId}"})
+    public UserGymVisit checkInUserToGym(@PathVariable(required = true)  Long gymId,
+                                         @PathVariable(required = true)  @Email String email) throws RecordNotFoundException, InvalidOperationException, BadServerException {
         return adminService.checkInUsers(gymId, email);
     }
-    @PutMapping({"/member/checkOut"})
-    public UserGymVisit checkOutUserToGym(@RequestParam(required = true) Long userGymVisitId) throws InvalidOperationException {
+    @PutMapping({"/member/checkOut/{userGymVisitId}"})
+    public UserGymVisit checkOutUserToGym(@PathVariable(required = true)  Long userGymVisitId) throws InvalidOperationException {
         return adminService.checkOutUsers(userGymVisitId);
     }
-    @GetMapping({"/member/currentCheckedInList"})
-    public List<UserGymVisit> getAllCurrentCheckedInUsers(@RequestParam(required = true) Long gymId) throws RecordNotFoundException{
+    @GetMapping({"/member/currentCheckedInList/{gymId}"})
+    public List<UserGymVisit> getAllCurrentCheckedInUsers(@PathVariable(required = true)  Long gymId) throws RecordNotFoundException{
         return adminService.getAllCurrentCheckedInUsers(gymId);
     }
 }

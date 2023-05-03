@@ -77,7 +77,9 @@ export const checkOutMembers = (userGymVisitId) => {
 
 export const getCheckedInUsers = (gymId) => {
     const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
-    return axios.get('http://localhost:8080/api/v1/admin/member/currentCheckedInList', { gymId }, {
+    const gym = 1;
+    console.log(`${api}/admin/member/currentCheckedInList?gymId=${gym}`);
+    return axios.get(`${api}/admin/member/currentCheckedInList?gymId=${gym}`, {
         headers: {
             'Authorization': `Bearer ${adminData.token}`,
             // 'Access-Control-Allow-Origin': 'http://localhost:3000',

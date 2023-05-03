@@ -7,6 +7,8 @@ import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import com.CMPE202.healthclub.model.UserDetailsResponse;
 import com.CMPE202.healthclub.service.MemberService;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -23,8 +25,8 @@ import java.util.List;
 public class MemberController {
     @Autowired
     private final MemberService memberService;
-    @GetMapping({"/user"})
-    public UserDetailsResponse getUserDetailsFromEmail(@RequestParam(required = true) String email) throws RecordNotFoundException {
+    @GetMapping({"/user/{email}"})
+    public UserDetailsResponse getUserDetailsFromEmail(@PathVariable(required = true)  @Email String email) throws RecordNotFoundException {
         return memberService.getUserDetailsFromEmail(email);
     }
     @PostMapping({"/user/{userId}/book/{scheduleId}"})
