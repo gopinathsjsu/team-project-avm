@@ -11,6 +11,5 @@ import lombok.*;
 @Builder
 public class UserGymCheckOutRequest {
     @NotNull
-    @NotBlank
     private Long userGymVisitId;
 }

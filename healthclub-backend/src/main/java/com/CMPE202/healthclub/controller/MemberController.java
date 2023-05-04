@@ -7,6 +7,7 @@ import com.CMPE202.healthclub.model.User.UserDetailsResponse;
 import com.CMPE202.healthclub.model.User.UserGymScheduleBookRequest;
 import com.CMPE202.healthclub.service.MemberService;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class MemberController {
     }
     @PostMapping({"/user/book"})
     public UserSchedule bookGymClassForUser (
-            @RequestBody UserGymScheduleBookRequest userGymScheduleBookRequest)throws RecordNotFoundException, BadServerException {
+            @RequestBody @Valid UserGymScheduleBookRequest userGymScheduleBookRequest)throws RecordNotFoundException, BadServerException {
             return memberService.bookGymClassForUser(userGymScheduleBookRequest.getUserId(), userGymScheduleBookRequest.getScheduleId());
     }
     @GetMapping({"/user/{userId}/schedule"})

@@ -16,6 +16,5 @@ public class UserGymCheckInRequest {
     @NotBlank
     private String email;
     @NotNull
-    @NotBlank
     private Long gymId;
 }

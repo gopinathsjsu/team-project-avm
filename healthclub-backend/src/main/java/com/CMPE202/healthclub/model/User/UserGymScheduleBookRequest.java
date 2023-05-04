@@ -12,9 +12,7 @@ import lombok.*;
 @Builder
 public class UserGymScheduleBookRequest {
     @NotNull
-    @NotBlank
     private Long userId;
     @NotNull
-    @NotBlank
     private Long scheduleId;
 }
