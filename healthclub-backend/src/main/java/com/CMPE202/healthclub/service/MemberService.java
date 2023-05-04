@@ -8,9 +8,8 @@ import com.CMPE202.healthclub.entity.user.embeddableids.UserGymScheduleId;
 import com.CMPE202.healthclub.entity.user.enums.REG_STATUS;
 import com.CMPE202.healthclub.exceptions.BadServerException;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
-import com.CMPE202.healthclub.model.UserDetailsResponse;
+import com.CMPE202.healthclub.model.User.UserDetailsResponse;
 import com.CMPE202.healthclub.repository.GymClassScheduleRepository;
-import com.CMPE202.healthclub.repository.GymRepository;
 import com.CMPE202.healthclub.repository.UserRepository;
 import com.CMPE202.healthclub.repository.UserScheduleRepository;
 import lombok.AllArgsConstructor;
@@ -78,7 +77,7 @@ public class MemberService {
     //Return the list of upcoming classed for the user
     public List<UserSchedule> getUpcomingGymClassesForUser(Long userId) throws RecordNotFoundException{
         User user = findUserById(userId);
-        List<UserSchedule> allGymClasses =  userScheduleRepository.findUpComingClassesByUser(user, LocalDateTime.now());
+        List<UserSchedule> allGymClasses =  userScheduleRepository.findUpComingClassesByUser(user.getId(), LocalDateTime.now());
         return allGymClasses;
     }
 

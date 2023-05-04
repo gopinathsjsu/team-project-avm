@@ -10,9 +10,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UserScheduleRepository extends JpaRepository<UserSchedule, UserGymScheduleId> {
-    @Query(value = "SELECT u.* FROM healthclub.user u\n" +
-            "inner join healthclub.user_gym_visit as v\n" +
-            "on v.user_id = u.id\n" +
-            "where v.gym_id = ?1 and v.checkout_date_time IS NULL;",nativeQuery = true )
-    List<UserSchedule> findUpComingClassesByUser(User user, LocalDateTime currentTime);
+    @Query(value = "SELECT u.* FROM healthclub.user_schedule as u\n" +
+            "inner join healthclub.gym_schedule as s\n" +
+            "on s.schedule_id = u.schedule_id\n" +
+            "and s.start_time >= ?2\n" +
+            "and u.user_id = ?1",nativeQuery = true )
+    List<UserSchedule> findUpComingClassesByUser(Long userId, LocalDateTime currentTime);
 }

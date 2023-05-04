@@ -1,4 +1,4 @@
-package com.CMPE202.healthclub.model;
+package com.CMPE202.healthclub.model.authentication;
 
 import com.CMPE202.healthclub.entity.user.enums.ROLE;
 import jakarta.validation.constraints.Email;

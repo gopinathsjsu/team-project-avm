@@ -21,9 +21,8 @@ public class UserSchedule {
     @Column(nullable = false, unique = true)
     private UserGymScheduleId id;
     @MapsId("scheduleId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "scheduleId", referencedColumnName = "scheduleId")
-
     private GymSchedule gymSchedule;
 
     @MapsId("userId")

@@ -1,22 +1,21 @@
 package com.CMPE202.healthclub.controller;
 
-import com.CMPE202.healthclub.entity.user.User;
 import com.CMPE202.healthclub.entity.user.UserGymVisit;
 import com.CMPE202.healthclub.exceptions.BadServerException;
 import com.CMPE202.healthclub.exceptions.InvalidOperationException;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
-import com.CMPE202.healthclub.model.UserDetailsResponse;
+import com.CMPE202.healthclub.model.User.UserDetailsResponse;
+import com.CMPE202.healthclub.model.User.UserGymCheckInRequest;
+import com.CMPE202.healthclub.model.User.UserGymCheckOutRequest;
 import com.CMPE202.healthclub.service.AdminService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -30,14 +29,13 @@ public class AdminController {
     public UserDetailsResponse getUserDetailsFromEmail(@PathVariable(required = true)  @Email String email) throws RecordNotFoundException {
         return adminService.getUserDetailsFromEmail(email);
     }
-    @PostMapping({"/member/{email}/checkIn/{gymId}"})
-    public UserGymVisit checkInUserToGym(@PathVariable(required = true)  Long gymId,
-                                         @PathVariable(required = true)  @Email String email) throws RecordNotFoundException, InvalidOperationException, BadServerException {
-        return adminService.checkInUsers(gymId, email);
+    @PostMapping({"/member/checkIn"})
+    public UserGymVisit checkInUserToGym(@RequestBody @Valid UserGymCheckInRequest userGymCheckInRequest) throws RecordNotFoundException, InvalidOperationException, BadServerException {
+        return adminService.checkInUsers(userGymCheckInRequest.getGymId(), userGymCheckInRequest.getEmail());
     }
-    @PutMapping({"/member/checkOut/{userGymVisitId}"})
-    public UserGymVisit checkOutUserToGym(@PathVariable(required = true)  Long userGymVisitId) throws InvalidOperationException {
-        return adminService.checkOutUsers(userGymVisitId);
+    @PutMapping({"/member/checkOut"})
+    public UserGymVisit checkOutUserToGym(@RequestBody @Valid UserGymCheckOutRequest userGymCheckOutRequest) throws InvalidOperationException {
+        return adminService.checkOutUsers(userGymCheckOutRequest.getUserGymVisitId());
     }
     @GetMapping({"/member/currentCheckedInList/{gymId}"})
     public List<UserGymVisit> getAllCurrentCheckedInUsers(@PathVariable(required = true)  Long gymId) throws RecordNotFoundException{

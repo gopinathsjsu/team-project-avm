@@ -1,9 +1,9 @@
 package com.CMPE202.healthclub.controller;
 
 import com.CMPE202.healthclub.exceptions.InvalidOperationException;
-import com.CMPE202.healthclub.model.AuthenticationRequest;
-import com.CMPE202.healthclub.model.AuthenticationResponse;
-import com.CMPE202.healthclub.model.UserModel;
+import com.CMPE202.healthclub.model.authentication.AuthenticationRequest;
+import com.CMPE202.healthclub.model.authentication.AuthenticationResponse;
+import com.CMPE202.healthclub.model.User.UserModel;
 import com.CMPE202.healthclub.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

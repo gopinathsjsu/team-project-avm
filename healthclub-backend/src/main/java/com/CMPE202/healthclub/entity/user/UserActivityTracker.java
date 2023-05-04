@@ -20,8 +20,8 @@ public class UserActivityTracker {
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private LocalDateTime creationTime;
+    private Long minutes;
     @Enumerated(EnumType.STRING)
     private ACTIVITY activity;
 }

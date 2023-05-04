@@ -1,4 +1,4 @@
-package com.CMPE202.healthclub.model;
+package com.CMPE202.healthclub.model.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,11 +1,10 @@
 package com.CMPE202.healthclub.service;
 
-import com.CMPE202.healthclub.entity.gym.Gym;
 import com.CMPE202.healthclub.entity.user.User;
 import com.CMPE202.healthclub.exceptions.InvalidOperationException;
-import com.CMPE202.healthclub.model.AuthenticationRequest;
-import com.CMPE202.healthclub.model.AuthenticationResponse;
-import com.CMPE202.healthclub.model.UserModel;
+import com.CMPE202.healthclub.model.authentication.AuthenticationRequest;
+import com.CMPE202.healthclub.model.authentication.AuthenticationResponse;
+import com.CMPE202.healthclub.model.User.UserModel;
 import com.CMPE202.healthclub.repository.GymRepository;
 import com.CMPE202.healthclub.repository.UserRepository;
 import com.CMPE202.healthclub.security.service.JWTService;

@@ -1,4 +1,4 @@
-package com.CMPE202.healthclub.model;
+package com.CMPE202.healthclub.model.User;
 
 import com.CMPE202.healthclub.entity.user.enums.ROLE;
 import lombok.*;
