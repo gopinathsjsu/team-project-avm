@@ -34,24 +34,13 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 3. Choosing the database
 4. Choosing the cloud platform
 
-<br />
-<br />
+<h3>Component Ownership / Task Allocation:</h3>
 
-  <h3>Component Ownership / Task Allocation:</h3>
-
-<br />
-<br />
-
-  <h3>Scrum Meetings Schedule:</h3>
-
+<h3>Scrum Meetings Schedule:</h3>
 Every Friday
 
-**Sprint Sheet:**
-<br />
+<h3>Sprint Sheet:</h3>
 https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP2NA/edit#gid=0
-
-<br />
-<br />
 
 <h3>Extreme Programming (XP) Core Values:</h3>
 
@@ -59,10 +48,8 @@ https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP
 2. Courage
 3. Respect
 
+<h3>Miscellaneous Documentation and Links</h3>
 
- <h3>Miscellaneous Documentation and Links</h3>
-<br/>
-<br/>
-Use Case Document: https://docs.google.com/document/d/1elBsyKjouo2y6qebof2T6KTjaqZViJoHcbuWU6KkSrg/edit
-<br/>
-DB Design Document: https://docs.google.com/document/d/1RVoZ4PhjYBk-wO_gTpIca4wBZe4h66cWvU7SVgAVgNs/edit
+1. Use Case Document: https://docs.google.com/document/d/1elBsyKjouo2y6qebof2T6KTjaqZViJoHcbuWU6KkSrg/edit
+2. DB Design Document: https://docs.google.com/document/d/1RVoZ4PhjYBk-wO_gTpIca4wBZe4h66cWvU7SVgAVgNs/edit
+
