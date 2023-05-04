@@ -3,13 +3,17 @@ package com.CMPE202.healthclub.service;
 
 import com.CMPE202.healthclub.entity.gym.GymSchedule;
 import com.CMPE202.healthclub.entity.user.User;
+import com.CMPE202.healthclub.entity.user.UserActivityTracker;
 import com.CMPE202.healthclub.entity.user.UserSchedule;
 import com.CMPE202.healthclub.entity.user.embeddableids.UserGymScheduleId;
+import com.CMPE202.healthclub.entity.user.enums.ACTIVITY;
 import com.CMPE202.healthclub.entity.user.enums.REG_STATUS;
 import com.CMPE202.healthclub.exceptions.BadServerException;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
+import com.CMPE202.healthclub.model.User.UserActivityRequest;
 import com.CMPE202.healthclub.model.User.UserDetailsResponse;
 import com.CMPE202.healthclub.repository.GymClassScheduleRepository;
+import com.CMPE202.healthclub.repository.UserActivityRepository;
 import com.CMPE202.healthclub.repository.UserRepository;
 import com.CMPE202.healthclub.repository.UserScheduleRepository;
 import lombok.AllArgsConstructor;
@@ -30,6 +34,8 @@ public class MemberService {
     private final UserScheduleRepository userScheduleRepository;
     @Autowired
     private final GymClassScheduleRepository gymClassScheduleRepository;
+    @Autowired
+    private final UserActivityRepository userActivityRepository;
     //Private Utility Methods
     private User getUserByEmail(String email) throws RecordNotFoundException {
         Optional<User> optionalUser = userRepository.findUserByEmail(email);
@@ -79,6 +85,20 @@ public class MemberService {
         User user = findUserById(userId);
         List<UserSchedule> allGymClasses =  userScheduleRepository.findUpComingClassesByUser(user.getId(), LocalDateTime.now());
         return allGymClasses;
+    }
+
+    public UserActivityTracker logActivityForUser(Long userId,
+                                      ACTIVITY activity,
+                                      Long timeInMinutes) throws RecordNotFoundException {
+       User user = findUserById(userId);
+       UserActivityTracker userActivity = UserActivityTracker.builder().minutes(timeInMinutes)
+               .user(user).creationTime(LocalDateTime.now()).activity(activity).build();
+       return userActivityRepository.save(userActivity);
+
+    }
+    public List<UserActivityTracker> getActivityForUser(Long userId) throws RecordNotFoundException {
+        User user = findUserById(userId);
+        return userActivityRepository.findAllByUser(user);
     }
 
 

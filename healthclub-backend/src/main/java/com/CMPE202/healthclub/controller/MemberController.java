@@ -1,8 +1,10 @@
 package com.CMPE202.healthclub.controller;
 
+import com.CMPE202.healthclub.entity.user.UserActivityTracker;
 import com.CMPE202.healthclub.entity.user.UserSchedule;
 import com.CMPE202.healthclub.exceptions.BadServerException;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
+import com.CMPE202.healthclub.model.User.UserActivityRequest;
 import com.CMPE202.healthclub.model.User.UserDetailsResponse;
 import com.CMPE202.healthclub.model.User.UserGymScheduleBookRequest;
 import com.CMPE202.healthclub.service.MemberService;
@@ -37,6 +39,17 @@ public class MemberController {
     @GetMapping({"/user/{userId}/schedule"})
     public List<UserSchedule> getUserClassSchedule(@PathVariable(required = true) Long userId) throws RecordNotFoundException {
         return memberService.getUpcomingGymClassesForUser(userId);
+    }
+    @PostMapping({"/user/activity"})
+    public UserActivityTracker logActivityForUser (
+            @RequestBody @Valid UserActivityRequest userActivityRequest)throws RecordNotFoundException, BadServerException {
+        return memberService.logActivityForUser(userActivityRequest.getUserId(),
+                                                userActivityRequest.getActivity(),
+                                                userActivityRequest.getTimeInMinutes());
+    }
+    @GetMapping({"/user/{userId}/activity"})
+    public List<UserActivityTracker> getActivityOfUser(@PathVariable(required = true) Long userId) throws RecordNotFoundException {
+        return memberService.getActivityForUser(userId);
     }
 
 }
