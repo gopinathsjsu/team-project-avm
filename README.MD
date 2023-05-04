@@ -19,26 +19,6 @@
 
 Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/69).
 
-**Component Ownership / Task Allocation:**
-
-<br />
-<br />
-
-**Scrum Meetings Schedule:**
-<br />
-Every Friday
-<br />
-<br />
-
-<br />
-<br />
-**Sprint Sheet:**
-<br />
-https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP2NA/edit#gid=0
-
-<br />
-<br />
-
 <h3>UML Diagrams:</h3>
 
 1. Use case Diagram
@@ -57,15 +37,32 @@ https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP
 <br />
 <br />
 
-**Extreme Programming (XP) Core Values:**
-<br/>
-<br/>
-Communication
-<br/>
-Courage
-<br/>
-Respect
-<br/>
+**Component Ownership / Task Allocation:**
+
+<br />
+<br />
+
+**Scrum Meetings Schedule:**
+<br />
+Every Friday
+<br />
+
+
+<br />
+<br />
+**Sprint Sheet:**
+<br />
+https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP2NA/edit#gid=0
+
+<br />
+<br />
+
+<h3>Extreme Programming (XP) Core Values:</h3>
+
+1. Communication
+2. Courage
+3. Respect
+
 
 Miscellaneous Documentation and Links
 <br/>
