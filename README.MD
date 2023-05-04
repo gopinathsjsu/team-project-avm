@@ -17,7 +17,7 @@
 
 <h3>Project Board</h3>
 
-Click to view the Project Board [Project Board](https://github.com/orgs/gopinathsjsu/projects/69).
+Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/69).
 
 **Component Ownership / Task Allocation:**
 
