@@ -35,4 +35,8 @@ public class GymController {
     public List<ACTIVITY> getActivitiesInHealthClub(){
         return Arrays.stream(ACTIVITY.values()).toList();
     }
+    @GetMapping({"/city"})
+    public List<String> getAllCities(){
+        return gymService.getALlCities();
+    }
 }

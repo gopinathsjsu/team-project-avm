@@ -25,4 +25,8 @@ public class GymService {
         Gym gym = gymRepository.findById(id).get();
         return gymClassScheduleRepository.findAllByGym(gym);
     }
+    public List<String> getALlCities(){
+        return gymRepository.getAllCities();
+    }
+
 }
