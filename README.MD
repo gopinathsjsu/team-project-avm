@@ -30,7 +30,6 @@ Every Friday
 <br />
 <br />
 
-**Project Board:**
 <br />
 <br />
 **Sprint Sheet:**
