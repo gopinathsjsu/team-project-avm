@@ -37,19 +37,15 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 <br />
 <br />
 
-**Component Ownership / Task Allocation:**
+  <h3>Component Ownership / Task Allocation:</h3>
 
 <br />
 <br />
 
-**Scrum Meetings Schedule:**
-<br />
+  <h3>Scrum Meetings Schedule:</h3>
+
 Every Friday
-<br />
 
-
-<br />
-<br />
 **Sprint Sheet:**
 <br />
 https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP2NA/edit#gid=0
@@ -64,7 +60,7 @@ https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP
 3. Respect
 
 
-Miscellaneous Documentation and Links
+ <h3>Miscellaneous Documentation and Links</h3>
 <br/>
 <br/>
 Use Case Document: https://docs.google.com/document/d/1elBsyKjouo2y6qebof2T6KTjaqZViJoHcbuWU6KkSrg/edit
