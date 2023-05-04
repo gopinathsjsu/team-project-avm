@@ -39,32 +39,21 @@ https://docs.google.com/spreadsheets/d/1xLlccF00kpXQ1XLHmtTqcTU-2KicD5gy_fVLCXrP
 <br />
 <br />
 
-**Project Journals:**
-<br />
-<br />
-**UML Diagrams:**
-<br />
-1. Use case Diagram
-<br />
-2. Class Diagram
-<br />
-3. Architecture Diagram
-<br />
-4. Wireframes
-<br />
-5. Component diagram
-<br />
-<br />
+<h3>UML Diagrams:</h3>
 
-**Design decisions:**
-<br />
+1. Use case Diagram
+2. Class Diagram
+3. Architecture Diagram
+4. Wireframes
+5. Component diagram
+
+<h3>Design decisions:</h3>
+
 1. Choosing the frontend framework
-<br />
 2. Choosing the backend framework
-<br />
 3. Choosing the database
-<br />
 4. Choosing the cloud platform
+
 <br />
 <br />
 
