@@ -1,4 +1,4 @@
-<h1 align="center">Fitfinity-Project</h1>
+<h1 align="center">CMPE 202 - HealthClub Membership Management</h1>
 <h3>HealthClub Membership Management system for your Health club/Gym.</h3>
 
 <h3>Team Name</h3>
