@@ -3,6 +3,7 @@ package com.CMPE202.healthclub.service;
 
 import com.CMPE202.healthclub.entity.gym.Gym;
 import com.CMPE202.healthclub.entity.gym.GymSchedule;
+import com.CMPE202.healthclub.entity.user.UserGymVisit;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import com.CMPE202.healthclub.model.Admin.AdminAnalyticsRequest;
 import com.CMPE202.healthclub.model.Admin.AdminAnalyticsResponse;
@@ -15,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -57,10 +60,8 @@ public class AnalyticsService {
         }
         //Find the number of hours spent in the gym
         Integer numberOfHoursVisited = userGymVisitRepository.totalHoursByGymAndCheckoutCheckInDateTime(gymId,startTime,endTime);
-        //Find the number of visitors per business hours 6 am to 6 pm.
-        //12 hours
-        //12 slots
-        //7 days
+        //Get the list of user gym checkin
+        List<UserGymVisit> userGymVisitList = userGymVisitRepository.findByGymAndCheckoutCheckInDateTime(gymId,startTime,endTime);
 
         return AdminAnalyticsResponse.builder()
                 .endDate(adminAnalyticsRequest.getEndDate())
@@ -69,8 +70,16 @@ public class AnalyticsService {
                 .enrollmentsPossible(totalEnrollmentsPossible)
                 .totalHoursSpent(numberOfHoursVisited)
                 .numberOfClasses(gymScheduleList.size())
-                .userGymVisitList(userGymVisitRepository.findByGymAndCheckoutCheckInDateTime(gymId,startTime,endTime))
+                .userGymVisitList(userGymVisitList)
                 .gymId(gymId)
                 .build();
+    }
+
+    public List<Object[]> getHoursSpentByDayWeekMonth(Long gymId, LocalDateTime startTime, LocalDateTime endTime) {
+        return userGymVisitRepository.getHoursSpentByDayWeekMonth(gymId, startTime, endTime);
+    }
+
+    public List<Object[]> getVisitorsByHourDayOfWeekWeekendOrWeekday(Long gymId, LocalDateTime startTime, LocalDateTime endTime) {
+        return userGymVisitRepository.getVisitorsByHourDayOfWeekWeekendOrWeekday(gymId, startTime, endTime);
     }
 }

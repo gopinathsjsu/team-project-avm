@@ -60,4 +60,19 @@ public class AdminController {
 
         return analyticsService.getAnalyticsResponse(gymId,adminAnalyticsRequest);
     }
+    @GetMapping({"/member/analytics/{gymId}/hours-spent"})
+    public List<Object[]> getHoursSpentByDayWeekMonth(@PathVariable(required = true)  Long gymId,
+                                                      @RequestBody AdminAnalyticsRequest adminAnalyticsRequest){
+        return analyticsService.getHoursSpentByDayWeekMonth(gymId,
+                adminAnalyticsRequest.getStartDate().atStartOfDay(),
+                adminAnalyticsRequest.getEndDate().atStartOfDay()
+        );
+    }
+    @GetMapping("/member/analytics/{gymId}/visitors-by-hour")
+    public List<Object[]> getVisitorsByHourDayOfWeekWeekendOrWeekday(@PathVariable(required = true)  Long gymId,
+                                                                     @RequestBody AdminAnalyticsRequest adminAnalyticsRequest) {
+        return analyticsService.getVisitorsByHourDayOfWeekWeekendOrWeekday(gymId,
+                adminAnalyticsRequest.getStartDate().atStartOfDay(),
+                adminAnalyticsRequest.getEndDate().atStartOfDay());
+    }
 }
