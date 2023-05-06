@@ -4,10 +4,13 @@ import com.CMPE202.healthclub.entity.user.UserGymVisit;
 import com.CMPE202.healthclub.exceptions.BadServerException;
 import com.CMPE202.healthclub.exceptions.InvalidOperationException;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
+import com.CMPE202.healthclub.model.Admin.AdminAnalyticsRequest;
+import com.CMPE202.healthclub.model.Admin.AdminAnalyticsResponse;
 import com.CMPE202.healthclub.model.User.UserDetailsResponse;
 import com.CMPE202.healthclub.model.User.UserGymCheckInRequest;
 import com.CMPE202.healthclub.model.User.UserGymCheckOutRequest;
 import com.CMPE202.healthclub.service.AdminService;
+import com.CMPE202.healthclub.service.AnalyticsService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -25,6 +28,7 @@ import java.util.List;
 @Validated
 public class AdminController {
     private final AdminService adminService;
+    private final AnalyticsService analyticsService;
     @GetMapping({"/member/{email}"})
     public UserDetailsResponse getUserDetailsFromEmail(@PathVariable(required = true)  @Email String email) throws RecordNotFoundException {
         return adminService.getUserDetailsFromEmail(email);
@@ -40,5 +44,20 @@ public class AdminController {
     @GetMapping({"/member/currentCheckedInList/{gymId}"})
     public List<UserGymVisit> getAllCurrentCheckedInUsers(@PathVariable(required = true)  Long gymId) throws RecordNotFoundException{
         return adminService.getAllCurrentCheckedInUsers(gymId);
+    }
+    /**
+     * Analytics APIs
+     * Location ID, Start Date, End Date
+     * Total number of classes
+     * Total number of enrollments
+     * Total number of hours spend in the Gym
+     * Number of visitors per hour per day between 10 to 6
+     */
+    @GetMapping({"/member/analytics/{gymId}"})
+    public AdminAnalyticsResponse getAnalyticsResponse(@PathVariable(required = true)  Long gymId,
+                                                       @RequestBody AdminAnalyticsRequest adminAnalyticsRequest) throws RecordNotFoundException {
+
+
+        return analyticsService.getAnalyticsResponse(gymId,adminAnalyticsRequest);
     }
 }
