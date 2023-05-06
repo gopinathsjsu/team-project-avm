@@ -56,7 +56,12 @@ public class AnalyticsService {
             totalEnrollments += gymSchedule.getSignUpList().size();
         }
         //Find the number of hours spent in the gym
-        Integer numberOfHoursVisited = userGymVisitRepository.findByGymAndCheckoutCheckInDateTime(gymId,startTime,endTime);
+        Integer numberOfHoursVisited = userGymVisitRepository.totalHoursByGymAndCheckoutCheckInDateTime(gymId,startTime,endTime);
+        //Find the number of visitors per business hours 6 am to 6 pm.
+        //12 hours
+        //12 slots
+        //7 days
+
         return AdminAnalyticsResponse.builder()
                 .endDate(adminAnalyticsRequest.getEndDate())
                 .startDate(adminAnalyticsRequest.getStartDate())
@@ -64,6 +69,7 @@ public class AnalyticsService {
                 .enrollmentsPossible(totalEnrollmentsPossible)
                 .totalHoursSpent(numberOfHoursVisited)
                 .numberOfClasses(gymScheduleList.size())
+                .userGymVisitList(userGymVisitRepository.findByGymAndCheckoutCheckInDateTime(gymId,startTime,endTime))
                 .gymId(gymId)
                 .build();
     }

@@ -17,5 +17,9 @@ public interface UserGymVisitRepository extends JpaRepository<UserGymVisit, Long
             "FROM healthclub.user_gym_visit " +
             "where gym_id = ?1 and checkin_date_time>= ?2\n" +
             "and checkout_date_time <= ?3", nativeQuery = true)
-    Integer findByGymAndCheckoutCheckInDateTime(Long gymId, LocalDateTime startTime, LocalDateTime endTime);
+    Integer totalHoursByGymAndCheckoutCheckInDateTime(Long gymId, LocalDateTime startTime, LocalDateTime endTime);
+    @Query(value = "SELECT * FROM healthclub.user_gym_visit\n" +
+            "where gym_id = ?1 and checkin_date_time>= ?2 \n" +
+            "and checkout_date_time <= ?3", nativeQuery = true)
+    List<UserGymVisit> findByGymAndCheckoutCheckInDateTime(Long gymId, LocalDateTime startTime, LocalDateTime endTime);
 }

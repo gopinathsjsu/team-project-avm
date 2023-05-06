@@ -1,6 +1,7 @@
 package com.CMPE202.healthclub.entity.user;
 
 import com.CMPE202.healthclub.entity.gym.Gym;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
@@ -23,7 +24,7 @@ public class UserGymVisit {
 
     @ManyToOne
     @JoinColumn(name = "gymId", referencedColumnName = "id")
-
+    @JsonIgnore
     private Gym gym;
 
 
