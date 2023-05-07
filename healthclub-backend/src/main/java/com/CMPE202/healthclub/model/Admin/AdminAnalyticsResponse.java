@@ -21,6 +21,5 @@ public class AdminAnalyticsResponse {
     private Integer enrollments;
     private Integer enrollmentsPossible;
     private Integer totalHoursSpent;
-    private Map<String, Integer[]> visitorCount;
     private List<UserGymVisit> userGymVisitList;
 }
