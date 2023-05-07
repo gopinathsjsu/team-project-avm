@@ -9,6 +9,7 @@ import com.CMPE202.healthclub.model.Admin.AdminAnalyticsRequest;
 import com.CMPE202.healthclub.model.Admin.AdminAnalyticsResponse;
 import com.CMPE202.healthclub.repository.GymClassScheduleRepository;
 import com.CMPE202.healthclub.repository.GymRepository;
+import com.CMPE202.healthclub.repository.UserActivityRepository;
 import com.CMPE202.healthclub.repository.UserGymVisitRepository;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +31,8 @@ public class AnalyticsService {
     private final UserGymVisitRepository userGymVisitRepository;
     @Autowired
     private  final GymClassScheduleRepository gymClassScheduleRepository;
+    @Autowired
+    private final UserActivityRepository userActivityRepository;
     private Gym getGymById(Long gymId) throws RecordNotFoundException {
         Optional<Gym> gym = gymRepository.findById(gymId);
         if(gym.isEmpty()){
@@ -82,4 +85,15 @@ public class AnalyticsService {
     public List<Object[]> getVisitorsByHourDayOfWeekWeekendOrWeekday(Long gymId, LocalDateTime startTime, LocalDateTime endTime) {
         return userGymVisitRepository.getVisitorsByHourDayOfWeekWeekendOrWeekday(gymId, startTime, endTime);
     }
+    public List<Object[]> getTotalMinutesByActivityLast90Days(Long userId){
+        return userActivityRepository.getTotalMinutesByActivityLast90Days(userId);
+    }
+    public List<Object[]> getTotalMinutesByActivityLastWeek(Long userId){
+        return userActivityRepository.getTotalMinutesByActivityLastWeek(userId);
+    }
+    public List<Object[]> getTotalMinutesByActivityLastMonth(Long userId){
+        return userActivityRepository.getTotalMinutesByActivityLastMonth(userId);
+    }
+
+
 }

@@ -15,6 +15,7 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,4 +76,5 @@ public class AdminController {
                 adminAnalyticsRequest.getStartDate().atStartOfDay(),
                 adminAnalyticsRequest.getEndDate().atStartOfDay());
     }
+
 }

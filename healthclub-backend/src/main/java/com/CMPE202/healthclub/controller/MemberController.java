@@ -7,6 +7,7 @@ import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import com.CMPE202.healthclub.model.User.UserActivityRequest;
 import com.CMPE202.healthclub.model.User.UserDetailsResponse;
 import com.CMPE202.healthclub.model.User.UserGymScheduleBookRequest;
+import com.CMPE202.healthclub.service.AnalyticsService;
 import com.CMPE202.healthclub.service.MemberService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
@@ -27,6 +28,7 @@ import java.util.List;
 public class MemberController {
     @Autowired
     private final MemberService memberService;
+    private final AnalyticsService analyticsService;
     @GetMapping({"/user/{email}"})
     public UserDetailsResponse getUserDetailsFromEmail(@PathVariable(required = true)  @Email String email) throws RecordNotFoundException {
         return memberService.getUserDetailsFromEmail(email);
@@ -50,6 +52,18 @@ public class MemberController {
     @GetMapping({"/user/{userId}/activity"})
     public List<UserActivityTracker> getActivityOfUser(@PathVariable(required = true) Long userId) throws RecordNotFoundException {
         return memberService.getActivityForUser(userId);
+    }
+    @GetMapping({"/user/{userId}/activity/last-90-days"})
+    public List<Object[]> getTotalMinutesByActivityLast90Days(@PathVariable(required = true) Long userId) throws RecordNotFoundException {
+        return analyticsService.getTotalMinutesByActivityLast90Days(userId);
+    }
+    @GetMapping({"/user/{userId}/activity/last-month"})
+    public List<Object[]> getTotalMinutesByActivityLastMonth(@PathVariable(required = true) Long userId) throws RecordNotFoundException {
+        return analyticsService.getTotalMinutesByActivityLastMonth(userId);
+    }
+    @GetMapping({"/user/{userId}/activity/last-week"})
+    public List<Object[]> getTotalMinutesByActivityLastWeek(@PathVariable(required = true) Long userId) throws RecordNotFoundException {
+        return analyticsService.getTotalMinutesByActivityLastWeek(userId);
     }
 
 }
