@@ -53,14 +53,14 @@ public class AdminController {
      * Total number of hours spend in the Gym
      * Number of visitors per hour per day between 10 to 6
      */
-    @GetMapping({"/member/analytics/{gymId}"})
+    @GetMapping({"/analytics/{gymId}"})
     public AdminAnalyticsResponse getAnalyticsResponse(@PathVariable(required = true)  Long gymId,
                                                        @RequestBody AdminAnalyticsRequest adminAnalyticsRequest) throws RecordNotFoundException {
 
 
         return analyticsService.getAnalyticsResponse(gymId,adminAnalyticsRequest);
     }
-    @GetMapping({"/member/analytics/{gymId}/hours-spent"})
+    @GetMapping({"/analytics/{gymId}/hours-spent"})
     public List<Object[]> getHoursSpentByDayWeekMonth(@PathVariable(required = true)  Long gymId,
                                                       @RequestBody AdminAnalyticsRequest adminAnalyticsRequest){
         return analyticsService.getHoursSpentByDayWeekMonth(gymId,
@@ -68,7 +68,7 @@ public class AdminController {
                 adminAnalyticsRequest.getEndDate().atStartOfDay()
         );
     }
-    @GetMapping("/member/analytics/{gymId}/visitors-by-hour")
+    @GetMapping("/analytics/{gymId}/visitors-by-hour")
     public List<Object[]> getVisitorsByHourDayOfWeekWeekendOrWeekday(@PathVariable(required = true)  Long gymId,
                                                                      @RequestBody AdminAnalyticsRequest adminAnalyticsRequest) {
         return analyticsService.getVisitorsByHourDayOfWeekWeekendOrWeekday(gymId,
