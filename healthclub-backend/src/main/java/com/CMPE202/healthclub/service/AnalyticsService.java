@@ -7,10 +7,8 @@ import com.CMPE202.healthclub.entity.user.UserGymVisit;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import com.CMPE202.healthclub.model.Admin.AdminAnalyticsRequest;
 import com.CMPE202.healthclub.model.Admin.AdminAnalyticsResponse;
-import com.CMPE202.healthclub.repository.GymClassScheduleRepository;
-import com.CMPE202.healthclub.repository.GymRepository;
-import com.CMPE202.healthclub.repository.UserActivityRepository;
-import com.CMPE202.healthclub.repository.UserGymVisitRepository;
+import com.CMPE202.healthclub.repository.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +31,8 @@ public class AnalyticsService {
     private  final GymClassScheduleRepository gymClassScheduleRepository;
     @Autowired
     private final UserActivityRepository userActivityRepository;
+    @Autowired
+    private  final UserScheduleRepository userScheduleRepository;
     private Gym getGymById(Long gymId) throws RecordNotFoundException {
         Optional<Gym> gym = gymRepository.findById(gymId);
         if(gym.isEmpty()){
@@ -93,6 +93,15 @@ public class AnalyticsService {
     }
     public List<Object[]> getTotalMinutesByActivityLastMonth(Long userId){
         return userActivityRepository.getTotalMinutesByActivityLastMonth(userId);
+    }
+    public Integer getTotalHoursSpentInGymClassLast90Days(Long userId){
+        return userScheduleRepository.getTotalHoursSpentLast90Days(userId);
+    }
+    public Integer getTotalHoursSpentInGymClassLastWeek(Long userId){
+        return userScheduleRepository.getTotalHoursSpentLastWeek(userId);
+    }
+    public Integer getTotalHoursSpentInGymClassLastMonth(Long userId){
+        return userScheduleRepository.getTotalHoursSpentLastMonth(userId);
     }
 
 

@@ -66,4 +66,17 @@ public class MemberController {
         return analyticsService.getTotalMinutesByActivityLastWeek(userId);
     }
 
+    @GetMapping({"/user/{userId}/schedule/last-month"})
+    public Integer getTotalHoursSpentInGymClassLastMonth(@PathVariable(required = true) Long userId) throws RecordNotFoundException {
+        return analyticsService.getTotalHoursSpentInGymClassLastMonth(userId);
+    }
+    @GetMapping({"/user/{userId}/schedule/last-90-days"})
+    public Integer getTotalHoursSpentInGymClassLast90Days(@PathVariable(required = true) Long userId) throws RecordNotFoundException {
+        return analyticsService.getTotalHoursSpentInGymClassLast90Days(userId);
+    }
+    @GetMapping({"/user/{userId}/schedule/last-week"})
+    public Integer getTotalHoursSpentInGymClassLastWeek(@PathVariable(required = true) Long userId) throws RecordNotFoundException {
+        return analyticsService.getTotalHoursSpentInGymClassLastWeek(userId);
+    }
+
 }
