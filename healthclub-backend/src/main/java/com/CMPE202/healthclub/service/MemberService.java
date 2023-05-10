@@ -8,7 +8,9 @@ import com.CMPE202.healthclub.entity.user.UserSchedule;
 import com.CMPE202.healthclub.entity.user.embeddableids.UserGymScheduleId;
 import com.CMPE202.healthclub.entity.user.enums.ACTIVITY;
 import com.CMPE202.healthclub.entity.user.enums.REG_STATUS;
+import com.CMPE202.healthclub.entity.user.enums.ROLE;
 import com.CMPE202.healthclub.exceptions.BadServerException;
+import com.CMPE202.healthclub.exceptions.InvalidOperationException;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import com.CMPE202.healthclub.model.User.UserActivityRequest;
 import com.CMPE202.healthclub.model.User.UserDetailsResponse;
@@ -59,7 +61,7 @@ public class MemberService {
                 .homeGym(user.getHomeGymId()).build();
     }
     //Book a particular Gym Class for the User
-    public UserSchedule bookGymClassForUser(Long userId, Long scheduleId) throws RecordNotFoundException, BadServerException{
+    public UserSchedule bookGymClassForUser(Long userId, Long scheduleId) throws RecordNotFoundException, BadServerException, InvalidOperationException {
         //Find the user
         User user = findUserById(userId);
         //Find the Gym schedule
@@ -72,6 +74,18 @@ public class MemberService {
         if(signUpList.size() == gymClass.get().getMaxOccupancy()){
             throw new BadServerException("Class reached full capacity");
         }
+        List<UserSchedule> userSchedules = user.getUserSchedules();
+        //Validations
+        if(userSchedules != null){
+            if(user.getRole() == ROLE.FREE_TRIAL_MEMBER && userSchedules.size()>=1)
+                throw new InvalidOperationException("You can book only one free trial class");
+            for(UserSchedule userSchedule: userSchedules){
+                if(userSchedule.getId().getScheduleId().equals(scheduleId)){
+                    throw new RuntimeException("You have already booked this class");
+                }
+            }
+        }
+
         //Sign up the user for the class
         UserSchedule userSchedule = UserSchedule.builder().user(user).gymSchedule(gymClass.get())
                 .registrationStatus(REG_STATUS.SCHEDULED).id(new UserGymScheduleId(scheduleId,userId)).build();

@@ -114,4 +114,21 @@ public class AdminService {
         return userRepository.findByRole(ROLE.FREE_TRIAL_MEMBER);
     }
 
+    public User upgradeMembership(Long userId) throws InvalidOperationException {
+        User freeMemberToUpgrade = null;
+        Optional<User> freeMember = userRepository.findById(userId);
+        if(!freeMember.isEmpty()){
+            freeMemberToUpgrade= freeMember.get();
+            if(freeMemberToUpgrade.getRole() == ROLE.FREE_TRIAL_MEMBER){
+                freeMemberToUpgrade.setRole(ROLE.MEMBER);
+                userRepository.save(freeMemberToUpgrade);
+            }else{
+                throw new InvalidOperationException("The member is not a free trial member");
+            }
+        }else{
+            throw new InvalidOperationException("Could not find the user for the user Id");
+        }
+        return freeMemberToUpgrade;
+    }
+
 }

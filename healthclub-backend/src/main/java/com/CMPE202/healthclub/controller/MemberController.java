@@ -4,6 +4,7 @@ import com.CMPE202.healthclub.entity.user.UserActivityTracker;
 import com.CMPE202.healthclub.entity.user.UserSchedule;
 import com.CMPE202.healthclub.entity.user.enums.ROLE;
 import com.CMPE202.healthclub.exceptions.BadServerException;
+import com.CMPE202.healthclub.exceptions.InvalidOperationException;
 import com.CMPE202.healthclub.exceptions.RecordNotFoundException;
 import com.CMPE202.healthclub.model.User.UserActivityRequest;
 import com.CMPE202.healthclub.model.User.UserDetailsResponse;
@@ -37,7 +38,7 @@ public class MemberController {
     @PostMapping({"/user/book"})
     @RolesAllowed({"MEMBER","FREE_TRIAL_MEMBER"})
     public UserSchedule bookGymClassForUser (
-            @RequestBody @Valid UserGymScheduleBookRequest userGymScheduleBookRequest)throws RecordNotFoundException, BadServerException {
+            @RequestBody @Valid UserGymScheduleBookRequest userGymScheduleBookRequest) throws RecordNotFoundException, BadServerException, InvalidOperationException {
             return memberService.bookGymClassForUser(userGymScheduleBookRequest.getUserId(), userGymScheduleBookRequest.getScheduleId());
     }
     @GetMapping({"/user/{userId}/schedule"})
