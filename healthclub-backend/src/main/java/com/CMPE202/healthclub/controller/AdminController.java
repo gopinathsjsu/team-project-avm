@@ -16,9 +16,11 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -54,27 +56,65 @@ public class AdminController {
      * Total number of hours spend in the Gym
      * Number of visitors per hour per day between 10 to 6
      */
-    @GetMapping({"/analytics/{gymId}"})
-    public AdminAnalyticsResponse getAnalyticsResponse(@PathVariable(required = true)  Long gymId,
-                                                       @RequestBody AdminAnalyticsRequest adminAnalyticsRequest) throws RecordNotFoundException {
+    @GetMapping("/analytics/{gymId}")
+    public AdminAnalyticsResponse getAnalyticsResponse(@PathVariable Long gymId,
+                                                       @RequestParam(name = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                       @RequestParam(name = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) throws RecordNotFoundException {
 
+        AdminAnalyticsRequest adminAnalyticsRequest = new AdminAnalyticsRequest();
+        adminAnalyticsRequest.setStartDate(startDate);
+        adminAnalyticsRequest.setEndDate(endDate);
 
-        return analyticsService.getAnalyticsResponse(gymId,adminAnalyticsRequest);
+        return analyticsService.getAnalyticsResponse(gymId, adminAnalyticsRequest);
     }
+
+    //    @GetMapping({"/analytics/{gymId}"})
+//    public AdminAnalyticsResponse getAnalyticsResponse(@PathVariable(required = true)  Long gymId,
+//                                                       @RequestBody AdminAnalyticsRequest adminAnalyticsRequest) throws RecordNotFoundException {
+//
+//
+//        return analyticsService.getAnalyticsResponse(gymId,adminAnalyticsRequest);
+//    }
+
     @GetMapping({"/analytics/{gymId}/hours-spent"})
     public List<Object[]> getHoursSpentByDayWeekMonth(@PathVariable(required = true)  Long gymId,
-                                                      @RequestBody AdminAnalyticsRequest adminAnalyticsRequest){
+                                                      @RequestParam(name = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                      @RequestParam(name = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate){
+        AdminAnalyticsRequest adminAnalyticsRequest = new AdminAnalyticsRequest();
+        adminAnalyticsRequest.setStartDate(startDate);
+        adminAnalyticsRequest.setEndDate(endDate);
         return analyticsService.getHoursSpentByDayWeekMonth(gymId,
                 adminAnalyticsRequest.getStartDate().atStartOfDay(),
                 adminAnalyticsRequest.getEndDate().atStartOfDay()
         );
     }
+//    @GetMapping({"/analytics/{gymId}/hours-spent"})
+//    public List<Object[]> getHoursSpentByDayWeekMonth(@PathVariable(required = true)  Long gymId,
+//                                                      @RequestBody AdminAnalyticsRequest adminAnalyticsRequest){
+//        return analyticsService.getHoursSpentByDayWeekMonth(gymId,
+//                adminAnalyticsRequest.getStartDate().atStartOfDay(),
+//                adminAnalyticsRequest.getEndDate().atStartOfDay()
+//        );
+//    }
+
     @GetMapping("/analytics/{gymId}/visitors-by-hour")
     public List<Object[]> getVisitorsByHourDayOfWeekWeekendOrWeekday(@PathVariable(required = true)  Long gymId,
-                                                                     @RequestBody AdminAnalyticsRequest adminAnalyticsRequest) {
+                                                                     @RequestParam(name = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                                     @RequestParam(name = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        AdminAnalyticsRequest adminAnalyticsRequest = new AdminAnalyticsRequest();
+        adminAnalyticsRequest.setStartDate(startDate);
+        adminAnalyticsRequest.setEndDate(endDate);
         return analyticsService.getVisitorsByHourDayOfWeekWeekendOrWeekday(gymId,
                 adminAnalyticsRequest.getStartDate().atStartOfDay(),
                 adminAnalyticsRequest.getEndDate().atStartOfDay());
     }
+
+//    @GetMapping("/analytics/{gymId}/visitors-by-hour")
+//    public List<Object[]> getVisitorsByHourDayOfWeekWeekendOrWeekday(@PathVariable(required = true)  Long gymId,
+//                                                                     @RequestBody AdminAnalyticsRequest adminAnalyticsRequest) {
+//        return analyticsService.getVisitorsByHourDayOfWeekWeekendOrWeekday(gymId,
+//                adminAnalyticsRequest.getStartDate().atStartOfDay(),
+//                adminAnalyticsRequest.getEndDate().atStartOfDay());
+//    }
 
 }
