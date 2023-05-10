@@ -10,6 +10,7 @@ import com.CMPE202.healthclub.model.Admin.AdminAnalyticsResponse;
 import com.CMPE202.healthclub.model.User.UserDetailsResponse;
 import com.CMPE202.healthclub.model.User.UserGymCheckInRequest;
 import com.CMPE202.healthclub.model.User.UserGymCheckOutRequest;
+import com.CMPE202.healthclub.model.User.UserId;
 import com.CMPE202.healthclub.service.AdminService;
 import com.CMPE202.healthclub.service.AnalyticsService;
 import jakarta.annotation.security.RolesAllowed;
@@ -94,5 +95,9 @@ public class AdminController {
     @GetMapping("/free-trial-members")
     public List<User> getFreeTrialMembers() {
         return adminService.getFreeTrialMembers();
+    }
+    @PostMapping("/upgrade")
+    public User upgradeMembership(@RequestBody(required = true) UserId userId) throws InvalidOperationException {
+        return adminService.upgradeMembership(userId.getUserId());
     }
 }
