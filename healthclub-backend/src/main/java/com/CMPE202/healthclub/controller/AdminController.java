@@ -67,15 +67,6 @@ public class AdminController {
 
         return analyticsService.getAnalyticsResponse(gymId, adminAnalyticsRequest);
     }
-
-    //    @GetMapping({"/analytics/{gymId}"})
-//    public AdminAnalyticsResponse getAnalyticsResponse(@PathVariable(required = true)  Long gymId,
-//                                                       @RequestBody AdminAnalyticsRequest adminAnalyticsRequest) throws RecordNotFoundException {
-//
-//
-//        return analyticsService.getAnalyticsResponse(gymId,adminAnalyticsRequest);
-//    }
-
     @GetMapping({"/analytics/{gymId}/hours-spent"})
     public List<Object[]> getHoursSpentByDayWeekMonth(@PathVariable(required = true)  Long gymId,
                                                       @RequestParam(name = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -88,15 +79,6 @@ public class AdminController {
                 adminAnalyticsRequest.getEndDate().atStartOfDay()
         );
     }
-//    @GetMapping({"/analytics/{gymId}/hours-spent"})
-//    public List<Object[]> getHoursSpentByDayWeekMonth(@PathVariable(required = true)  Long gymId,
-//                                                      @RequestBody AdminAnalyticsRequest adminAnalyticsRequest){
-//        return analyticsService.getHoursSpentByDayWeekMonth(gymId,
-//                adminAnalyticsRequest.getStartDate().atStartOfDay(),
-//                adminAnalyticsRequest.getEndDate().atStartOfDay()
-//        );
-//    }
-
     @GetMapping("/analytics/{gymId}/visitors-by-hour")
     public List<Object[]> getVisitorsByHourDayOfWeekWeekendOrWeekday(@PathVariable(required = true)  Long gymId,
                                                                      @RequestParam(name = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -108,13 +90,4 @@ public class AdminController {
                 adminAnalyticsRequest.getStartDate().atStartOfDay(),
                 adminAnalyticsRequest.getEndDate().atStartOfDay());
     }
-
-//    @GetMapping("/analytics/{gymId}/visitors-by-hour")
-//    public List<Object[]> getVisitorsByHourDayOfWeekWeekendOrWeekday(@PathVariable(required = true)  Long gymId,
-//                                                                     @RequestBody AdminAnalyticsRequest adminAnalyticsRequest) {
-//        return analyticsService.getVisitorsByHourDayOfWeekWeekendOrWeekday(gymId,
-//                adminAnalyticsRequest.getStartDate().atStartOfDay(),
-//                adminAnalyticsRequest.getEndDate().atStartOfDay());
-//    }
-
 }
