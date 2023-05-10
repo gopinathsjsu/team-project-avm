@@ -110,5 +110,8 @@ public class AdminService {
         userGymVisit.get().setCheckoutDateTime(LocalDateTime.now());
         return userGymVisitRepository.save(userGymVisit.get());
     }
+    public List<User> getFreeTrialMembers() {
+        return userRepository.findByRole(ROLE.FREE_TRIAL_MEMBER);
+    }
 
 }

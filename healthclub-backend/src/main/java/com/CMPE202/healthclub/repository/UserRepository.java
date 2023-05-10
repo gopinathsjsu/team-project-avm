@@ -2,6 +2,7 @@ package com.CMPE202.healthclub.repository;
 
 
 import com.CMPE202.healthclub.entity.user.User;
+import com.CMPE202.healthclub.entity.user.enums.ROLE;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "on v.user_id = u.id\n" +
             "where v.gym_id = ?1 and v.checkout_date_time IS NULL;",nativeQuery = true )
     Optional<List<User>> findCurrentCheckedInUsers(Long gymId);
+    List<User> findByRole(ROLE role);
 }

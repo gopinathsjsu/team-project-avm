@@ -1,5 +1,6 @@
 package com.CMPE202.healthclub.controller;
 
+import com.CMPE202.healthclub.entity.user.User;
 import com.CMPE202.healthclub.entity.user.UserGymVisit;
 import com.CMPE202.healthclub.exceptions.BadServerException;
 import com.CMPE202.healthclub.exceptions.InvalidOperationException;
@@ -89,5 +90,9 @@ public class AdminController {
         return analyticsService.getVisitorsByHourDayOfWeekWeekendOrWeekday(gymId,
                 adminAnalyticsRequest.getStartDate().atStartOfDay(),
                 adminAnalyticsRequest.getEndDate().atStartOfDay());
+    }
+    @GetMapping("/free-trial-members")
+    public List<User> getFreeTrialMembers() {
+        return adminService.getFreeTrialMembers();
     }
 }

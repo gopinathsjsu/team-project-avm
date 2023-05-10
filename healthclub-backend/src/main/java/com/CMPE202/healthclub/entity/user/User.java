@@ -26,6 +26,7 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
     @Column(length = 60)
+    @JsonIgnore
     private String password;
     @Enumerated(EnumType.STRING)
     private ROLE role;
