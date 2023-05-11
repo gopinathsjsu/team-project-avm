@@ -21,7 +21,6 @@ export default function Workout() {
                 start: 'top 90%',
                 end: 'bottom 60%',
                 toggleActions: 'restart complete ',
-                //options: play, pause, resume, reset, restart, complete, reverse,none
             },
         });
     }, []);
@@ -40,7 +39,6 @@ export default function Workout() {
                 start: 'top 90%',
                 end: 'bottom 60%',
                 toggleActions: 'restart complete',
-                //options: play, pause, resume, reset, restart, complete, reverse,none
             },
         });
     }, []);
@@ -59,7 +57,6 @@ export default function Workout() {
                 start: 'top 90%',
                 end: 'bottom 60%',
                 toggleActions: 'restart complete',
-                //options: play, pause, resume, reset, restart, complete, reverse,none
             },
         });
     }, []);
@@ -78,7 +75,6 @@ export default function Workout() {
                 start: 'top 90%',
                 end: 'bottom 60%',
                 toggleActions: 'restart complete',
-                //options: play, pause, resume, reset, restart, complete, reverse,none
             },
         });
     }, []);
@@ -98,7 +94,6 @@ export default function Workout() {
                 start: 'top 90%',
                 end: 'bottom 60%',
                 toggleActions: 'restart complete ',
-                //options: play, pause, resume, reset, restart, complete, reverse,none
             },
         });
     }, []);
@@ -118,7 +113,6 @@ export default function Workout() {
                 start: 'top 90%',
                 end: 'bottom 60%',
                 toggleActions: 'restart complete ',
-                //options: play, pause, resume, reset, restart, complete, reverse,none
             },
         });
     }, []);
