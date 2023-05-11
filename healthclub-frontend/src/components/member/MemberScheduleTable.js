@@ -36,7 +36,6 @@ export const MemberScheduleTable = (props) => {
     rowsPerPage = 0,
     selected = []
   } = props;
-  console.log('items',items)
   const selectedSome = (selected.length > 0) && (selected.length < items.length);
   const selectedAll = (items.length > 0) && (selected.length === items.length);
 
@@ -85,10 +84,10 @@ export const MemberScheduleTable = (props) => {
                     {schedule.gym.address}, {schedule.gym.city}, {schedule.gym.state}
                   </TableCell>
                   <TableCell>
-                    {schedule.startTime}
+                    {schedule.startTimeOnly}
                   </TableCell>
                   <TableCell>
-                    {schedule.endTime}
+                    {schedule.endTimeOnly}
                   </TableCell>
                   <TableCell>
                     {schedule.trainer}

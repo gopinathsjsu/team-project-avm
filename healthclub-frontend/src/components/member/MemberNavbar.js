@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 function MemberNavbar() {
     const navigate = useNavigate();
     const [username, setUsername] = React.useState('');
+    const [userRole, setUserRole] = React.useState('');
 
     useEffect(() => {
         const storedObject = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
@@ -17,12 +18,14 @@ function MemberNavbar() {
         if (storedObject) {
             if (storedObject.token) {
                 setUsername(storedObject.user);
+                setUserRole(storedObject.role)
             }
         }
     }, [])
 
     const handleLogout = (event) => {
         window.sessionStorage.removeItem("USER_DETAILS");
+        window.sessionStorage.removeItem("USER_DATA");
         setUsername('');
         navigate('/');
     }
@@ -43,10 +46,14 @@ function MemberNavbar() {
                             <Nav.Link href="/locations">Locations</Nav.Link>
                             <Nav.Link href="/memberships">Membership</Nav.Link> */}
                             {/* Member Navs */}
-
-                            <Nav.Link href="/memberpage/activities">Activities</Nav.Link>
+                            {/* {userRole === 'MEMBER' ? (
+                                <> */}
+                                    <Nav.Link href="/memberpage/activities">Activities</Nav.Link>
+                                    <Nav.Link href="/memberpage/tracker">Workout Tracker</Nav.Link>
+                                {/* </>
+                            ) : null} */}
                             <Nav.Link href="/memberpage/memberclasses">Classes</Nav.Link>
-                            <Nav.Link href="/memberpage/tracker">Workout Tracker</Nav.Link>
+                            
                             <NavDropdown title={username} id="basic-nav-dropdown">
                                 <NavDropdown.Item >User Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />

@@ -49,22 +49,24 @@ const MemberSchedule = (props) => {
         const modifiedSchedules = response.data.map(schedule => {
           // setCity(schedule.gym.city);
           // setLocation(schedule.gym.address);
-          const dateObject = new Date(schedule.startTime);
-          const dateOnlyString = dateObject.toDateString();
 
-          const startTimeOnly = schedule.startTime.split('T')[1].slice(0, 5);;
-          const endTimeOnly = schedule.endTime.split('T')[1].slice(0, 5);;
+          schedule.startTime[1] -= 1;
+          const startDateTime = new Date(...schedule.startTime);
+          const endDateTime = new Date(...schedule.endTime);
+
+          const date = startDateTime.toLocaleDateString();
+
+          const formattedStartTime = `${(startDateTime.getHours() % 12) || 12}:${startDateTime.getMinutes() < 10 ? '0' : ''}${startDateTime.getMinutes()} ${startDateTime.getMinutes() >= 12 ? 'PM' : 'AM'}`;
+          const formattedEndTime = `${(endDateTime.getHours() % 12) || 12}:${endDateTime.getMinutes() < 10 ? '0' : ''}${endDateTime.getMinutes()} ${endDateTime.getMinutes() >= 12 ? 'PM' : 'AM'}`;
+          
           return {
             ...schedule,
-            classDate: dateOnlyString,
-            startTimeOnly: startTimeOnly,
-            endTimeOnly: endTimeOnly
+            classDate: date,
+            startTimeOnly: formattedStartTime,
+            endTimeOnly: formattedEndTime
           };
         });
-
         setSchedules(modifiedSchedules)
-        //setData(schedules.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage))
-        console.log(modifiedSchedules)
       })
       .catch(error => {
         console.log(error);
@@ -113,8 +115,7 @@ const MemberSchedule = (props) => {
                 >
                 </Stack>
               </Stack>
-            </Stack>
-            {schedules.length}
+            </Stack>            
             {schedules.length > 0 ? (
               <MemberScheduleTable
                 count={schedules.length}

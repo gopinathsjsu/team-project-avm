@@ -1,0 +1,62 @@
+.class-schedule {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.class-item {
+    width: calc(23.33% - 5px);
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.class-item:hover {
+    transform: scale(1.03);
+}
+
+.class-date {
+    padding: 10px;
+    background-color: #121213;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.class-image {
+    height: 180px;
+    overflow: hidden;
+}
+
+.class-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.class-image img:hover {
+    transform: scale(1.1);
+}
+
+.class-details {
+    padding: 10px;
+}
+
+.class-title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.class-time {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.class-instructor {
+    font-size: 14px;
+}

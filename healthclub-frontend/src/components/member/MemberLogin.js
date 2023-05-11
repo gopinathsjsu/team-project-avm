@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -6,9 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { decodeToken } from "react-jwt";
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 import * as API from '../../actions/API.js';
-import AuthContext from '../../context/AuthContext';
 
 
 function MemberLogin(props) {
@@ -16,7 +17,7 @@ function MemberLogin(props) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    //const [isLoggedIn, setIsLoggedIn] = useState(userIsAuthenticated())
+    const [freeTrail, setFreeTrail] = useState(false);
     const [isError, setIsError] = useState(false)
 
     const handleEmailChange = (event) => {
@@ -30,40 +31,30 @@ function MemberLogin(props) {
 
     const handleMemberLogin = (event) => {
         event.preventDefault();
-        const role = 'MEMBER';
-        console.log('username=>' + email)
-        console.log('password=>' + password)        
+        let role = 'MEMBER';
+        if(freeTrail){
+            role = 'FREE_TRIAL_MEMBER'
+        }
         const data = { email, password, role };
-        console.log(data);
         if (!(email && password)) {
             setIsError(true)
+            console.log(isError)
             return;
         }
         API.login(data)
             .then(response => {
-                console.log(response);
-                console.log(response.data);
                 const decoded = decodeToken(response.data.token);
-                console.log("decoded token", decoded);
-                console.log("decoded token sub=>", decoded.sub); //given user email! - change to return user from BE
-                const userDetails = { token: response.data.token, role: decoded.role, user: decoded.sub.split("@")[0]};
-                console.log("userDetails ", userDetails);
+                const userDetails = { token: response.data.token, role: decoded.role, user: decoded.sub.split("@")[0], email: decoded.sub };
                 window.sessionStorage.setItem("USER_DETAILS", JSON.stringify(userDetails));
                 props.onHide(); // hide only when admin is loggedin successfully
                 if (window.sessionStorage.getItem("USER_DETAILS")) {
                     navigate('/memberpage/activities'); // navigate to member page
                 }
-
-
-
-
             })
             .catch(error => {
                 console.log(error);
                 setIsError(true);
             })
-
-
     }
 
     return (
@@ -77,6 +68,7 @@ function MemberLogin(props) {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>
                                 <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
+                                &nbsp;
                                 Email address</Form.Label>
                             <Form.Control
                                 name="email"
@@ -90,12 +82,15 @@ function MemberLogin(props) {
                         <Form.Group className="mb-3">
                             <Form.Label>
                                 <FontAwesomeIcon icon={faLock} className="mr-2" />
+                                &nbsp;
                                 Password</Form.Label>
                             <Form.Control
                                 name="password"
                                 value={password}
                                 placeholder="*******" type="password" onChange={handlePasswordChange} />
                         </Form.Group>
+                        <FormControlLabel control={<Switch checked={freeTrail} onChange={() => setFreeTrail(!freeTrail)} />}
+                            label="Are you a Free Trail Member?" />
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
