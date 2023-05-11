@@ -31,7 +31,7 @@ public class MemberController {
     private final MemberService memberService;
     private final AnalyticsService analyticsService;
     @GetMapping({"/user/{email}"})
-    @RolesAllowed("MEMBER")
+    @RolesAllowed({"MEMBER","FREE_TRIAL_MEMBER"})
     public UserDetailsResponse getUserDetailsFromEmail(@PathVariable(required = true)  @Email String email) throws RecordNotFoundException {
         return memberService.getUserDetailsFromEmail(email);
     }
