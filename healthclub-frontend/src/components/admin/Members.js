@@ -12,6 +12,7 @@ import { MembersTable } from './MembersTable';
 import { applyPagination } from './apply-pagination';
 import PropTypes from 'prop-types';
 import * as API from '../../actions/API.js';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const now = new Date();
 
@@ -201,24 +202,60 @@ const Members = (props) => {
 
 
   const gymId = props;
+  const membersUpdated = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const customers = useCustomers(page, rowsPerPage);
   const customersIds = useCustomerIds(customers);
+  const [checkoutClicked, setCheckoutClicked] = useState(false);
   //const customersSelection = useSelection(customersIds);
+
+  const [checkedInMembers, setCheckedInMembers] = useState([]);
 
   useEffect(() => {
     console.log(gymId)
     //make an API call!               
     API.getCheckedInUsers(gymId)
       .then(response => {
-        console.log(response);
-        console.log(response.data);
+        const modifiedCheckedInUsers = response.data.map(schedule => {
+          
+          const checkInDateTime = schedule.checkinDateTime;
+          const checkInDate = checkInDateTime[0] + '-' + checkInDateTime[1].toString().padStart(2, '0') + '-' + checkInDateTime[2].toString().padStart(2, '0')
+          const checkInHours = checkInDateTime[3];
+          const checkInMins = checkInDateTime[4];
+          const checkInTime = checkInDateTime[3].toString().padStart(2, '0') + ':' + checkInDateTime[4].toString().padStart(2, '0')
+          const period = (checkInHours >= 0 && checkInHours < 12) ? 'AM' : 'PM';
+          const checkIntimeOnly = checkInTime + ' ' + period;
+
+          let checkoutimeOnly;
+          if (schedule.checkoutDateTime !== null) {
+            const checkoutDateTime = schedule.checkoutDateTime;
+            const checkoutDate = checkoutDateTime[0] + '-' + checkoutDateTime[1].toString().padStart(2, '0') + '-' + checkoutDateTime[2].toString().padStart(2, '0')
+            const checkoutHours = checkoutDateTime[3];
+            const checkoutMins = checkoutDateTime[4];
+            const checkoutTime = checkoutDateTime[3] + ':' + checkoutDateTime[4]
+            const period = (checkInHours >= 0 && checkInHours < 12) ? 'AM' : 'PM';
+            checkoutimeOnly = checkInTime + ' ' + period
+          }
+
+          return {
+            ...schedule,
+            classDate: checkInDate,
+            entryTimeOnly: checkIntimeOnly,
+            exitTimeOnly: checkoutimeOnly
+          };
+        });
+        setCheckedInMembers(modifiedCheckedInUsers)
       })
       .catch(error => {
         console.log(error);
       })
-  }, [])
+  }, [membersUpdated, checkoutClicked])
+
+  const handleCheckoutClick = () => {
+    // from child component - MembersTable
+    setCheckoutClicked(!checkoutClicked)
+  };
 
   const handlePageChange = useCallback(
     (event, value) => {
@@ -260,53 +297,28 @@ const Members = (props) => {
                   direction="row"
                   spacing={1}
                 >
-                  {/* <Button
-                    color="inherit"
-                    startIcon={(
-                      <SvgIcon fontSize="small">
-                        <ArrowUpOnSquareIcon />
-                      </SvgIcon>
-                    )}
-                  >
-                    Import
-                  </Button>
-                  <Button
-                    color="inherit"
-                    startIcon={(
-                      <SvgIcon fontSize="small">
-                        <ArrowDownOnSquareIcon />
-                      </SvgIcon>
-                    )}
-                  >
-                    Export
-                  </Button> */}
                 </Stack>
               </Stack>
-              {/* <div>
-                <Button
-                  startIcon={(
-                    <SvgIcon fontSize="small">
-                      <PlusIcon />
-                    </SvgIcon>
-                  )}
-                  variant="contained"
-                >
-                  Add
-                </Button>
-              </div> */}
+              {/* <Button
+                startIcon={(
+                  <SvgIcon fontSize="small">
+                    <RefreshIcon />
+                  </SvgIcon>
+                )}
+                variant="contained"
+                size='small'
+              >
+                Refresh
+              </Button> */}
             </Stack>
             <MembersTable
-              count={data.length}
-              items={customers}
-              //   onDeselectAll={customersSelection.handleDeselectAll}
-              //   onDeselectOne={customersSelection.handleDeselectOne}
+              count={checkedInMembers.length}
+              items={checkedInMembers}
               onPageChange={handlePageChange}
               onRowsPerPageChange={handleRowsPerPageChange}
-              //   onSelectAll={customersSelection.handleSelectAll}
-              //   onSelectOne={customersSelection.handleSelectOne}
               page={page}
               rowsPerPage={rowsPerPage}
-            //   selected={customersSelection.selected}
+              onCheckoutClick={handleCheckoutClick}
             />
           </Stack>
         </Container>

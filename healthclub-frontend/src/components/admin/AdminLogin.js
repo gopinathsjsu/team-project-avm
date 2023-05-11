@@ -44,7 +44,7 @@ function AdminLogin(props) {
                 const decoded = decodeToken(response.data.token);
                 console.log("decoded token", decoded);
                 console.log("decoded token sub=>", decoded.sub); //given user email! - change to return user from BE
-                const userDetails = { token: response.data.token, role: decoded.role, user: decoded.sub.split("@")[0] };
+                const userDetails = { token: response.data.token, role: decoded.role, user: decoded.sub.split("@")[0], email: decoded.sub };
                 console.log("userDetails ", userDetails);
                 window.sessionStorage.setItem("USER_DETAILS", JSON.stringify(userDetails));
                 props.onHide(); // hide only when admin is loggedin successfully
@@ -70,6 +70,7 @@ function AdminLogin(props) {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>
                                 <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
+                                &nbsp;
                                 Email address</Form.Label>
                             <Form.Control
                                 name="email"
@@ -83,6 +84,7 @@ function AdminLogin(props) {
                         <Form.Group className="mb-3">
                             <Form.Label>
                                 <FontAwesomeIcon icon={faLock} className="mr-2" />
+                                &nbsp;
                                 Password</Form.Label>
                             <Form.Control
                                 name="password"

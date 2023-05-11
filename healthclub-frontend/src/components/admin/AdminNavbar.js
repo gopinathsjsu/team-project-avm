@@ -16,7 +16,7 @@ function AdminNavbar() {
         console.log("loggedin user data==>", storedObject);
         if (storedObject) {
             if (storedObject.token) {
-                setUsername(storedObject.user);
+                setUsername(storedObject.user.charAt(0).toUpperCase() + storedObject.user.slice(1));
             }
         }
     }, [])
@@ -47,6 +47,7 @@ function AdminNavbar() {
                             <Nav.Link href="/adminpage">Dashboard</Nav.Link>
                             <Nav.Link href="/adminpage/enrollmember">Register Members</Nav.Link>
                             <Nav.Link href="/adminpage/logmember">Checkin Members</Nav.Link>
+                            <Nav.Link href="/adminpage/upgrade-non-members">Upgrade Free Trial Members</Nav.Link>
                             <NavDropdown title={username} id="basic-nav-dropdown">
                                 <NavDropdown.Item >User Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />

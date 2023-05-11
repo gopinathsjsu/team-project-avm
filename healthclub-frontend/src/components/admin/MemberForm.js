@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -12,16 +12,18 @@ import Lock from '@mui/icons-material/Lock';
 import InputAdornment from '@mui/material/InputAdornment';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import MenuItem from '@mui/material/MenuItem';
 
 import './MemberForm.css'
 import AdminNavbar from './AdminNavbar.js'
 import * as API from '../../actions/API.js';
+import AdminAuth from '../../context/AdminAuth.js'
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function MemberForm() {
+function MemberForm() {
     const [memberFirstName, setMemberFirstName] = useState('');
     const [memberLastName, setMemberLastName] = useState('');
     const [memberEmail, setMemberEmail] = useState('');
@@ -29,6 +31,10 @@ export default function MemberForm() {
     const [freeTrail, setFreeTrail] = useState(false);
     const [open, setOpen] = useState(false);
     const [errorReg, setErrorReg] = useState(false);
+    const [city, setCity] = useState('');
+    const [cityList, setCityList] = useState([]);
+    const [location, setLocation] = useState('');
+    const [locationList, setLocationList] = useState([]);
 
     const handleMemberFirstNameChange = (event) => {
         setMemberFirstName(event.target.value);
@@ -46,7 +52,34 @@ export default function MemberForm() {
         setMemberPassword(event.target.value);
     };
 
+    useEffect(() => {
+        API.getGymCities()
+            .then(response => {
+                console.log(response.data)
+                setCityList(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, [])
 
+    const handleCityChange = (event) => {
+        setCity(event.target.value);
+        API.fetchGyms(event.target.value)
+            .then(response => {
+                setLocationList(response.data);
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        console.log(city)
+    };
+
+    const handleLocationChange = (event) => {
+        console.log(event.target.value)
+        setLocation(event.target.value);
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -59,7 +92,7 @@ export default function MemberForm() {
         // "homeGym":"1"
         let memberRole = 'MEMBER';
         if (freeTrail) {
-            memberRole = 'NON-MEMBER'
+            memberRole = 'FREE_TRIAL_MEMBER'
         }
         const data = {
             "firstName": memberFirstName,
@@ -67,7 +100,7 @@ export default function MemberForm() {
             "email": memberEmail,
             "password": memberPassword,
             "role": memberRole,
-            // "homeGym": 1
+            "homeGym": location
         };
         //make an API call!
         API.register(data)
@@ -82,9 +115,6 @@ export default function MemberForm() {
                 setErrorReg(true);
                 setOpen(true)
             })
-        // toast message if success!
-        //need to send role as member
-        // You can use the memberName and memberEmail to send a request to your server to enroll a new member
     };
 
     const handleClose = () => {
@@ -184,6 +214,42 @@ export default function MemberForm() {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        id="city"
+                                        select
+                                        label="Select City"
+                                        variant='outlined'
+                                        fullWidth
+                                        name='city'
+                                        value={city}
+                                        onChange={handleCityChange}
+                                    >
+                                        {cityList.map((option) => (
+                                            <MenuItem key={option} value={option}>
+                                                {option}
+                                            </MenuItem>
+                                        ))}
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        id="location"
+                                        select
+                                        label="Select Gym Location"
+                                        variant='outlined'
+                                        fullWidth
+                                        name='location'
+                                        value={location}
+                                        onChange={handleLocationChange}
+                                    >
+                                        {locationList.map((filter) => (
+                                            <MenuItem key={filter.id} value={filter.id}>{filter.address}</MenuItem>
+                                        ))}
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={12}>
                                     <FormControlLabel control={<Switch checked={freeTrail} onChange={() => setFreeTrail(!freeTrail)} />}
                                         label="Enroll Member for Free Trail" />
                                 </Grid>
@@ -221,3 +287,5 @@ export default function MemberForm() {
         </>
     );
 }
+
+export default AdminAuth(MemberForm);

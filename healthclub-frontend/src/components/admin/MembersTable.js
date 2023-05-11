@@ -21,6 +21,15 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import PersonIcon from '@mui/icons-material/Person';
 // import { Scrollbar } from 'src/components/scrollbar';
 // import { getInitials } from 'src/utils/get-initials';
+import React, { useState } from 'react';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import * as API from '../../actions/API.js';
+
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export const MembersTable = (props) => {
   const {
@@ -45,14 +54,41 @@ export const MembersTable = (props) => {
   const time = today.toLocaleTimeString('en', { hour: 'numeric', hour12: true, minute: 'numeric' });
 
 
+  const [errorReg, setErrorReg] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleCheckout = (userGymVisitId) => {
+    console.log('user_Gym_vist_I=>', userGymVisitId)
+    const data = { userGymVisitId };
+    API.checkOutMembers(data)
+      .then(response => {
+        console.log(response.data);
+        setErrorReg(false);
+        props.onCheckoutClick()
+      })
+      .catch(error => {
+        console.log('error in checkout')
+        console.log(error);
+        setErrorReg(true);
+        setErrorMessage(error.response.data);
+      })
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
   return (
-    <Card>
-      {/* <Scrollbar> */}
-      <Box sx={{ minWidth: 800 }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {/* <TableCell padding="checkbox">
+    <>
+      <Card>
+        {/* <Scrollbar> */}
+        <Box sx={{ minWidth: 800 }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {/* <TableCell padding="checkbox">
                   <Checkbox
                     checked={selectedAll}
                     indeterminate={selectedSome}
@@ -65,44 +101,37 @@ export const MembersTable = (props) => {
                     }}
                   />
                 </TableCell> */}
-              <TableCell>
-                Name
-              </TableCell>
-              <TableCell>
-                Email
-              </TableCell>
-              <TableCell>
-                Location
-              </TableCell>
-              <TableCell>
-                Phone
-              </TableCell>
-              {/* <TableCell>
-                Signed Up
-              </TableCell> */}
-              <TableCell>
-                Entry Time
-              </TableCell>
-              <TableCell>
-                Exit Time
-              </TableCell>
-              <TableCell>
-                {/* Mark Exit */}
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {items.map((customer) => {
-              const isSelected = selected.includes(customer.id);
-              const createdAt = format(customer.createdAt, 'dd/MM/yyyy');
+                <TableCell>
+                  Name
+                </TableCell>
+                <TableCell>
+                  Email
+                </TableCell>
+                <TableCell>
+                  Date
+                </TableCell>
+                <TableCell>
+                  Entry Time
+                </TableCell>
+                <TableCell>
+                  Exit Time
+                </TableCell>
+                <TableCell>
+                  {/* Mark Exit */}
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {items.map((customer) => {
+                const isSelected = selected.includes(customer.userGymVisitId);
 
-              return (
-                <TableRow
-                  hover
-                  key={customer.id}
-                  selected={isSelected}
-                >
-                  {/* <TableCell padding="checkbox">
+                return (
+                  <TableRow
+                    hover
+                    key={customer.userGymVisitId}
+                    selected={isSelected}
+                  >
+                    {/* <TableCell padding="checkbox">
                       <Checkbox
                         checked={isSelected}
                         onChange={(event) => {
@@ -114,70 +143,87 @@ export const MembersTable = (props) => {
                         }}
                       />
                     </TableCell> */}
-                  <TableCell>
-                    <Stack
-                      alignItems="center"
-                      direction="row"
-                      spacing={2}
-                    >
-                      {/* <PersonIcon fontSize='xs' /> */}
-                      {/* <Avatar src={customer.avatar}>
+                    <TableCell>
+                      <Stack
+                        alignItems="center"
+                        direction="row"
+                        spacing={2}
+                      >
+                        {/* <PersonIcon fontSize='xs' /> */}
+                        {/* <Avatar src={customer.avatar}>
                           {getInitials(customer.name)}
                           {customer.name}
                         </Avatar> */}
-                      <Typography variant="subtitle2">
-                        {customer.name}
-                      </Typography>
-                    </Stack>
-                  </TableCell>
-                  <TableCell>
-                    {customer.email}
-                  </TableCell>
-                  <TableCell>
-                    {customer.address.city}, {customer.address.state}, {customer.address.country}
-                  </TableCell>
-                  <TableCell>
-                    {customer.phone}
-                  </TableCell>
-                  {/* <TableCell>
-                    {createdAt}
-                  </TableCell> */}
-                  <TableCell>
-                    {customer.entry}
-                  </TableCell>
-                  <TableCell>
-                    {customer.exit}
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      startIcon={(
-                        <SvgIcon fontSize="small">
-                          <AccessTimeFilledIcon />
-                        </SvgIcon>
-                      )}
-                      variant="contained"
-                      disabled={customer.exit?true:false}
-                    >
-                      Check-out
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </Box>
-      {/* </Scrollbar> */}
-      <TablePagination
-        component="div"
-        count={count}
-        onPageChange={onPageChange}
-        onRowsPerPageChange={onRowsPerPageChange}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-    </Card>
+                        <Typography variant="subtitle2">
+                          {customer.user.firstName} {customer.user.lastName}
+                        </Typography>
+                      </Stack>
+                    </TableCell>
+                    <TableCell>
+                      {customer.user.email}
+                    </TableCell>
+                    <TableCell>
+                      {customer.classDate}
+                    </TableCell>
+                    <TableCell>
+                      {customer.entryTimeOnly}
+                    </TableCell>
+                    <TableCell>
+                      {customer.exitTimeOnly}
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        startIcon={(
+                          <SvgIcon fontSize="small">
+                            <AccessTimeFilledIcon />
+                          </SvgIcon>
+                        )}
+                        variant="contained"
+                        disabled={customer.exitTimeOnly ? true : false}
+                        onClick={() => handleCheckout(customer.userGymVisitId)}
+                      >
+                        Check-out
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Box>
+        {/* </Scrollbar> */}
+        <TablePagination
+          component="div"
+          count={count}
+          onPageChange={onPageChange}
+          onRowsPerPageChange={onRowsPerPageChange}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          rowsPerPageOptions={[5, 10, 25]}
+        />
+      </Card>
+
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        {errorReg === false ? (
+          <Snackbar open={open} autoHideDuration={6000}
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              Member is checked-out successfully.
+            </Alert>
+          </Snackbar>
+        ) :
+          <Snackbar open={open} autoHideDuration={6000}
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+              {errorMessage}
+            </Alert>
+          </Snackbar>
+        }
+      </Stack>
+    </>
+
   );
 };
 

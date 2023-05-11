@@ -5,7 +5,7 @@ import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
 
 export const OverviewTotalCustomers = (props) => {
-  const { difference, positive = false, sx, value, overviewType } = props;
+  const { difference, positive = false, sx, value, overviewType, iconElement, footerText } = props;
 
   return (
     <Card sx={sx}>
@@ -21,7 +21,7 @@ export const OverviewTotalCustomers = (props) => {
               color="text.secondary"
               variant="overline"
             >
-              Total Members
+              {overviewType}
             </Typography>
             <Typography variant="h4">
               {value}
@@ -35,7 +35,7 @@ export const OverviewTotalCustomers = (props) => {
             }}
           >
             <SvgIcon>
-              <UsersIcon />
+              {/* <UsersIcon /> */} {iconElement}
             </SvgIcon>
           </Avatar>
         </Stack>
@@ -46,6 +46,12 @@ export const OverviewTotalCustomers = (props) => {
             spacing={2}
             sx={{ mt: 2 }}
           >
+            <Typography
+              color="green"
+              variant="caption"
+            >
+              {footerText}
+            </Typography>
             <Stack
               alignItems="center"
               direction="row"
@@ -55,21 +61,16 @@ export const OverviewTotalCustomers = (props) => {
                 color={positive ? 'success' : 'error'}
                 fontSize="small"
               >
-                {positive ? <ArrowUpIcon /> : <ArrowDownIcon />}
+                {/* {positive ? <ArrowUpIcon /> : <ArrowDownIcon />} */}
               </SvgIcon>
               <Typography
                 color={positive ? 'success.main' : 'error.main'}
                 variant="body2"
               >
-                {difference}%
+                {/* {difference}% */}
               </Typography>
             </Stack>
-            <Typography
-              color="text.secondary"
-              variant="caption"
-            >
-              Since last month
-            </Typography>
+
           </Stack>
         )}
       </CardContent>
@@ -80,7 +81,9 @@ export const OverviewTotalCustomers = (props) => {
 OverviewTotalCustomers.propTypes = {
   difference: PropTypes.number,
   positive: PropTypes.bool,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number,   //string.isRequired,
   sx: PropTypes.object,
-  overviewType: PropTypes.string
+  overviewType: PropTypes.string,
+  iconElement: PropTypes.element.isRequired,
+  footerText: PropTypes.string
 };

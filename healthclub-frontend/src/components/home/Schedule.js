@@ -6,6 +6,7 @@ import Link from '@mui/material/Link';
 import * as API from '../../actions/API.js';
 import NavbarHome from './NavbarHome.js';
 import './Schedule.css'
+import { Button } from '@mui/material';
 
 export default function Schedule() {
     const { gymId } = useParams();
@@ -16,21 +17,24 @@ export default function Schedule() {
     useEffect(() => {
         console.log('Schedule is called' + gymId);
         API.fetchGymSchedule(gymId)
-            .then(response => {                
+            .then(response => {
                 const modifiedSchedules = response.data.map(schedule => {
                     console.log(schedule)
                     setCity(schedule.gym.city);
                     setLocation(schedule.gym.address);
-                    const dateObject = new Date(schedule.startTime);
-                    const dateOnlyString = dateObject.toDateString();
+                    schedule.startTime[1] -= 1;
+                    const startDateTime = new Date(...schedule.startTime);
+                    const endDateTime = new Date(...schedule.endTime);
 
-                    const startTimeOnly = schedule.startTime.split('T')[1].slice(0, 5);;
-                    const endTimeOnly = schedule.endTime.split('T')[1].slice(0, 5);;
+                    const date = startDateTime.toLocaleDateString();
+
+                    const formattedStartTime = `${(startDateTime.getHours() % 12) || 12}:${startDateTime.getMinutes() < 10 ? '0' : ''}${startDateTime.getMinutes()} ${startDateTime.getMinutes() >= 12 ? 'PM' : 'AM'}`;
+                    const formattedEndTime = `${(endDateTime.getHours() % 12) || 12}:${endDateTime.getMinutes() < 10 ? '0' : ''}${endDateTime.getMinutes()} ${endDateTime.getMinutes() >= 12 ? 'PM' : 'AM'}`;
                     return {
                         ...schedule,
-                        classDate: dateOnlyString,
-                        startTimeOnly: startTimeOnly,
-                        endTimeOnly: endTimeOnly
+                        classDate: date,
+                        startTimeOnly: formattedStartTime,
+                        endTimeOnly: formattedEndTime
                     };
                 });
                 setSchedules(modifiedSchedules)
@@ -51,7 +55,7 @@ export default function Schedule() {
 
     return (
         <>
-            <NavbarHome/>
+            <NavbarHome />
             <div style={{ marginLeft: '100px', marginTop: '100px', width: 'fit-content' }} role="presentation">
                 <Breadcrumbs aria-label="breadcrumb">
                     <Link underline="hover" color="inherit">
@@ -59,13 +63,13 @@ export default function Schedule() {
                     </Link>
                     <Link
                         underline="hover"
-                        color="inherit"                        
+                        color="inherit"
                     >
                         {city}
                     </Link>
                     <Link
                         underline="hover"
-                        color="text.primary"                       
+                        color="text.primary"
                         aria-current="page"
                     >
                         {location}
@@ -73,12 +77,12 @@ export default function Schedule() {
                 </Breadcrumbs>
             </div>
             <div style={{ marginTop: '10px' }} className="class-schedule">
-                {filteredClasses.map((cls) => (
+                {schedules.map((cls) => (
                     <div key={cls.scheduleId} className="class-item">
                         <div className="class-date">{cls.classDate}</div>
                         <div className="class-details">
-                            <div className="class-title">{cls.trainer}</div>
-                            <div className="class-time">
+                            {/* <div className="class-title">{cls.trainer}</div> */}
+                            <div className="class-title">
                                 <b>Class Time:</b>
                                 {cls.startTimeOnly} - {cls.endTimeOnly}
                             </div>
@@ -87,7 +91,14 @@ export default function Schedule() {
                             </div>
                             <div className="class-instructor">
                                 <b>Max Occupancy:</b> {cls.maxOccupancy}
+                                <Button
+                                    style={{ float: 'right' }}
+                                    variant="contained"
+                                    size="small">
+                                    Reserve
+                                </Button>
                             </div>
+                            <br />
                         </div>
                     </div>
                 ))}

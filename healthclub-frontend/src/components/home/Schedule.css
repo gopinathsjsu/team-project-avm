@@ -53,11 +53,11 @@
 }
 
 .class-time {
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 5px;
 }
 
 .class-instructor {
     font-size: 14px;
-    color: #666;
+    /* color: #666; */
 }
