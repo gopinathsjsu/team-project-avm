@@ -1,103 +1,245 @@
 import axios from 'axios';
-import cors from 'cors';
 
 // Constants
-const LOGOUT = 'LOGOUT';
 const api = 'http://localhost:8080/api/v1';
+
 // Actions
 
+/* ******** PUBLIC APIs *********** */
+
+/* Register new user - Admin, Member */
 export const register = (payload) => {
     return axios.post(`${api}/auth/register`, payload);
 }
 
+/* Login authentication API - Admin, Member */
 export const login = (payload) => {
     return axios.post(`${api}/auth/authenticate`, payload);
 }
 
-export const logout = () => {
-    return { type: LOGOUT };
-};
-
+/* API to fetch gyms based on the given city */
 export const fetchGyms = (city) => {
-    console.log('city in api.js method==>', city);
-    console.log(`${api}/gym/${city}`);
     return axios.get(`${api}/gym/${city}`);
 }
 
+/* API to fetch gym schedules based on the given gym ID */
 export const fetchGymSchedule = (gymId) => {
-    console.log('gymId in api.js method==>', gymId);
-    console.log(`${api}/gym/schedule/${gymId}`);
     return axios.get(`${api}/gym/schedule/${gymId}`);
 }
 
-export const fetchMemberDetails = () => {
-    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
-    const email = 'tom@gmail.com';
-    return axios.get('http://localhost:8080/api/v1/admin/member', { email }, {
-        headers: {
-            'Authorization': `Bearer ${adminData.token}`,
-            // 'Access-Control-Allow-Origin': 'http://localhost:3000',
-            // 'Access-Control-Allow-Headers': '*'
-        },
-        mode: 'no-cors',
-        //credentials: true
-    });
-    
+/* API to fetch gym schedules based on the given gym ID */
+export const getGymActivities = () => {
+    return axios.get(`${api}/gym/activity`);
 }
 
-export const checkInMembers = (gymId, email) => {
-    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
-    const corsOptions = {
-        origin: 'http://localhost:3000', // specify the URL of your server
-    };
-
-    const axiosInstance = axios.create();
-    axiosInstance.interceptors.request.use(cors(corsOptions));
-    return axiosInstance.post('http://localhost:8080/api/v1/admin/member/checkIn', { gymId, email }, {
-        headers: {
-            'Authorization': `Bearer ${adminData.token}`,
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': '*'
-        },
-        mode: 'cors',
-        credentials: 'include'
-    });
+/* API to fetch all the gym cities */
+export const getGymCities = () => {
+    return axios.get(`${api}/gym/city`);
 }
 
-export const checkOutMembers = (userGymVisitId) => {
+/* API to fetch all the gym location details */
+export const getLocationDetails = (gymId) => {
+    return axios.get(`${api}/gym/details/${gymId}`);
+}
+
+/****************** 
+*****************  ADMIN APIs *****************
+******************/
+
+/* API to fetch any user details based on the given email of the user */
+export const fetchUserDetails = (email) => {
     const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
-    return axios.put('http://localhost:8080/api/v1/admin/member/checkOut?userGymVisitId', { userGymVisitId }, {
+    console.log(`${api}/admin/member/${email}`)
+    return axios.get(`${api}/admin/member/${email}`, {
         headers: {
             'Authorization': `Bearer ${adminData.token}`
-        },
-        mode: 'cors',
-        credentials: 'include'
+        }
     });
 }
 
-export const getCheckedInUsers = (gymId) => {
+/* API to check-in members into the gym */
+export const checkInMembers = (payload) => {
+    console.log('payload=>', payload)
+    console.log('gymId', payload.gymId)
+    console.log('email', payload.email)
     const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
-    const gym = 1;
-    console.log(`${api}/admin/member/currentCheckedInList?gymId=${gym}`);
-    return axios.get(`${api}/admin/member/currentCheckedInList?gymId=${gym}`, {
+    return axios.post(`${api}/admin/member/checkIn`, payload, {
+        headers: {
+            'Authorization': `Bearer ${adminData.token}`
+        }
+    });
+}
+
+/* API to check-out members out of the gym */
+export const checkOutMembers = (payload) => {
+    console.log('payload in checkout==>', payload)
+    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.put(`${api}/admin/member/checkOut`, payload, {
+        headers: {
+            'Authorization': `Bearer ${adminData.token}`
+        }
+    });
+}
+
+/* API to get a list of checked-in members into the gym */
+// Only for current date??? - Ideally current date
+export const getCheckedInUsers = (gym) => {
+    let gymId = gym.gymId;
+    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.get(`${api}/admin/member/currentCheckedInList/${gymId}`, {
         headers: {
             'Authorization': `Bearer ${adminData.token}`,
-            // 'Access-Control-Allow-Origin': 'http://localhost:3000',
-            // 'Access-Control-Allow-Credentials':'true',
-            // 'Access-Control-Allow-Headers': '*'
-        },
-        //mode: 'no-cors',
-        //credentials: 'include'
+        }
+    });
+}
+
+/* API to get Gym analytics for the given location and Date range */
+export const getGymAnalytics = (location, startDate, endDate) => {
+    console.log('location in getGymAnalytics==>', location)    
+    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.get(`${api}/admin/analytics/${location}?startDate=${startDate}&endDate=${endDate}`,  {
+        headers: {
+            'Authorization': `Bearer ${adminData.token}`
+        }
+    });
+}
+
+/* API to get Gym Visitors by hour for the given location and Date range */
+export const getVisitorsByHour = (location, startDate, endDate) => {
+    console.log('location in getGymAnalytics==>', location)
+    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.get(`${api}/admin/analytics/${location}/visitors-by-hour?startDate=${startDate}&endDate=${endDate}`,  {
+        headers: {
+            'Authorization': `Bearer ${adminData.token}`
+        }
+    });
+}
+
+/* API to get time sent by the vistors by date for the given location and Date range */
+export const getTimeSpentByDate = (location, startDate, endDate) => {
+    console.log('location in getGymAnalytics==>', location)
+    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.get(`${api}/admin/analytics/${location}/hours-spent?startDate=${startDate}&endDate=${endDate}`,  {
+        headers: {
+            'Authorization': `Bearer ${adminData.token}`
+        }
+    });
+}
+
+/* API to get a list of all free trail members */
+export const getFreeTrailMembers = () => {    
+    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.get(`${api}/admin/free-trial-members`,  {
+        headers: {
+            'Authorization': `Bearer ${adminData.token}`
+        }
+    });
+}
+
+/* API to upgrade free trial members  */
+export const upgradeFreeTrailMembers = (payload) => {
+    console.log('payload=>', payload)
+    console.log('userId==>', payload.userId)    
+    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.post(`${api}/admin/upgrade`, payload, {
+        headers: {
+            'Authorization': `Bearer ${adminData.token}`
+        }
+    });
+}
+/****************** 
+*****************  MEMBER APIs *****************
+******************/
+
+
+/* API to fetch member and free trial user details based on the given email of the user */
+export const fetchMemberDetails = (email) => {
+    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));    
+    return axios.get(`${api}/member/user/${email}`, {
+        headers: {
+            'Authorization': `Bearer ${adminData.token}`
+        }
     });
 }
 
 
+/* API for members to register for a class */
 /*
-headers: {
-    "Authorization": `Bearer ${token}`,
-    "Content-Type": "application/json"
+{   
+    "userId": 2,
+    "scheduleId": 9
 }
 */
+export const registerForClass = (payload) => {
+    const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.post(`${api}/member/user/book`, payload, {
+        headers: {
+            'Authorization': `Bearer ${memberData.token}`,
+        }
+    });
+}
+
+/* API for members to get his upcoming/reserved classes */
+export const getUserUpcomingClasses = (userId) => {
+    const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.get(`${api}/member/user/${userId}/schedule`, {
+        headers: {
+            'Authorization': `Bearer ${memberData.token}`,
+        }
+    });
+}
+
+/* API for members to log their activities (in minutes) */
+/*
+{   
+    "userId":1,
+    "activity":Cardio,
+    "timeInMinutes":10
+}
+*/
+export const logMemberActivity = (payload) => {
+    const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.post(`${api}/member/user/activity`, payload, {
+        headers: {
+            'Authorization': `Bearer ${memberData.token}`,
+        }
+    });
+}
+
+/* API for members to get all their activities data */
+export const getMemberActivities = (userId) => {
+    const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.get(`${api}/member/user/${userId}/activity`, {
+        headers: {
+            'Authorization': `Bearer ${memberData.token}`,
+        }
+    });
+}
+
+/* API for members to get all their activities data for the selected time period */
+export const getActivitiesBasedOnTimePeriod = (userId, timePeriod) => {
+    console.log(userId)
+    console.log(timePeriod)
+    const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.get(`${api}/member/user/${userId}/activity/${timePeriod}`, {
+        headers: {
+            'Authorization': `Bearer ${memberData.token}`,
+        }
+    });
+}
+
+/* API for members to get all their classes enrolled count for the selected time period */
+export const getCountOfClassesEnrolledBasedOnTimePeriod = (userId, timePeriod) => {
+    console.log(userId)
+    console.log(timePeriod)
+    const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
+    return axios.get(`${api}/member/user/${userId}/schedule/${timePeriod}`, {
+        headers: {
+            'Authorization': `Bearer ${memberData.token}`,
+        }
+    });
+}
+
 
 
 /*
