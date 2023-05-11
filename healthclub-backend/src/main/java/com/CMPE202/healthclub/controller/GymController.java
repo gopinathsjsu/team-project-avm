@@ -39,7 +39,7 @@ public class GymController {
     public List<String> getAllCities(){
         return gymService.getALlCities();
     }
-    @GetMapping({"/{gymid}"})
+    @GetMapping({"/details/{gymid}"})
     public Optional<Gym> getGymDetails(@PathVariable(required = true) Long gymid){
         return gymService.getGymDetails(gymid);
     }
