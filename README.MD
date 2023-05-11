@@ -7,9 +7,9 @@
 
 <h3>Project Contributors</h3>
 
+- Meera Tresa Sebastian
 - Adesh Landge
 - Vineeth Hamilpur
-- Meera Tresa Sebastian
 
 <h3>Tech Stack</h3>
 
@@ -22,8 +22,8 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 <h3>Project Journals</h3>
 
 - Adesh Landge - [Project Journal](https://github.com/gopinathsjsu/team-project-avm/blob/main/Project%20Journals/Project%20Journal%20of%20Adesh.MD).
-- Vineeth Hamilpur - 
-- Meera Tresa Sebastian - 
+- Vineeth Hamilpur - [Project Journal](https://github.com/gopinathsjsu/team-project-avm/blob/main/Project%20Journals/Project%20Journal%20Of%20Vineeth.MD).
+- Meera Tresa Sebastian - [Project Journal](https://github.com/gopinathsjsu/team-project-avm/blob/main/Project%20Journals/Project%20Journal%20Of%20Meera.MD).
 
 <h3>UML Diagrams:</h3>
 
