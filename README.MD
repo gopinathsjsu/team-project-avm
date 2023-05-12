@@ -25,6 +25,10 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 - Vineeth Hamilpur - [Project Journal](https://github.com/gopinathsjsu/team-project-avm/blob/main/Project%20Journals/Project%20Journal%20Of%20Vineeth.MD).
 - Meera Tresa Sebastian - [Project Journal](https://github.com/gopinathsjsu/team-project-avm/blob/main/Project%20Journals/Project%20Journal%20Of%20Meera.MD).
 
+<h3>Sprint Sheet:</h3>
+  
+[UI Wireframes](https://github.com/gopinathsjsu/team-project-avm/tree/main/UI%20Wireframes).
+  
 <h3>UML Diagrams:</h3>
 
 1. Use case Diagram
