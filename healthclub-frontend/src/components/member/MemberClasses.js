@@ -188,7 +188,7 @@ function MemberClasses() {
                 }
             </div>
             <Typography align='center' gutterBottom variant="h5" >
-                Your registered Classes
+                Your upcoming classes
             </Typography>
             <div style={{ marginTop: '10px' }} className="class-schedule">
                 {userSchedules.length !== 0 ? (
