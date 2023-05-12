@@ -5,6 +5,8 @@ public enum ACTIVITY {
     TRAINING,
     WEIGHT_TRAINING,
     TREADMILL,
-    ROWING
+    ROWING,
+    HIKING,
+    SWIMMING
 
 }
