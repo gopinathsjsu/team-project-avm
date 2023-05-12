@@ -55,8 +55,6 @@ function MemberNavbar() {
                             <Nav.Link href="/memberpage/memberclasses">Classes</Nav.Link>
                             
                             <NavDropdown title={username} id="basic-nav-dropdown">
-                                <NavDropdown.Item href="/memberpage/profile">User Profile</NavDropdown.Item>
-                                <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
