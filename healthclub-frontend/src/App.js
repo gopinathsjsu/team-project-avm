@@ -34,14 +34,7 @@ function App() {
         {/* Member Routes */}
         <Route path="/memberpage/activities" element={<MemberHome />} />
         <Route path="/memberpage/memberclasses" element={<MemberClasses />} />
-        <Route path="/memberpage/tracker" element={<MemberWorkoutTracker />} />        
-        
-        
-        
-        {/* <Route path='/login' element={<Login />} />
-        <Route path="/adminpage" element={<PrivateRoute><AdminPage /></PrivateRoute>} />
-        <Route path="/memberpage" element={<PrivateRoute><MemberPage /></PrivateRoute>} /> */}
-        
+        <Route path="/memberpage/tracker" element={<MemberWorkoutTracker />} />                                      
       </Routes>
     </Router>
   );

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Box, Container, Unstable_Grid2 as Grid } from '@mui/material';
-import Paper from '@mui/material/Paper';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -171,11 +170,7 @@ function MemberHome() {
             }));
         }).catch(error => {
             console.log(error);
-        })
-
-        //make API call before and modify the response array based on filter or make API call everytime the filter changes.
-
-
+        })        
     };
     return (
         <>
@@ -236,15 +231,12 @@ function MemberHome() {
                                             <p>You do not have access to view this data. <BlockIcon color='error'/></p>                                        
                                         </>
                                     }
-
                                 </Box>
                             </Card>
                         </Grid>
                     </Grid>
                 </Container>
             </div>
-
-
         </>
     );
 }

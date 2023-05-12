@@ -19,8 +19,7 @@ import {
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import PersonIcon from '@mui/icons-material/Person';
-// import { Scrollbar } from 'src/components/scrollbar';
-// import { getInitials } from 'src/utils/get-initials';
+
 
 export const MemberScheduleTable = (props) => {
   const {

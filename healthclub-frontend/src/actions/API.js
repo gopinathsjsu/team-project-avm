@@ -48,8 +48,7 @@ export const getLocationDetails = (gymId) => {
 
 /* API to fetch any user details based on the given email of the user */
 export const fetchUserDetails = (email) => {
-    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
-    console.log(`${api}/admin/member/${email}`)
+    const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));    
     return axios.get(`${api}/admin/member/${email}`, {
         headers: {
             'Authorization': `Bearer ${adminData.token}`
@@ -58,10 +57,7 @@ export const fetchUserDetails = (email) => {
 }
 
 /* API to check-in members into the gym */
-export const checkInMembers = (payload) => {
-    console.log('payload=>', payload)
-    console.log('gymId', payload.gymId)
-    console.log('email', payload.email)
+export const checkInMembers = (payload) => {    
     const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
     return axios.post(`${api}/admin/member/checkIn`, payload, {
         headers: {
@@ -71,8 +67,7 @@ export const checkInMembers = (payload) => {
 }
 
 /* API to check-out members out of the gym */
-export const checkOutMembers = (payload) => {
-    console.log('payload in checkout==>', payload)
+export const checkOutMembers = (payload) => {    
     const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
     return axios.put(`${api}/admin/member/checkOut`, payload, {
         headers: {
@@ -94,8 +89,7 @@ export const getCheckedInUsers = (gym) => {
 }
 
 /* API to get Gym analytics for the given location and Date range */
-export const getGymAnalytics = (location, startDate, endDate) => {
-    console.log('location in getGymAnalytics==>', location)    
+export const getGymAnalytics = (location, startDate, endDate) => {       
     const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
     return axios.get(`${api}/admin/analytics/${location}?startDate=${startDate}&endDate=${endDate}`,  {
         headers: {
@@ -105,8 +99,7 @@ export const getGymAnalytics = (location, startDate, endDate) => {
 }
 
 /* API to get Gym Visitors by hour for the given location and Date range */
-export const getVisitorsByHour = (location, startDate, endDate) => {
-    console.log('location in getGymAnalytics==>', location)
+export const getVisitorsByHour = (location, startDate, endDate) => {    
     const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
     return axios.get(`${api}/admin/analytics/${location}/visitors-by-hour?startDate=${startDate}&endDate=${endDate}`,  {
         headers: {
@@ -116,8 +109,7 @@ export const getVisitorsByHour = (location, startDate, endDate) => {
 }
 
 /* API to get time sent by the vistors by date for the given location and Date range */
-export const getTimeSpentByDate = (location, startDate, endDate) => {
-    console.log('location in getGymAnalytics==>', location)
+export const getTimeSpentByDate = (location, startDate, endDate) => {    
     const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
     return axios.get(`${api}/admin/analytics/${location}/hours-spent?startDate=${startDate}&endDate=${endDate}`,  {
         headers: {
@@ -138,8 +130,6 @@ export const getFreeTrailMembers = () => {
 
 /* API to upgrade free trial members  */
 export const upgradeFreeTrailMembers = (payload) => {
-    console.log('payload=>', payload)
-    console.log('userId==>', payload.userId)    
     const adminData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
     return axios.post(`${api}/admin/upgrade`, payload, {
         headers: {
@@ -218,8 +208,6 @@ export const getMemberActivities = (userId) => {
 
 /* API for members to get all their activities data for the selected time period */
 export const getActivitiesBasedOnTimePeriod = (userId, timePeriod) => {
-    console.log(userId)
-    console.log(timePeriod)
     const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
     return axios.get(`${api}/member/user/${userId}/activity/${timePeriod}`, {
         headers: {
@@ -230,8 +218,6 @@ export const getActivitiesBasedOnTimePeriod = (userId, timePeriod) => {
 
 /* API for members to get all their classes enrolled count for the selected time period */
 export const getCountOfClassesEnrolledBasedOnTimePeriod = (userId, timePeriod) => {
-    console.log(userId)
-    console.log(timePeriod)
     const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
     return axios.get(`${api}/member/user/${userId}/schedule/${timePeriod}`, {
         headers: {
@@ -239,16 +225,3 @@ export const getCountOfClassesEnrolledBasedOnTimePeriod = (userId, timePeriod) =
         }
     });
 }
-
-
-
-/*
-
-Mark Entry time (member name/ID, DateTime, location)  - POST request
-Get members with entry time posted - home location, today's Date
-After exit time load table again and disable the exit time button
-Get Instructors
-Dashboard APIs
-
-
-*/

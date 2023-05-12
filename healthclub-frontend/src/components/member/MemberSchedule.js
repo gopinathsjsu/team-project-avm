@@ -42,8 +42,7 @@ const MemberSchedule = (props) => {
   const [data, setData] = useState([])
 
 
-  useEffect(() => {
-    console.log('MemberSchedule is called' + gymId);
+  useEffect(() => {    
     API.fetchGymSchedule(gymId)
       .then(response => {
         const modifiedSchedules = response.data.map(schedule => {
