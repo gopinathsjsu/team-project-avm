@@ -5,6 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import NavbarHome from './NavbarHome.js';
 import Image1 from '../../assets/images/WorkoutGym.jpg';
 import Image2 from '../../assets/images/Treadmill.jpg';
+import Image3 from '../../assets/images/Rowing.jpg';
+import Image4 from '../../assets/images/Weights2.jpg';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Workout() {
@@ -79,6 +81,24 @@ export default function Workout() {
         });
     }, []);
 
+    let cor4 = useRef(null);
+    useEffect(() => {
+        gsap.to(cor4, {
+            delay: 0.4,
+            duration: 1,
+            x: '0',
+            y: '0',
+            opacity: 1,
+            ease: 'ease-in',
+            scrollTrigger: {
+                trigger: cor3,
+                start: 'top 90%',
+                end: 'bottom 60%',
+                toggleActions: 'restart complete',
+            },
+        });
+    }, []);
+
     let corri1 = useRef(null);
     useEffect(() => {
         gsap.to(corri1, {
@@ -120,6 +140,25 @@ export default function Workout() {
     let corri3 = useRef(null);
     useEffect(() => {
         gsap.to(corri3, {
+            delay: 0.4,
+            duration: 1,
+            x: '0',
+            y: '0',
+            opacity: 1,
+            stagger: 0.4,
+            ease: 'ease-in',
+            scrollTrigger: {
+                trigger: corri3,
+                start: 'top 90%',
+                end: 'bottom 60%',
+                toggleActions: 'restart complete ',
+            },
+        });
+    }, []);
+
+    let corri4 = useRef(null);
+    useEffect(() => {
+        gsap.to(corri4, {
             delay: 0.4,
             duration: 1,
             x: '0',
@@ -217,7 +256,7 @@ export default function Workout() {
             <div className="join-us">
                 <div className="joinus--container">
                     <img
-                        src="https://sm.askmen.com/t/askmen_in/photo/default/askmen-coolestgym-th_fmq6.h720.jpg"
+                        src={Image3}
                         alt="membership"
                         ref={(el) => {
                             cor3 = el;
@@ -232,11 +271,38 @@ export default function Workout() {
                         <h3>Rowing</h3>
                         <p>
                         At our gym store, we believe that rowing is one of the most effective workouts you can do.
-                        Not only does it engage multiple muscle groups at once, but it also provides a low-impact, 
-                        full-body workout that can help you build strength, burn calories,and improve your cardiovascular health. 
-                        Our rowing machines are top-of-the-line, with features like adjustable resistance levels and 
-                        comfortable seating to help you get the most out of your workout. 
+                        Not only does it engage multiple muscle groups at once, but it also provides a low-impact and
+                        full-body workout that can help you build strength
                         So why not give it a try and see how rowing can help you reach your fitness goals? Come on in and get rowing today! </p>
+                        {/* <Button buttonStyle="btn--primary" buttonSize="btn--large">
+            Join Us{' '}
+        </Button> */}
+                    </div>
+                </div>
+            </div>
+
+            <div className="join-us">
+                <div className="joinus--container">
+                    <img
+                        src={Image4}
+                        alt="membership"
+                        ref={(el) => {
+                            cor4 = el;
+                        }}
+                    />
+                    <div
+                        className="joinus--headline"
+                        ref={(el) => {
+                            corri4 = el;
+                        }}
+                    >
+                        <h3>Weights</h3>
+                        <p>
+                        Our gym is equipped with a wide range of weights that cater to all levels of experience and strength.
+                        Weight training is not just about building muscle; 
+                        it's about enhancing your overall fitness, boosting your metabolism, 
+                        and improving your functional strength.Step into our gym, embrace the power of weights, and 
+                        witness the incredible transformations that can happen when you make weight training an integral part of your fitness routine.</p>
                         {/* <Button buttonStyle="btn--primary" buttonSize="btn--large">
             Join Us{' '}
         </Button> */}

@@ -33,7 +33,7 @@ function MemberHome() {
     const [userRole, setUserRole] = React.useState('');
 
     const [data, setData] = useState({
-        labels: ['RUNNING', 'CARDIO', 'TRAINING', 'WEIGHT_TRAINING', 'SWIMMING', 'HIKING'],
+        labels: ['CARDIO', 'TRAINING', 'WEIGHT_TRAINING', 'TREADMILL', 'ROWING'],
         datasets: [
             {
                 label: '# of Mins Spent',
@@ -84,12 +84,11 @@ function MemberHome() {
                 }, {});
 
                 const valuesArray = [];
-                valuesArray.push(dataMap['RUNNING'])
                 valuesArray.push(dataMap['CARDIO']);
                 valuesArray.push(dataMap['TRAINING'])
                 valuesArray.push(dataMap['WEIGHT_TRAINING']);
-                valuesArray.push(dataMap['SWIMMING'])
-                valuesArray.push(dataMap['HIKING'])
+                valuesArray.push(dataMap['TREADMILL'])
+                valuesArray.push(dataMap['ROWING'])
 
                 setData((prevState) => ({
                     ...prevState,
