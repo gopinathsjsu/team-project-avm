@@ -91,12 +91,6 @@ export default function Schedule() {
                             </div>
                             <div className="class-instructor">
                                 <b>Max Occupancy:</b> {cls.maxOccupancy}
-                                <Button
-                                    style={{ float: 'right' }}
-                                    variant="contained"
-                                    size="small">
-                                    Reserve
-                                </Button>
                             </div>
                             <br />
                         </div>
