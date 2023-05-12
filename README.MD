@@ -32,10 +32,15 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 <h3>UML Diagrams:</h3>
 
 1. Use case Diagram
-2. Class Diagram
-3. Architecture Diagram
-4. Wireframes
-5. Component diagram
+
+  ![image](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/74584911-fc8b-4c88-9d07-ebd5677e3bc8)
+
+2. Architecture Diagram
+
+  ![Untitled drawing (1)](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/f2674e23-634e-48c2-9165-3b22b77b16e5)
+
+
+3. Component diagram
 
 <h3>Design decisions:</h3>
 
@@ -45,6 +50,24 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 4. Choosing the cloud platform - AWS for load balancer
 
 <h3>Component Ownership / Task Allocation:</h3>
+  Frontend - Adesh, Vineeth
+  
+  
+  Database Design - Meera
+  
+  Backend - Meera
+  
+  Integration - All
+  
+  Cloud Deployment - All
+  
+  Testing - All
+  
+  Project Management - Rotated among all
+  
+  Documentation - All 
+  
+  
 
 <h3>Scrum Meetings Schedule:</h3>
 Every Friday
