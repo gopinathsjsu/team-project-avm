@@ -242,7 +242,7 @@ function AdminDashboard() {
             window.sessionStorage.setItem("USER_DATA", JSON.stringify(response.data));
             adminHomeGym = response.data.homeGym;
             console.log('adminHomeGym ID==>', adminHomeGym)
-            setUserName(response.data.firstName)
+            setUserName(response.data.firstName + ' ' + response.data.lastName)
             API.getLocationDetails(adminHomeGym).then(response => {
                 setCity(response.data.city)
                 API.fetchGyms(response.data.city)
@@ -340,8 +340,18 @@ function AdminDashboard() {
                 const daysVisitorsData = {}; // variable to store Day Vs Vistors Data (Mon, Tue, Wed..., Sun)
                 const dayGroupVisitorsData = {}; // variable to store Weekend/Weekday Vs Vistors Data
                 const timeVisitorsData = {}; // variable to store Weekend/Weekday Vs Vistors Data
-
-                resp.forEach(item => {
+                const sortedResp = resp.sort((a, b) => {
+                    const dateA = a[0];
+                    const dateB = b[0];
+                    if (dateA < dateB) {
+                        return -1;
+                    }
+                    if (dateA > dateB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                sortedResp.forEach(item => {
                     const date = item[0].split(" ")[0]; // extracting the date portion from the timestamp
                     const dayGroup = item[2]; // Weekend or Weekday
                     const dayType = item[1]; // Mon, Tue, Wed, .., Sun
@@ -451,8 +461,18 @@ function AdminDashboard() {
             .then(response => {
                 const resp = response.data;
                 const timeSpentBasedOnDate = {};
-
-                resp.forEach(item => {
+                const sortedResp = resp.sort((a, b) => {
+                    const dateA = a[0];
+                    const dateB = b[0];
+                    if (dateA < dateB) {
+                        return -1;
+                    }
+                    if (dateA > dateB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                sortedResp.forEach(item => {
                     const date = item[0]
                     const hours = item[1];
                     if (timeSpentBasedOnDate[date]) {

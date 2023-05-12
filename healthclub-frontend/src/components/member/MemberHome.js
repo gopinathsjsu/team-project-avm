@@ -30,7 +30,7 @@ function MemberHome() {
     const [userId, setUserId] = React.useState();
     const [userName, setUserName] = useState('')
     const [userRole, setUserRole] = React.useState('');
-    const [noOfClassEnrollments, setNoOfClassEnrollments] = React.useState('');
+    const [noOfClassEnrollments, setNoOfClassEnrollments] = React.useState(0);
 
     const [data, setData] = useState({
         labels: ['CARDIO', 'TRAINING', 'WEIGHT_TRAINING', 'TREADMILL', 'ROWING', 'HIKING', 'SWIMMING'],
@@ -74,7 +74,7 @@ function MemberHome() {
             window.sessionStorage.setItem("USER_DATA", JSON.stringify(response.data));
             memberId = response.data.id;
             setUserId(response.data.id)
-            setUserName(response.data.firstName)
+            setUserName(response.data.firstName+' '+response.data.lastName)            
             console.log('userid**==>', response.data.id)
             //make API call with default value for Past week!            
             API.getActivitiesBasedOnTimePeriod(memberId, filterValue).then(response => {
@@ -109,7 +109,7 @@ function MemberHome() {
             API.getCountOfClassesEnrolledBasedOnTimePeriod(memberId, filterValue).then(response => {
                 const count = response.data;
                 console.log('classes==>', response.data)
-                setNoOfClassEnrollments(count)
+                setNoOfClassEnrollments(count !=0 ? count : 0)
                 // setClassesEnrolled((prevState) => ({
                 //     ...prevState,
                 //     // labels: keys,

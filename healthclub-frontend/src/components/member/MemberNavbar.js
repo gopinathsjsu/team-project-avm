@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as API from '../../actions/API.js';
 import { useNavigate } from 'react-router-dom';
 
 function MemberNavbar() {
@@ -17,10 +18,16 @@ function MemberNavbar() {
         console.log("loggedin user data==>", storedObject);
         if (storedObject) {
             if (storedObject.token) {
-                setUsername(storedObject.user);
+                //setUsername(storedObject.user);
                 setUserRole(storedObject.role)
             }
+            API.fetchMemberDetails(storedObject.email).then(response => {
+                setUsername(response.data.firstName+' '+response.data.lastName);
+            }).catch(error => {
+                console.log(error);
+            })
         }
+
     }, [])
 
     const handleLogout = (event) => {
@@ -48,12 +55,12 @@ function MemberNavbar() {
                             {/* Member Navs */}
                             {/* {userRole === 'MEMBER' ? (
                                 <> */}
-                                    <Nav.Link href="/memberpage/activities">Activities</Nav.Link>
-                                    <Nav.Link href="/memberpage/tracker">Workout Tracker</Nav.Link>
-                                {/* </>
+                            <Nav.Link href="/memberpage/activities">Activities</Nav.Link>
+                            <Nav.Link href="/memberpage/tracker">Workout Tracker</Nav.Link>
+                            {/* </>
                             ) : null} */}
                             <Nav.Link href="/memberpage/memberclasses">Classes</Nav.Link>
-                            
+
                             <NavDropdown title={username} id="basic-nav-dropdown">
                                 <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                             </NavDropdown>

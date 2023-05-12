@@ -21,14 +21,14 @@ const Maps = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={position}  icon={markerIcon}>
+            <Marker position={position} icon={markerIcon}>
                 <Popup>
-                    SJSU
+                    Fitfinity San Jose
                 </Popup>
             </Marker>
             <Marker position={position2} icon={markerIcon}>
                 <Popup>
-                    Cahill
+                    Fitfinity San Jose
                 </Popup>
             </Marker>
         </MapContainer>

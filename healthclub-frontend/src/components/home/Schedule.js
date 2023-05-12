@@ -34,11 +34,28 @@ export default function Schedule() {
 
                     const formattedStartTime = `${(startDateTime.getHours() % 12) || 12}:${startDateTime.getMinutes() < 10 ? '0' : ''}${startDateTime.getMinutes()} ${startDateTime.getMinutes() >= 12 ? 'PM' : 'AM'}`;
                     const formattedEndTime = `${(endDateTime.getHours() % 12) || 12}:${endDateTime.getMinutes() < 10 ? '0' : ''}${endDateTime.getMinutes()} ${endDateTime.getMinutes() >= 12 ? 'PM' : 'AM'}`;
+
+                    const checkInDateTime = schedule.startTime;
+                    const checkInDate = checkInDateTime[0] + '-' + checkInDateTime[1].toString().padStart(2, '0') + '-' + checkInDateTime[2].toString().padStart(2, '0')
+                    const checkInHours = checkInDateTime[3];
+                    const checkInMins = checkInDateTime[4];
+                    const checkInTime = checkInDateTime[3].toString().padStart(2, '0') + ':' + checkInDateTime[4].toString().padStart(2, '0')
+                    const period = (checkInHours >= 0 && checkInHours < 12) ? 'AM' : 'PM';
+                    const checkIntimeOnly = checkInTime + ' ' + period;
+
+                    const checkoutDateTime = schedule.endTime;
+                    const checkoutDate = checkoutDateTime[0] + '-' + checkoutDateTime[1].toString().padStart(2, '0') + '-' + checkoutDateTime[2].toString().padStart(2, '0')
+                    const checkoutHours = checkoutDateTime[3];
+                    const checkoutMins = checkoutDateTime[4];
+                    const checkoutTime = checkoutDateTime[3].toString().padStart(2, '0') + ':' + checkoutDateTime[4].toString().padStart(2, '0')
+                    const endperiod = (checkoutHours >= 0 && checkoutHours < 12) ? 'AM' : 'PM';
+                    const checkoutimeOnly = checkoutTime + ' ' + endperiod
+
                     return {
                         ...schedule,
                         classDate: date,
-                        startTimeOnly: formattedStartTime,
-                        endTimeOnly: formattedEndTime
+                        startTimeOnly: checkIntimeOnly,//formattedStartTime,
+                        endTimeOnly: checkoutimeOnly,//formattedEndTime
                     };
                 });
                 setSchedules(modifiedSchedules)

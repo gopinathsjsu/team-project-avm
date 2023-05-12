@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as API from '../../actions/API.js';
 import { useNavigate } from 'react-router-dom';
 
 function AdminNavbar() {
@@ -16,7 +17,12 @@ function AdminNavbar() {
         console.log("loggedin user data==>", storedObject);
         if (storedObject) {
             if (storedObject.token) {
-                setUsername(storedObject.user.charAt(0).toUpperCase() + storedObject.user.slice(1));
+                API.fetchUserDetails(storedObject.email).then(response => {
+                    setUsername(response.data.firstName+' '+response.data.lastName);
+                }).catch(error => {
+                    console.log(error);
+                })
+                //setUsername(storedObject.user.charAt(0).toUpperCase() + storedObject.user.slice(1));
             }
         }
     }, [])
