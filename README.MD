@@ -32,12 +32,12 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 <h3>UML Diagrams:</h3>
 
 1. Use case Diagram
+  </br>
   ![image](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/193df0b7-9d7a-4659-aea7-1a9d9f392501)
 
 2. Class Diagram
 3. Architecture Diagram
-4. Wireframes
-5. Component diagram
+4. Component diagram
 
 <h3>Design decisions:</h3>
 
