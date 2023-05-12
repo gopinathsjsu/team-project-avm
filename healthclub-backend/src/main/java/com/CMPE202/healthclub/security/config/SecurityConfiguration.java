@@ -48,7 +48,7 @@ public class SecurityConfiguration {
                 .disable()
                 .cors().configurationSource(corsConfigurationSource()).and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**", "/api/v1/home", "/api/v1/gym/**")
+                .requestMatchers("/api/v1/auth/**", "/api/v1/home", "/api/v1/gym/**","/")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
