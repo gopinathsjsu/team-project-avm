@@ -42,6 +42,11 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 
 3. Component diagram
 
+  ![Component Diagram](https://github.com/gopinathsjsu/team-project-avm/blob/main/Documentation/Component%20Diagram.jpeg)
+
+  
+  
+
 <h3>Design decisions:</h3>
 
 1. Choosing the frontend framework - ReactJS for it's flexibility and faster page loads.
