@@ -32,7 +32,7 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 <h3>UML Diagrams:</h3>
 
 1. Use case Diagram
-  </br>
+
   ![image](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/74584911-fc8b-4c88-9d07-ebd5677e3bc8)
 
 
