@@ -27,6 +27,7 @@ function MemberClasses() {
     const [open, setOpen] = useState(false);
     const [errorReg, setErrorReg] = useState(false);
     const [errorMessage, setErrorMessage] = useState(false);
+    const [loadUserSchedule, setLoadUserSchedule] = useState(false);
 
     useEffect(() => {
         const userData = JSON.parse(window.sessionStorage.getItem("USER_DATA"));
@@ -42,22 +43,39 @@ function MemberClasses() {
         API.fetchGymSchedule(userData.homeGym)
             .then(response => {
                 const modifiedSchedules = response.data.map(schedule => {
-                    console.log(schedule)
+                    //console.log(schedule)
                     // setCity(schedule.gym.city);
                     // setLocation(schedule.gym.address);
-                    schedule.startTime[1] -= 1;
+                    //schedule.startTime[1] -= 1;
+                    //schedule.endTime[1] -= 1;
                     const startDateTime = new Date(...schedule.startTime);
                     const endDateTime = new Date(...schedule.endTime);
 
                     const date = startDateTime.toLocaleDateString();
-
                     const formattedStartTime = `${(startDateTime.getHours() % 12) || 12}:${startDateTime.getMinutes() < 10 ? '0' : ''}${startDateTime.getMinutes()} ${startDateTime.getMinutes() >= 12 ? 'PM' : 'AM'}`;
                     const formattedEndTime = `${(endDateTime.getHours() % 12) || 12}:${endDateTime.getMinutes() < 10 ? '0' : ''}${endDateTime.getMinutes()} ${endDateTime.getMinutes() >= 12 ? 'PM' : 'AM'}`;
+
+                    const checkInDateTime = schedule.startTime;
+                    const checkInDate = checkInDateTime[0] + '-' + checkInDateTime[1].toString().padStart(2, '0') + '-' + checkInDateTime[2].toString().padStart(2, '0')
+                    const checkInHours = checkInDateTime[3];
+                    const checkInMins = checkInDateTime[4];
+                    const checkInTime = checkInDateTime[3].toString().padStart(2, '0') + ':' + checkInDateTime[4].toString().padStart(2, '0')
+                    const period = (checkInHours >= 0 && checkInHours < 12) ? 'AM' : 'PM';
+                    const checkIntimeOnly = checkInTime + ' ' + period;
+
+                    const checkoutDateTime = schedule.endTime;
+                    const checkoutDate = checkoutDateTime[0] + '-' + checkoutDateTime[1].toString().padStart(2, '0') + '-' + checkoutDateTime[2].toString().padStart(2, '0')
+                    const checkoutHours = checkoutDateTime[3];
+                    const checkoutMins = checkoutDateTime[4];
+                    const checkoutTime = checkoutDateTime[3].toString().padStart(2, '0') + ':' + checkoutDateTime[4].toString().padStart(2, '0')
+                    const endperiod = (checkoutHours >= 0 && checkoutHours < 12) ? 'AM' : 'PM';
+                    const checkoutimeOnly = checkoutTime + ' ' + endperiod
+
                     return {
                         ...schedule,
                         classDate: date,
-                        startTimeOnly: formattedStartTime,
-                        endTimeOnly: formattedEndTime
+                        startTimeOnly: checkIntimeOnly,//formattedStartTime,
+                        endTimeOnly: checkoutimeOnly//formattedEndTime
                     };
                 });
                 setSchedules(modifiedSchedules)
@@ -69,7 +87,7 @@ function MemberClasses() {
         //fetch user's registered classes/schedules
         API.getUserUpcomingClasses(userData.id)
             .then(response => {
-                console.log(response.data)
+                //console.log(response.data)
                 const modifiedSchedules = response.data.map(schedule => {
                     //schedule.gymSchedule.startTime[1] -= 1;
                     const startDateTime = new Date(...schedule.gymSchedule.startTime);
@@ -79,11 +97,28 @@ function MemberClasses() {
 
                     const formattedStartTime = `${(startDateTime.getHours() % 12) || 12}:${startDateTime.getMinutes() < 10 ? '0' : ''}${startDateTime.getMinutes()} ${startDateTime.getMinutes() >= 12 ? 'PM' : 'AM'}`;
                     const formattedEndTime = `${(endDateTime.getHours() % 12) || 12}:${endDateTime.getMinutes() < 10 ? '0' : ''}${endDateTime.getMinutes()} ${endDateTime.getMinutes() >= 12 ? 'PM' : 'AM'}`;
+
+                    const checkInDateTime = schedule.gymSchedule.startTime;
+                    const checkInDate = checkInDateTime[0] + '-' + checkInDateTime[1].toString().padStart(2, '0') + '-' + checkInDateTime[2].toString().padStart(2, '0')
+                    const checkInHours = checkInDateTime[3];
+                    const checkInMins = checkInDateTime[4];
+                    const checkInTime = checkInDateTime[3].toString().padStart(2, '0') + ':' + checkInDateTime[4].toString().padStart(2, '0')
+                    const period = (checkInHours >= 0 && checkInHours < 12) ? 'AM' : 'PM';
+                    const checkIntimeOnly = checkInTime + ' ' + period;
+
+                    const checkoutDateTime = schedule.gymSchedule.endTime;
+                    const checkoutDate = checkoutDateTime[0] + '-' + checkoutDateTime[1].toString().padStart(2, '0') + '-' + checkoutDateTime[2].toString().padStart(2, '0')
+                    const checkoutHours = checkoutDateTime[3];
+                    const checkoutMins = checkoutDateTime[4];
+                    const checkoutTime = checkoutDateTime[3].toString().padStart(2, '0') + ':' + checkoutDateTime[4].toString().padStart(2, '0')
+                    const endperiod = (checkoutHours >= 0 && checkoutHours < 12) ? 'AM' : 'PM';
+                    const checkoutimeOnly = checkoutTime + ' ' + endperiod
+
                     return {
                         ...schedule,
                         classDate: date,
-                        startTimeOnly: formattedStartTime,
-                        endTimeOnly: formattedEndTime
+                        startTimeOnly: checkIntimeOnly,//formattedStartTime,
+                        endTimeOnly: checkoutimeOnly//formattedEndTime
                     };
                 });
                 setUserSchedules(modifiedSchedules)
@@ -91,7 +126,7 @@ function MemberClasses() {
             .catch(error => {
                 console.log(error);
             })
-    }, []);
+    }, [loadUserSchedule]);
 
     const today = new Date();
     const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
@@ -110,13 +145,14 @@ function MemberClasses() {
             .then(response => {
                 console.log(response)
                 setErrorReg(false);
+                setLoadUserSchedule(!loadUserSchedule)
             })
             .catch(error => {
                 console.log(error);
                 setErrorReg(true);
                 setErrorMessage(error.response.data);
             })
-            setOpen(true)
+        setOpen(true)
     }
 
     const handleClose = () => {

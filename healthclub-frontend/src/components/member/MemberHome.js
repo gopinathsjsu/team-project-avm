@@ -30,9 +30,10 @@ function MemberHome() {
     const [userId, setUserId] = React.useState();
     const [userName, setUserName] = useState('')
     const [userRole, setUserRole] = React.useState('');
+    const [noOfClassEnrollments, setNoOfClassEnrollments] = React.useState('');
 
     const [data, setData] = useState({
-        labels: ['CARDIO', 'TRAINING', 'WEIGHT_TRAINING', 'TREADMILL', 'ROWING'],
+        labels: ['CARDIO', 'TRAINING', 'WEIGHT_TRAINING', 'TREADMILL', 'ROWING', 'HIKING', 'SWIMMING'],
         datasets: [
             {
                 label: '# of Mins Spent',
@@ -67,13 +68,13 @@ function MemberHome() {
     useEffect(() => {
         const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
         const capitalizedUsername = memberData.user.charAt(0).toUpperCase() + memberData.user.slice(1);
-        setUserName(capitalizedUsername)
         setUserRole(memberData.role)
         let memberId;
         API.fetchMemberDetails(memberData.email).then(response => {
             window.sessionStorage.setItem("USER_DATA", JSON.stringify(response.data));
             memberId = response.data.id;
             setUserId(response.data.id)
+            setUserName(response.data.firstName)
             console.log('userid**==>', response.data.id)
             //make API call with default value for Past week!            
             API.getActivitiesBasedOnTimePeriod(memberId, filterValue).then(response => {
@@ -88,6 +89,8 @@ function MemberHome() {
                 valuesArray.push(dataMap['WEIGHT_TRAINING']);
                 valuesArray.push(dataMap['TREADMILL'])
                 valuesArray.push(dataMap['ROWING'])
+                valuesArray.push(dataMap['HIKING'])
+                valuesArray.push(dataMap['SWIMMING'])                
 
                 setData((prevState) => ({
                     ...prevState,
@@ -106,16 +109,17 @@ function MemberHome() {
             API.getCountOfClassesEnrolledBasedOnTimePeriod(memberId, filterValue).then(response => {
                 const count = response.data;
                 console.log('classes==>', response.data)
-                setClassesEnrolled((prevState) => ({
-                    ...prevState,
-                    // labels: keys,
-                    datasets: [
-                        {
-                            ...prevState.datasets[0],
-                            data: count,
-                        },
-                    ],
-                }));
+                setNoOfClassEnrollments(count)
+                // setClassesEnrolled((prevState) => ({
+                //     ...prevState,
+                //     // labels: keys,
+                //     datasets: [
+                //         {
+                //             ...prevState.datasets[0],
+                //             data: [count],
+                //         },
+                //     ],
+                // }));
             }).catch(error => {
                 console.log(error);
             })
@@ -135,12 +139,13 @@ function MemberHome() {
             }, {});
 
             const valuesArray = [];
-            valuesArray.push(dataMap['RUNNING'])
             valuesArray.push(dataMap['CARDIO']);
             valuesArray.push(dataMap['TRAINING'])
             valuesArray.push(dataMap['WEIGHT_TRAINING']);
-            valuesArray.push(dataMap['SWIMMING'])
+            valuesArray.push(dataMap['TREADMILL'])
+            valuesArray.push(dataMap['ROWING'])
             valuesArray.push(dataMap['HIKING'])
+            valuesArray.push(dataMap['SWIMMING']) 
 
             setData((prevState) => ({
                 ...prevState,
@@ -157,20 +162,22 @@ function MemberHome() {
         })
 
         API.getCountOfClassesEnrolledBasedOnTimePeriod(userId, event.target.value).then(response => {
+            console.log('response.data classes==>', response)
             const count = response.data;
-            setClassesEnrolled((prevState) => ({
-                ...prevState,
-                // labels: keys,
-                datasets: [
-                    {
-                        ...prevState.datasets[0],
-                        data: count,
-                    },
-                ],
-            }));
+            setNoOfClassEnrollments(count)
+            // setClassesEnrolled((prevState) => ({
+            //     ...prevState,
+            //     // labels: keys,
+            //     datasets: [
+            //         {
+            //             ...prevState.datasets[0],
+            //             data: [count],
+            //         },
+            //     ],
+            // }));
         }).catch(error => {
             console.log(error);
-        })        
+        })
     };
     return (
         <>
@@ -212,7 +219,7 @@ function MemberHome() {
                                         </>
                                     ) :
                                         <>
-                                            <p>You do not have access to view this data. <BlockIcon color='error'/></p>
+                                            <p>You do not have access to view this data. <BlockIcon color='error' /></p>
                                         </>
                                     }
                                 </Box>
@@ -220,15 +227,16 @@ function MemberHome() {
                         </Grid>
                         <Grid xs={12} sm={6} lg={3}>
                             <Card>
-                                <CardHeader title="Class Enrolled" subheader={filterValue} />
+                                <CardHeader title="# of Class Enrollments" subheader={filterValue} />
                                 <Box sx={{ p: 5, pb: 2 }} dir="ltr">
                                     {userRole === 'MEMBER' ? (
                                         <>
-                                            <Pie data={classesEnrolled} />
+                                            {/* <Pie data={classesEnrolled} /> */}
+                                            <Typography variant="h5" sx={{ mb: 5 }} align='center'>{noOfClassEnrollments}</Typography>
                                         </>
                                     ) :
                                         <>
-                                            <p>You do not have access to view this data. <BlockIcon color='error'/></p>                                        
+                                            <p>You do not have access to view this data. <BlockIcon color='error' /></p>
                                         </>
                                     }
                                 </Box>

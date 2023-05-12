@@ -18,7 +18,9 @@ import Button from '@mui/material/Button';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import AnimatedNumber from 'react-animated-numbers';
 import { OverviewTotalCustomers } from './OverviewTotalCustomers.js';
-
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 import AdminAuth from '../../context/AdminAuth.js'
 import AdminNavbar from './AdminNavbar.js'
 import * as API from '../../actions/API.js';
@@ -39,7 +41,9 @@ import { Bar } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
 import { Line } from 'react-chartjs-2';
 
-
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 ChartJS.register(
     CategoryScale,
@@ -101,12 +105,16 @@ function AdminDashboard() {
     const [differenceInMonths, setDifferenceInMonths] = useState(0);
     const [freeTrailMembersCount, setFreeTrailMembersCount] = useState(0);
 
+    const [open, setOpen] = useState(false);
+    const [errorReg, setErrorReg] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(false);
+
 
     const [visitorDataByDate, setVisitorDataByDate] = useState({
         labels: [],
         datasets: [
             {
-                label: 'Number of visitors by Date',
+                label: 'Members visiting Gym by Date',
                 data: [],
                 backgroundColor: [
                     'rgba(255, 99, 132)',
@@ -198,7 +206,7 @@ function AdminDashboard() {
         labels: [],
         datasets: [
             {
-                label: 'Number of visitors by Date',
+                label: 'Hours Spent by Visitors per Day',
                 data: [],
                 backgroundColor: [
                     'rgba(255, 99, 132)',
@@ -228,12 +236,13 @@ function AdminDashboard() {
     useEffect(() => {
         const memberData = JSON.parse(window.sessionStorage.getItem("USER_DETAILS"));
         const capitalizedUsername = memberData.user.charAt(0).toUpperCase() + memberData.user.slice(1);
-        setUserName(capitalizedUsername)
+
         let adminHomeGym;
         API.fetchUserDetails(memberData.email).then(response => {
             window.sessionStorage.setItem("USER_DATA", JSON.stringify(response.data));
             adminHomeGym = response.data.homeGym;
             console.log('adminHomeGym ID==>', adminHomeGym)
+            setUserName(response.data.firstName)
             API.getLocationDetails(adminHomeGym).then(response => {
                 setCity(response.data.city)
                 API.fetchGyms(response.data.city)
@@ -275,24 +284,30 @@ function AdminDashboard() {
         setCity(event.target.value);
         API.fetchGyms(event.target.value)
             .then(response => {
-                setLocationList(response.data);                
+                setLocationList(response.data);
             })
             .catch(error => {
                 console.log(error);
-            })        
+            })
     };
 
-    const handleLocationChange = (event) => {        
+    const handleLocationChange = (event) => {
         setLocation(event.target.value);
     };
 
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const handleSubmit = (event) => {
-        event.preventDefault();        
+        event.preventDefault();
         if (city && location && startDateValue && endDateValue && startDateValue <= endDateValue) {
             getAnalytics()
         }
         else {
             //alert('Please fill in all required fields and select a valid date range.');
+            setOpen(true)
+            setErrorMessage('Please ensure that the Start Date entered is earlier than the End Date.')
             console.log('invalid details')
         }
 
@@ -308,8 +323,8 @@ function AdminDashboard() {
                 setNoOfClasses(analytics.numberOfClasses)
                 setNoOfEnrollments(analytics.enrollments)
                 setNoOfEnrollmentsPossible('Out of ' + analytics.enrollmentsPossible + ' possible enrollments!')
-                let hoursSpent = 0;                
-                if(analytics.totalHoursSpent !=0){
+                let hoursSpent = 0;
+                if (analytics.totalHoursSpent != 0) {
                     hoursSpent = analytics.totalHoursSpent
                 }
                 setNoOfHoursSpent(hoursSpent)
@@ -433,7 +448,7 @@ function AdminDashboard() {
             })
 
         API.getTimeSpentByDate(location, startDate, endDate)
-            .then(response => {                
+            .then(response => {
                 const resp = response.data;
                 const timeSpentBasedOnDate = {};
 
@@ -463,7 +478,7 @@ function AdminDashboard() {
             })
 
         API.getFreeTrailMembers()
-            .then(response => {                
+            .then(response => {
                 setFreeTrailMembersCount(response.data.length)
             })
             .catch(error => {
@@ -715,7 +730,7 @@ function AdminDashboard() {
                             </Grid>
                             <Grid item xs={12} md={6} lg={8}>
                                 <Card>
-                                    <CardHeader title="Number of hours spent by visitors" subheader="Per Day" />
+                                    <CardHeader title="Hours Spent by Visitors per Day" subheader="Per Day" />
                                     <Box sx={{ p: 3, pb: 1 }} dir="ltr">
                                         <Bar options={options} data={hoursSpentByDate} />
                                     </Box>
@@ -725,6 +740,15 @@ function AdminDashboard() {
                     </Container>
                 </div>
             </div>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={open} autoHideDuration={6000}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                        {errorMessage}
+                    </Alert>
+                </Snackbar>
+            </Stack>
         </>
     );
 }
