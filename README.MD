@@ -52,6 +52,7 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 <h3>Component Ownership / Task Allocation:</h3>
   Frontend - Adesh, Vineeth
   
+  
   Database Design - Meera
   
   Backend - Meera
