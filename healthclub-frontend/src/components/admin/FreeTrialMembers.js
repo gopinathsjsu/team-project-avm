@@ -93,8 +93,6 @@ const FreeTrailMembers = (props) => {
     );
 };
 
-
-
 export default FreeTrailMembers;
 
 FreeTrailMembers.propTypes = {

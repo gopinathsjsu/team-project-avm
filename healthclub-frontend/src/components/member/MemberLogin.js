@@ -11,7 +11,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 import * as API from '../../actions/API.js';
 
-
 function MemberLogin(props) {
     const navigate = useNavigate();
 
@@ -19,6 +18,7 @@ function MemberLogin(props) {
     const [password, setPassword] = useState('')
     const [freeTrail, setFreeTrail] = useState(false);
     const [isError, setIsError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(false);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -28,11 +28,10 @@ function MemberLogin(props) {
         setPassword(event.target.value);
     }
 
-
     const handleMemberLogin = (event) => {
         event.preventDefault();
         let role = 'MEMBER';
-        if(freeTrail){
+        if (freeTrail) {
             role = 'FREE_TRIAL_MEMBER'
         }
         const data = { email, password, role };
@@ -42,7 +41,7 @@ function MemberLogin(props) {
             return;
         }
         API.login(data)
-            .then(response => {
+            .then(response => {                
                 const decoded = decodeToken(response.data.token);
                 const userDetails = { token: response.data.token, role: decoded.role, user: decoded.sub.split("@")[0], email: decoded.sub };
                 window.sessionStorage.setItem("USER_DETAILS", JSON.stringify(userDetails));
@@ -53,7 +52,8 @@ function MemberLogin(props) {
             })
             .catch(error => {
                 console.log(error);
-                setIsError(true);
+                setIsError(true);                
+                setErrorMessage(error.response.data);
             })
     }
 
@@ -94,12 +94,13 @@ function MemberLogin(props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
+                    <p style={{float:'left', color:'red'}}>{errorMessage}</p>
                     <Button type="Submit" variant="primary"
                         onClick={handleMemberLogin}>
                         Login
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal>       
         </>
     );
 }

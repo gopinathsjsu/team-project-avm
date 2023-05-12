@@ -14,14 +14,19 @@ export default function Schedule() {
     const [city, setCity] = React.useState('');
     const [location, setLocation] = React.useState('');
 
-    useEffect(() => {
-        console.log('Schedule is called' + gymId);
+    useEffect(() => {        
+        API.getLocationDetails(gymId)
+            .then(response => {
+                setCity(response.data.city);
+                setLocation(response.data.address);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
         API.fetchGymSchedule(gymId)
             .then(response => {
-                const modifiedSchedules = response.data.map(schedule => {
-                    console.log(schedule)
-                    setCity(schedule.gym.city);
-                    setLocation(schedule.gym.address);
+                const modifiedSchedules = response.data.map(schedule => {                    
                     schedule.startTime[1] -= 1;
                     const startDateTime = new Date(...schedule.startTime);
                     const endDateTime = new Date(...schedule.endTime);

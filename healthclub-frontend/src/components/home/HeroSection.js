@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import '../../styles/HeroSection.css';
 import { Power3, gsap } from "gsap"
-import {Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 export default function HeroSection() {
 
     let text = useRef(null);
@@ -14,12 +14,9 @@ export default function HeroSection() {
     return (
         <div className="hero-container" id="hero">
             <div className="hero--header" ref={el => { text = el }}>
-                {/* <h1>Fitfinity</h1>
-                <h3>Shape your body like the way you want it.</h3>
-                <h3>Starts From <span><sup>$</sup>15/<small>month</small></span></h3> */}
                 <Typography variant="h1">Fitfinity</Typography>
                 <Typography variant="h3">Shape your body like the way you want it.</Typography>
-                <Typography variant="h3">Starts From <span><sup>$</sup>15/<small>month</small></span></Typography>                
+                <Typography variant="h3">Starts From <span><sup>$</sup>15/<small>month</small></span></Typography>
             </div>
         </div>
     )

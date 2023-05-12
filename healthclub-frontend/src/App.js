@@ -30,11 +30,11 @@ function App() {
         <Route path="/adminpage" element={<AdminDashboard />} />        
         <Route path="/adminpage/enrollmember" element={<MemberForm />} />
         <Route path="/adminpage/logmember" element={<CheckInCheckOut />} />
-        <Route path="/adminpage/upgrade-non-members" element={<UpgradeNonMembers />} />        
+        <Route path="/adminpage/upgrade-non-members" element={<UpgradeNonMembers />} />                
         {/* Member Routes */}
         <Route path="/memberpage/activities" element={<MemberHome />} />
         <Route path="/memberpage/memberclasses" element={<MemberClasses />} />
-        <Route path="/memberpage/tracker" element={<MemberWorkoutTracker />} />
+        <Route path="/memberpage/tracker" element={<MemberWorkoutTracker />} />        
         
         
         

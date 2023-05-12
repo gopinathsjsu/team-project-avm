@@ -18,6 +18,7 @@ function AdminLogin(props) {
     const [password, setPassword] = useState('')
     //const [isLoggedIn, setIsLoggedIn] = useState(userIsAuthenticated())
     const [isError, setIsError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(false);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -53,6 +54,7 @@ function AdminLogin(props) {
                 }
             })
             .catch(error => {
+                setErrorMessage(error.response.data)
                 console.log(error);
             })
 
@@ -94,6 +96,7 @@ function AdminLogin(props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
+                    <p style={{ float: 'left', color: 'red' }}>{errorMessage}</p>
                     <Button type="Submit" variant="primary"
                         onClick={handleAdminLogin}>
                         Login

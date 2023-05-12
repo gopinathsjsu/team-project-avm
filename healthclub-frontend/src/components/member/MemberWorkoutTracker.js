@@ -102,7 +102,7 @@ function MemberWorkoutTracker() {
                                         <TextField
                                             id="Workout"
                                             select
-                                            label="Workout"
+                                            label="Enter Workout"
                                             variant='outlined'
                                             fullWidth
                                             value={activity}

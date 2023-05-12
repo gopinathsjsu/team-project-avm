@@ -316,7 +316,11 @@ function AdminDashboard() {
                 setNoOfClasses(analytics.numberOfClasses)
                 setNoOfEnrollments(analytics.enrollments)
                 setNoOfEnrollmentsPossible('Out of ' + analytics.enrollmentsPossible + ' possible enrollments!')
-                setNoOfHoursSpent(analytics.totalHoursSpent)
+                let hoursSpent = 0;                
+                if(analytics.totalHoursSpent !=0){
+                    hoursSpent = analytics.totalHoursSpent
+                }
+                setNoOfHoursSpent(hoursSpent)
             })
             .catch(error => {
                 console.log(error);
