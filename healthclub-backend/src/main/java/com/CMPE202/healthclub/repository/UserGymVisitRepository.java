@@ -24,7 +24,7 @@ public interface UserGymVisitRepository extends JpaRepository<UserGymVisit, Long
             "and checkout_date_time <= ?3", nativeQuery = true)
     List<UserGymVisit> findByGymAndCheckoutCheckInDateTime(Long gymId, LocalDateTime startTime, LocalDateTime endTime);
 
-    @Query(value = "SELECT  DATE_FORMAT(DATE(MAX(u.checkin_date_time)), '%Y-%m-%d') AS date, SUM(TIMESTAMPDIFF(HOUR, u.checkin_date_time, u.checkout_date_time)) AS hoursSpent "
+    @Query(value = "SELECT  DATE_FORMAT(DATE(MAX(u.checkin_date_time)), '%Y-%m-%d') AS date, SUM(TIMESTAMPDIFF(MICROSECOND, u.checkin_date_time, u.checkout_date_time) / (1000000*60*60.0)) AS hoursSpent "
             + "FROM healthclub.user_gym_visit u "
             + "WHERE u.gym_id = ?1 AND u.checkin_date_time BETWEEN ?2 AND ?3 "
             + "GROUP BY DATE(u.checkin_date_time), YEAR(u.checkin_date_time), MONTH(u.checkin_date_time), WEEK(u.checkin_date_time)",nativeQuery = true)

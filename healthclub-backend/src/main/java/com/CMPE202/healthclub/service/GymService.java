@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class GymService {
     }
     public List<GymSchedule> getClassSchedule(Long id){
         Gym gym = gymRepository.findById(id).get();
-        return gymClassScheduleRepository.findAllByGym(gym);
+        return gymClassScheduleRepository.findUpComingClassesByGymId(LocalDate.now().atStartOfDay(),id);
     }
     public List<String> getALlCities(){
         return gymRepository.getAllCities();
