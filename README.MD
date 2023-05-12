@@ -35,10 +35,11 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 
   ![image](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/74584911-fc8b-4c88-9d07-ebd5677e3bc8)
 
+2. Architecture Diagram
+  
+  ![Untitled drawing (1)](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/d958c77a-7aad-481f-8268-c9a53a919544)
 
-2. Class Diagram
-3. Architecture Diagram
-4. Component diagram
+3. Component diagram
 
 <h3>Design decisions:</h3>
 
