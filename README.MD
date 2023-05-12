@@ -33,7 +33,8 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 
 1. Use case Diagram
   </br>
-  ![image](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/193df0b7-9d7a-4659-aea7-1a9d9f392501)
+  ![image](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/74584911-fc8b-4c88-9d07-ebd5677e3bc8)
+
 
 2. Class Diagram
 3. Architecture Diagram
