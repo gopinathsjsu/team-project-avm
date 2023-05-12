@@ -25,8 +25,8 @@ public class GymService {
     }
     public List<GymSchedule> getClassSchedule(Long id){
         Gym gym = gymRepository.findById(id).get();
-        return gymClassScheduleRepository.findAllByGym(gym);
-        //return gymClassScheduleRepository.findUpComingClassesByGymId(LocalDate.now().atStartOfDay(),id);
+        //return gymClassScheduleRepository.findAllByGym(gym);
+        return gymClassScheduleRepository.findUpComingClassesByGymId(LocalDate.now().atStartOfDay(),id);
     }
     public List<String> getALlCities(){
         return gymRepository.getAllCities();
