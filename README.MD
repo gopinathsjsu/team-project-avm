@@ -39,10 +39,10 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 
 <h3>Design decisions:</h3>
 
-1. Choosing the frontend framework
-2. Choosing the backend framework
-3. Choosing the database
-4. Choosing the cloud platform
+1. Choosing the frontend framework - ReactJS for it's flexibility and faster page loads.
+2. Choosing the backend framework - Spring Boot (Java)
+3. Choosing the database - MySQL to enforce structured relationships among the entities.
+4. Choosing the cloud platform - AWS for load balancer
 
 <h3>Component Ownership / Task Allocation:</h3>
 
