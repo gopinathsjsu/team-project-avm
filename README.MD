@@ -49,10 +49,11 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 
 <h3>Design decisions:</h3>
 1. Choosing the frontend framework - ReactJS for it's flexibility and faster page loads.
- </br>
-2. Choosing the backend framework - Spring Boot (Java)</br>
-Java Spring is a powerful framework for building web applications because it offers a wide range of features and functionality to developers. We chose thsi particularly for the following reasons.
 </br>
+</br>
+2. Choosing the backend framework - Spring Boot (Java)
+</br>
+Java Spring is a powerful framework for building web applications because it offers a wide range of features and functionality to developers. We chose thsi particularly for the following reasons.
 Dependency Injection (DI): Java Spring uses the concept of DI to manage dependencies between components of an application. This simplifies the code and makes it easier to test and maintain.
 MVC Architecture: Java Spring follows the Model-View-Controller (MVC) architecture, which separates the application's concerns and helps in building modular and maintainable code.
 Integrated Development Environment (IDE) Support: Java Spring has great IDE support with tools like IntelliJ IDEA, which makes development faster and easier.
@@ -67,7 +68,6 @@ By enforcing structured relationships among entities, MySQL ensures that data is
 </br>
 </br>
 5. Choosing the cloud platform - AWS
-</br>
 </br>
 AWS's load balancing and autoscaling capabilities make it a powerful platform for building scalable, high-performance, and cost-effective applications. With AWS, developers can easily manage their resources and ensure that their applications are always available and responsive to user demands.
 
