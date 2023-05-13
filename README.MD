@@ -65,7 +65,9 @@ Restful Web Services: Java Spring offers a powerful framework for building Restf
 By enforcing structured relationships among entities, MySQL ensures that data is consistent and reliable, and prevents errors and inconsistencies that can arise from manual data entry or incorrect updates. This makes MySQL a powerful tool for building robust and scalable applications that require a high degree of data integrity and consistency.
 </br>
 </br>
-5. Choosing the cloud platform
+5. Choosing the cloud platform - AWS
+</br>
+</br>
 AWS's load balancing and autoscaling capabilities make it a powerful platform for building scalable, high-performance, and cost-effective applications. With AWS, developers can easily manage their resources and ensure that their applications are always available and responsive to user demands.
 
 <h3>Component Ownership / Task Allocation:</h3>
