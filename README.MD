@@ -48,9 +48,8 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
   
 
 <h3>Design decisions:</h3>
-
 1. Choosing the frontend framework - ReactJS for it's flexibility and faster page loads.
-  </br>
+ </br>
 2. Choosing the backend framework - Spring Boot (Java)</br>
 Java Spring is a powerful framework for building web applications because it offers a wide range of features and functionality to developers. We chose thsi particularly for the following reasons.
 </br>
@@ -62,7 +61,7 @@ Database Integration: Java Spring has excellent support for database integration
 Restful Web Services: Java Spring offers a powerful framework for building Restful web services, which is essential for building modern web applications that are designed for mobile and web clients.
 </br>
 </br>
-3. Choosing the database - MySQL to enforce structured relationships among the entities.
+3. Choosing the database - MySQL
 By enforcing structured relationships among entities, MySQL ensures that data is consistent and reliable, and prevents errors and inconsistencies that can arise from manual data entry or incorrect updates. This makes MySQL a powerful tool for building robust and scalable applications that require a high degree of data integrity and consistency.
 </br>
 </br>
