@@ -60,8 +60,10 @@ Integrated Development Environment (IDE) Support: Java Spring has great IDE supp
 Security: Java Spring provides robust security features, including authentication and authorization, which are essential for building secure web applications. 
 Database Integration: Java Spring has excellent support for database integration with its Object-Relational Mapping (ORM) framework, Spring Data. This makes it easier to work with databases and perform CRUD operations.
 Restful Web Services: Java Spring offers a powerful framework for building Restful web services, which is essential for building modern web applications that are designed for mobile and web clients.
+</br>
 3. Choosing the database - MySQL to enforce structured relationships among the entities.
 By enforcing structured relationships among entities, MySQL ensures that data is consistent and reliable, and prevents errors and inconsistencies that can arise from manual data entry or incorrect updates. This makes MySQL a powerful tool for building robust and scalable applications that require a high degree of data integrity and consistency.
+</br>
 5. Choosing the cloud platform
 AWS's load balancing and autoscaling capabilities make it a powerful platform for building scalable, high-performance, and cost-effective applications. With AWS, developers can easily manage their resources and ensure that their applications are always available and responsive to user demands.
 
