@@ -52,11 +52,10 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 1. Choosing the frontend framework - ReactJS for it's flexibility and faster page loads.
 2. Choosing the backend framework - Spring Boot (Java)
 3. Choosing the database - MySQL to enforce structured relationships among the entities.
-4. Choosing the cloud platform - AWS for load balancer
+4. Choosing the cloud platform - AWS offers a seamless integration of the VM instance with load balancer. It also provides Auto-scaling which is an important non-functional requirement. For proper integration with other                                  web services, we went with AWS. 
 
 <h3>Component Ownership / Task Allocation:</h3>
-  Frontend - Adesh, Vineeth
-  
+  Frontend - Adesh, Vineeth  
   
   Database Design - Meera
   
@@ -83,9 +82,9 @@ Every Friday
 
 <h3>Extreme Programming (XP) Core Values:</h3>
 
-1. Communication
-2. Courage
-3. Respect
+Communication: Communication was critical throughout the project to ensure that everyone was on the same page with the project's needs, timeframes, and progress. We used daily scrums, group chat, and calls to keep each other informed and involved. Each team member put conscious effort to communicate and keep track of status.
+
+Courage: Courage was an essential piece of our advancement interaction. We all were not extremely sure of our aptitude in the innovation stack, thus to stay aware of the advancement for each run and not dreading to request help or additional time assuming required was essential. It takes mental fortitude to take up overwhelming work and we were most certainly exceptionally bold all through our cycle.
 
 <h3>Miscellaneous Documentation and Links</h3>
 
