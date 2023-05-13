@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // Constants
-const api = 'http://localhost:8080/api/v1';
-
+//const api = 'http://localhost:8080/api/v1';
+const api = 'http://healthclub-671190449.us-east-2.elb.amazonaws.com/api/v1'
 // Actions
 
 /* ******** PUBLIC APIs *********** */

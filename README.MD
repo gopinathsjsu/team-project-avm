@@ -37,21 +37,47 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 
 2. Architecture Diagram
 
-  ![Untitled drawing (1)](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/f2674e23-634e-48c2-9165-3b22b77b16e5)
+  ![Untitled drawing (3)](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/e115e8b7-ed27-4d70-a8c3-0673b583eaa9)
+
 
 
 3. Component diagram
 
-<h3>Design decisions:</h3>
+  ![Component Diagram](https://github.com/gopinathsjsu/team-project-avm/blob/main/Documentation/Component%20Diagram.jpeg)
+  
+4. Deployment Diagram
+  ![image](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/3f6514b5-5963-41ea-87ab-1b423a9682dc)
 
+
+  
+  
+
+<h3>Design decisions:</h3>
 1. Choosing the frontend framework - ReactJS for it's flexibility and faster page loads.
+</br>
+</br>
 2. Choosing the backend framework - Spring Boot (Java)
-3. Choosing the database - MySQL to enforce structured relationships among the entities.
-4. Choosing the cloud platform - AWS for load balancer
+</br>
+Java Spring is a powerful framework for building web applications because it offers a wide range of features and functionality to developers. We chose thsi particularly for the following reasons.
+Dependency Injection (DI): Java Spring uses the concept of DI to manage dependencies between components of an application. This simplifies the code and makes it easier to test and maintain.
+MVC Architecture: Java Spring follows the Model-View-Controller (MVC) architecture, which separates the application's concerns and helps in building modular and maintainable code.
+Integrated Development Environment (IDE) Support: Java Spring has great IDE support with tools like IntelliJ IDEA, which makes development faster and easier.
+Security: Java Spring provides robust security features, including authentication and authorization, which are essential for building secure web applications. 
+Database Integration: Java Spring has excellent support for database integration with its Object-Relational Mapping (ORM) framework, Spring Data. This makes it easier to work with databases and perform CRUD operations.
+Restful Web Services: Java Spring offers a powerful framework for building Restful web services, which is essential for building modern web applications that are designed for mobile and web clients.
+</br>
+</br>
+3. Choosing the database - MySQL
+</br>
+By enforcing structured relationships among entities, MySQL ensures that data is consistent and reliable, and prevents errors and inconsistencies that can arise from manual data entry or incorrect updates. This makes MySQL a powerful tool for building robust and scalable applications that require a high degree of data integrity and consistency.
+</br>
+</br>
+5. Choosing the cloud platform - AWS
+</br>
+AWS's load balancing and autoscaling capabilities make it a powerful platform for building scalable, high-performance, and cost-effective applications. With AWS, developers can easily manage their resources and ensure that their applications are always available and responsive to user demands.
 
 <h3>Component Ownership / Task Allocation:</h3>
-  Frontend - Adesh, Vineeth
-  
+  Frontend - Adesh, Vineeth  
   
   Database Design - Meera
   
@@ -78,12 +104,13 @@ Every Friday
 
 <h3>Extreme Programming (XP) Core Values:</h3>
 
-1. Communication
-2. Courage
-3. Respect
+Communication: Communication was critical throughout the project to ensure that everyone was on the same page with the project's needs, timeframes, and progress. We used daily scrums, group chat, and calls to keep each other informed and involved. Each team member put conscious effort to communicate and keep track of status.
+
+Courage: Courage was an essential piece of our advancement interaction. We all were not extremely sure of our aptitude in the innovation stack, thus to stay aware of the advancement for each run and not dreading to request help or additional time assuming required was essential. It takes mental fortitude to take up overwhelming work and we were most certainly exceptionally bold all through our cycle.
 
 <h3>Miscellaneous Documentation and Links</h3>
 
 1. Use Case Document: https://docs.google.com/document/d/1elBsyKjouo2y6qebof2T6KTjaqZViJoHcbuWU6KkSrg/edit
 2. DB Design Document: https://docs.google.com/document/d/1RVoZ4PhjYBk-wO_gTpIca4wBZe4h66cWvU7SVgAVgNs/edit
+3. Bugs Document: https://docs.google.com/document/d/1d4dYbtifIgcFvMww8lN2xDGCnvqMC0hKCSf_bLYceN4/edit
 
