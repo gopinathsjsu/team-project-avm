@@ -62,6 +62,7 @@ Restful Web Services: Java Spring offers a powerful framework for building Restf
 </br>
 </br>
 3. Choosing the database - MySQL
+</br>
 By enforcing structured relationships among entities, MySQL ensures that data is consistent and reliable, and prevents errors and inconsistencies that can arise from manual data entry or incorrect updates. This makes MySQL a powerful tool for building robust and scalable applications that require a high degree of data integrity and consistency.
 </br>
 </br>
