@@ -51,7 +51,6 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 
 1. Choosing the frontend framework - ReactJS for it's flexibility and faster page loads.
 2. Choosing the backend framework - Spring Boot (Java)
-</br>
 Java Spring is a powerful framework for building web applications because it offers a wide range of features and functionality to developers. We chose thsi particularly for the following reasons.
 </br>
 Dependency Injection (DI): Java Spring uses the concept of DI to manage dependencies between components of an application. This simplifies the code and makes it easier to test and maintain.
@@ -61,8 +60,10 @@ Security: Java Spring provides robust security features, including authenticatio
 Database Integration: Java Spring has excellent support for database integration with its Object-Relational Mapping (ORM) framework, Spring Data. This makes it easier to work with databases and perform CRUD operations.
 Restful Web Services: Java Spring offers a powerful framework for building Restful web services, which is essential for building modern web applications that are designed for mobile and web clients.
 </br>
+</br>
 3. Choosing the database - MySQL to enforce structured relationships among the entities.
 By enforcing structured relationships among entities, MySQL ensures that data is consistent and reliable, and prevents errors and inconsistencies that can arise from manual data entry or incorrect updates. This makes MySQL a powerful tool for building robust and scalable applications that require a high degree of data integrity and consistency.
+</br>
 </br>
 5. Choosing the cloud platform
 AWS's load balancing and autoscaling capabilities make it a powerful platform for building scalable, high-performance, and cost-effective applications. With AWS, developers can easily manage their resources and ensure that their applications are always available and responsive to user demands.
