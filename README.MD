@@ -50,7 +50,8 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 <h3>Design decisions:</h3>
 
 1. Choosing the frontend framework - ReactJS for it's flexibility and faster page loads.
-2. Choosing the backend framework - Spring Boot (Java)
+  </br>
+2. Choosing the backend framework - Spring Boot (Java)</br>
 Java Spring is a powerful framework for building web applications because it offers a wide range of features and functionality to developers. We chose thsi particularly for the following reasons.
 </br>
 Dependency Injection (DI): Java Spring uses the concept of DI to manage dependencies between components of an application. This simplifies the code and makes it easier to test and maintain.
