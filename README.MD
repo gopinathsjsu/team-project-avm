@@ -46,7 +46,7 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
   ![Component Diagram](https://github.com/gopinathsjsu/team-project-avm/blob/main/Documentation/Component%20Diagram.jpeg)
   
 4. Deployment Diagram
-  ![image](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/3f6514b5-5963-41ea-87ab-1b423a9682dc)
+  ![image](Documentation/UML Deployment Diagram.jpg)
 
 
   
