@@ -37,7 +37,8 @@ Click to view the [Project Board](https://github.com/orgs/gopinathsjsu/projects/
 
 2. Architecture Diagram
 
-  ![Untitled drawing (1)](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/f2674e23-634e-48c2-9165-3b22b77b16e5)
+  ![Untitled drawing (3)](https://github.com/gopinathsjsu/team-project-avm/assets/22830897/e115e8b7-ed27-4d70-a8c3-0673b583eaa9)
+
 
 
 3. Component diagram
