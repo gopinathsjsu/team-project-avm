@@ -91,4 +91,5 @@ Every Friday
 
 1. Use Case Document: https://docs.google.com/document/d/1elBsyKjouo2y6qebof2T6KTjaqZViJoHcbuWU6KkSrg/edit
 2. DB Design Document: https://docs.google.com/document/d/1RVoZ4PhjYBk-wO_gTpIca4wBZe4h66cWvU7SVgAVgNs/edit
+3. Bugs Document: https://docs.google.com/document/d/1d4dYbtifIgcFvMww8lN2xDGCnvqMC0hKCSf_bLYceN4/edit
 
